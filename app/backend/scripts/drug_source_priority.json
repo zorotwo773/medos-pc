@@ -1,0 +1,361 @@
+{
+  "analyzed_at": "2026-04-29",
+  "drugs_tested": 5,
+  "section_priority": {
+    "absorption": {
+      "mm_wins": 5,
+      "utd_wins": 0,
+      "recommended": "mm"
+    },
+    "administration": {
+      "mm_wins": 5,
+      "utd_wins": 0,
+      "recommended": "mm"
+    },
+    "adult_dosing": {
+      "mm_wins": 1,
+      "utd_wins": 3,
+      "recommended": "utd"
+    },
+    "adult_dosing_elderly": {
+      "mm_wins": 0,
+      "utd_wins": 5,
+      "recommended": "utd"
+    },
+    "adverse_effects": {
+      "mm_wins": 0,
+      "utd_wins": 5,
+      "recommended": "utd"
+    },
+    "black_box_warning": {
+      "mm_wins": 2,
+      "utd_wins": 2,
+      "recommended": "tie"
+    },
+    "brand_names_ca": {
+      "mm_wins": 0,
+      "utd_wins": 5,
+      "recommended": "utd"
+    },
+    "brand_names_us": {
+      "mm_wins": 0,
+      "utd_wins": 3,
+      "recommended": "utd"
+    },
+    "breast_feeding": {
+      "mm_wins": 5,
+      "utd_wins": 0,
+      "recommended": "mm"
+    },
+    "contraindications": {
+      "mm_wins": 0,
+      "utd_wins": 4,
+      "recommended": "utd"
+    },
+    "distribution": {
+      "mm_wins": 5,
+      "utd_wins": 0,
+      "recommended": "mm"
+    },
+    "dose_adjustments": {
+      "mm_wins": 5,
+      "utd_wins": 0,
+      "recommended": "mm"
+    },
+    "drug_class": {
+      "mm_wins": 5,
+      "utd_wins": 0,
+      "recommended": "mm"
+    },
+    "drug_class_utd": {
+      "mm_wins": 0,
+      "utd_wins": 3,
+      "recommended": "utd"
+    },
+    "excretion": {
+      "mm_wins": 5,
+      "utd_wins": 0,
+      "recommended": "mm"
+    },
+    "half_life": {
+      "mm_wins": 4,
+      "utd_wins": 0,
+      "recommended": "mm"
+    },
+    "hepatic_dosing": {
+      "mm_wins": 0,
+      "utd_wins": 5,
+      "recommended": "utd"
+    },
+    "how_supplied": {
+      "mm_wins": 0,
+      "utd_wins": 5,
+      "recommended": "utd"
+    },
+    "indications": {
+      "mm_wins": 5,
+      "utd_wins": 0,
+      "recommended": "mm"
+    },
+    "interactions_contraindicated": {
+      "mm_wins": 3,
+      "utd_wins": 0,
+      "recommended": "mm"
+    },
+    "interactions_major": {
+      "mm_wins": 5,
+      "utd_wins": 0,
+      "recommended": "mm"
+    },
+    "interactions_moderate": {
+      "mm_wins": 5,
+      "utd_wins": 0,
+      "recommended": "mm"
+    },
+    "mechanism": {
+      "mm_wins": 5,
+      "utd_wins": 0,
+      "recommended": "mm"
+    },
+    "metabolism": {
+      "mm_wins": 4,
+      "utd_wins": 0,
+      "recommended": "mm"
+    },
+    "monitoring": {
+      "mm_wins": 5,
+      "utd_wins": 0,
+      "recommended": "mm"
+    },
+    "pediatric_dosing": {
+      "mm_wins": 0,
+      "utd_wins": 5,
+      "recommended": "utd"
+    },
+    "precautions": {
+      "mm_wins": 0,
+      "utd_wins": 3,
+      "recommended": "utd"
+    },
+    "pregnancy": {
+      "mm_wins": 5,
+      "utd_wins": 0,
+      "recommended": "mm"
+    },
+    "regulatory_status": {
+      "mm_wins": 0,
+      "utd_wins": 0,
+      "recommended": "tie"
+    },
+    "renal_dosing": {
+      "mm_wins": 0,
+      "utd_wins": 5,
+      "recommended": "utd"
+    },
+    "renal_dosing_pediatric": {
+      "mm_wins": 0,
+      "utd_wins": 5,
+      "recommended": "utd"
+    },
+    "us_trade_names": {
+      "mm_wins": 4,
+      "utd_wins": 0,
+      "recommended": "mm"
+    },
+    "utd:": {
+      "mm_wins": 0,
+      "utd_wins": 0,
+      "recommended": "tie"
+    },
+    "utd:Administration: Adult": {
+      "mm_wins": 0,
+      "utd_wins": 5,
+      "recommended": "utd"
+    },
+    "utd:Administration: Pediatric": {
+      "mm_wins": 0,
+      "utd_wins": 5,
+      "recommended": "utd"
+    },
+    "utd:Adverse Reactions (Significant): Conside": {
+      "mm_wins": 0,
+      "utd_wins": 5,
+      "recommended": "utd"
+    },
+    "utd:Brand Names: International": {
+      "mm_wins": 0,
+      "utd_wins": 5,
+      "recommended": "utd"
+    },
+    "utd:Breastfeeding Considerations": {
+      "mm_wins": 0,
+      "utd_wins": 5,
+      "recommended": "utd"
+    },
+    "utd:Controlled Substance": {
+      "mm_wins": 0,
+      "utd_wins": 0,
+      "recommended": "tie"
+    },
+    "utd:Dietary Considerations": {
+      "mm_wins": 0,
+      "utd_wins": 5,
+      "recommended": "utd"
+    },
+    "utd:Dosage Forms: Canada": {
+      "mm_wins": 0,
+      "utd_wins": 5,
+      "recommended": "utd"
+    },
+    "utd:Dosing: Adjustment for Toxicity: Adult": {
+      "mm_wins": 0,
+      "utd_wins": 1,
+      "recommended": "utd"
+    },
+    "utd:Dosing: Liver Impairment: Pediatric": {
+      "mm_wins": 0,
+      "utd_wins": 5,
+      "recommended": "utd"
+    },
+    "utd:Dosing: Obesity: Adult": {
+      "mm_wins": 0,
+      "utd_wins": 1,
+      "recommended": "utd"
+    },
+    "utd:Drug Interactions": {
+      "mm_wins": 0,
+      "utd_wins": 5,
+      "recommended": "utd"
+    },
+    "utd:Extemporaneous Preparations": {
+      "mm_wins": 0,
+      "utd_wins": 3,
+      "recommended": "utd"
+    },
+    "utd:Food Interactions": {
+      "mm_wins": 0,
+      "utd_wins": 3,
+      "recommended": "utd"
+    },
+    "utd:Generic Equivalent Available: US": {
+      "mm_wins": 0,
+      "utd_wins": 1,
+      "recommended": "utd"
+    },
+    "utd:Hazardous Drugs Handling Considerations": {
+      "mm_wins": 0,
+      "utd_wins": 1,
+      "recommended": "utd"
+    },
+    "utd:Mechanism of Action": {
+      "mm_wins": 0,
+      "utd_wins": 5,
+      "recommended": "utd"
+    },
+    "utd:Medication Guide and/or Vaccine Informat": {
+      "mm_wins": 0,
+      "utd_wins": 2,
+      "recommended": "utd"
+    },
+    "utd:Medication Safety Issues": {
+      "mm_wins": 0,
+      "utd_wins": 5,
+      "recommended": "utd"
+    },
+    "utd:Metabolism/Transport Effects": {
+      "mm_wins": 0,
+      "utd_wins": 3,
+      "recommended": "utd"
+    },
+    "utd:Monitoring Parameters": {
+      "mm_wins": 0,
+      "utd_wins": 5,
+      "recommended": "utd"
+    },
+    "utd:Patient Counseling Points": {
+      "mm_wins": 0,
+      "utd_wins": 5,
+      "recommended": "utd"
+    },
+    "utd:Pharmacokinetics (Adult Data Unless Note": {
+      "mm_wins": 0,
+      "utd_wins": 5,
+      "recommended": "utd"
+    },
+    "utd:Pharmacokinetics: Additional Considerati": {
+      "mm_wins": 0,
+      "utd_wins": 5,
+      "recommended": "utd"
+    },
+    "utd:Pregnancy Considerations": {
+      "mm_wins": 0,
+      "utd_wins": 5,
+      "recommended": "utd"
+    },
+    "utd:Preparation for Administration: Adult": {
+      "mm_wins": 0,
+      "utd_wins": 2,
+      "recommended": "utd"
+    },
+    "utd:Preparation for Administration: Pediatri": {
+      "mm_wins": 0,
+      "utd_wins": 3,
+      "recommended": "utd"
+    },
+    "utd:Pricing: US": {
+      "mm_wins": 0,
+      "utd_wins": 5,
+      "recommended": "utd"
+    },
+    "utd:Reference Range": {
+      "mm_wins": 0,
+      "utd_wins": 2,
+      "recommended": "utd"
+    },
+    "utd:Reproductive Considerations": {
+      "mm_wins": 0,
+      "utd_wins": 5,
+      "recommended": "utd"
+    },
+    "utd:Special Alerts": {
+      "mm_wins": 0,
+      "utd_wins": 1,
+      "recommended": "utd"
+    },
+    "utd:Storage/Stability": {
+      "mm_wins": 0,
+      "utd_wins": 5,
+      "recommended": "utd"
+    },
+    "utd:Use: Labeled Indications": {
+      "mm_wins": 0,
+      "utd_wins": 5,
+      "recommended": "utd"
+    },
+    "utd:Use: Off-Label: Adult": {
+      "mm_wins": 0,
+      "utd_wins": 4,
+      "recommended": "utd"
+    },
+    "utd:Usual Infusion Concentrations: Adult": {
+      "mm_wins": 0,
+      "utd_wins": 0,
+      "recommended": "tie"
+    },
+    "utd:Usual Infusion Concentrations: Pediatric": {
+      "mm_wins": 0,
+      "utd_wins": 1,
+      "recommended": "utd"
+    },
+    "utd:Vesicant/Extravasation Risk": {
+      "mm_wins": 0,
+      "utd_wins": 0,
+      "recommended": "tie"
+    },
+    "utd:Warnings: Additional Pediatric Considera": {
+      "mm_wins": 0,
+      "utd_wins": 2,
+      "recommended": "utd"
+    }
+  }
+}

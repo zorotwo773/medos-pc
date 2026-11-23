@@ -1,0 +1,107 @@
+# MedOS production compose
+#
+# Three services. Tailscale runs on the host (installed by setup-vm.sh), not
+# in compose — keeps NET_ADMIN / kernel-module concerns out of the container
+# graph and lets `tailscale funnel` use the host's stable identity.
+#
+# Wiring:
+#   host:80  →  nginx :80  →  frontend :3000
+#                            →  backend  :8002
+#   tailscale funnel on host  →  https://medos-vm.<tailnet>.ts.net  →  host:80
+#
+# All compose commands assume cwd = app/ (the directory above infra/).
+# Use:   docker compose -f infra/docker-compose.yml --env-file infra/.env.production <up|build|...>
+
+name: medos
+
+services:
+  backend:
+    build:
+      context: ..
+      dockerfile: infra/Dockerfile.backend
+      args:
+        APP_UID: ${APP_UID:-1000}
+        APP_GID: ${APP_GID:-1000}
+    image: medos-backend:latest
+    container_name: medos-backend
+    restart: unless-stopped
+    env_file:
+      - .env.production
+    environment:
+      # Force backend to look at the bind-mounted data tree, not its bundled defaults.
+      MEDOS_ROOT: /medos
+      BACKEND_PORT: "8002"
+      # CORS isn't strictly needed (nginx fronts everything) but keep it permissive
+      # for the in-cluster frontend just in case.
+      ALLOWED_ORIGINS: "http://frontend:3000,http://localhost:3000"
+      # If the licensed AMBOSS/UTD/Step DBs were rsync'd to /medos/data, point at
+      # them via env. Empty values are tolerated by config.py — keys just get None.
+      AMBOSS_DIR:    /medos/data/amboss
+      UTD_DB_PATH:   /medos/data/uptodate/utd.sqlite
+      STEP1_DB_PATH: /medos/data/uworld/step1.sqlite
+      STEP2_DB_PATH: /medos/data/uworld/step2.sqlite
+      STEP3_DB_PATH: /medos/data/uworld/step3.sqlite
+      LEXI_DB_PATH:  /medos/data/Lexi/lexi.sqlite
+      # Anki collection lives outside the data tree on Windows — on the VM we
+      # copy a snapshot under /medos/data/anki/collection.anki2 and point here.
+      ANKI_COLLECTION: /medos/data/anki/collection.anki2
+    volumes:
+      # All ~20 GB of reference data, rsync'd in via infra/sync-data.ps1
+      - /data:/medos/data
+    networks:
+      - medos_net
+    # Healthcheck declared in Dockerfile.backend
+    expose:
+      - "8002"
+
+  frontend:
+    build:
+      context: ..
+      dockerfile: infra/Dockerfile.frontend
+      args:
+        APP_UID: ${APP_UID:-1000}
+        APP_GID: ${APP_GID:-1000}
+        NEXT_PUBLIC_BACKEND_URL: /api
+    image: medos-frontend:latest
+    container_name: medos-frontend
+    restart: unless-stopped
+    environment:
+      NODE_ENV: production
+      # The frontend hits the backend via nginx at /api — never directly.
+      MEDOS_BACKEND_INTERNAL_URL: http://backend:8002
+    depends_on:
+      backend:
+        condition: service_healthy
+    networks:
+      - medos_net
+    expose:
+      - "3000"
+
+  nginx:
+    image: nginx:1.27-alpine
+    container_name: medos-nginx
+    restart: unless-stopped
+    ports:
+      # Host port 80 — Tailscale Funnel proxies https://*.ts.net here.
+      # If you ever want to expose on host:443 directly (no Funnel),
+      # swap to "443:443" and mount certs.
+      - "127.0.0.1:80:80"
+    volumes:
+      - ./nginx.conf:/etc/nginx/nginx.conf:ro
+    depends_on:
+      backend:
+        condition: service_healthy
+      frontend:
+        condition: service_started
+    networks:
+      - medos_net
+    healthcheck:
+      test: ["CMD", "wget", "-qO-", "http://127.0.0.1/_nginx_health"]
+      interval: 30s
+      timeout: 5s
+      retries: 3
+      start_period: 10s
+
+networks:
+  medos_net:
+    driver: bridge

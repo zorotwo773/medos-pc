@@ -1,0 +1,73 @@
+# syntax=docker/dockerfile:1.7
+#
+# MedOS frontend container — Next.js 16, standalone output
+# Target: linux/arm64 (Oracle Cloud Ampere A1) and linux/amd64 (local smoke)
+#
+# Build:   docker buildx build --platform linux/arm64 -f infra/Dockerfile.frontend -t medos-frontend:latest .
+
+# ────────────────────────────────────────────────────────────────
+# Stage 1: deps — install node_modules with cached layer
+# ────────────────────────────────────────────────────────────────
+FROM node:20-bookworm-slim AS deps
+
+WORKDIR /app
+COPY package.json package-lock.json ./
+RUN npm ci --no-audit --no-fund
+
+# ────────────────────────────────────────────────────────────────
+# Stage 2: builder — produce .next/standalone
+# ────────────────────────────────────────────────────────────────
+FROM node:20-bookworm-slim AS builder
+
+ENV NEXT_TELEMETRY_DISABLED=1 \
+    NODE_ENV=production \
+    NEXT_STANDALONE=true
+
+WORKDIR /app
+COPY --from=deps /app/node_modules ./node_modules
+COPY . .
+
+# The backend URL the frontend hits — at build time this is the in-cluster
+# nginx URL; runtime override available via env if you change routing.
+ARG NEXT_PUBLIC_BACKEND_URL=/api
+ENV NEXT_PUBLIC_BACKEND_URL=${NEXT_PUBLIC_BACKEND_URL}
+
+RUN npm run build
+
+# ────────────────────────────────────────────────────────────────
+# Stage 3: runtime — minimal Node, only the standalone bundle
+# ────────────────────────────────────────────────────────────────
+FROM node:20-bookworm-slim AS runtime
+
+ENV NODE_ENV=production \
+    NEXT_TELEMETRY_DISABLED=1 \
+    PORT=3000 \
+    HOSTNAME=0.0.0.0
+
+RUN apt-get update && apt-get install -y --no-install-recommends \
+        curl \
+        ca-certificates \
+    && rm -rf /var/lib/apt/lists/*
+
+ARG APP_UID=1000
+ARG APP_GID=1000
+RUN groupadd --gid ${APP_GID} medos && \
+    useradd  --uid ${APP_UID} --gid ${APP_GID} --shell /bin/bash --create-home medos
+
+WORKDIR /app
+# Next 16 standalone output layout:
+#   /app/.next/standalone   → server.js + minimal node_modules
+#   /app/.next/static       → static assets
+#   /app/public             → static public/
+COPY --from=builder --chown=medos:medos /app/.next/standalone ./
+COPY --from=builder --chown=medos:medos /app/.next/static ./.next/static
+COPY --from=builder --chown=medos:medos /app/public ./public
+
+USER medos
+
+EXPOSE 3000
+
+HEALTHCHECK --interval=30s --timeout=5s --start-period=30s --retries=3 \
+    CMD curl -fsS http://127.0.0.1:3000/api/healthz || exit 1
+
+CMD ["node", "server.js"]

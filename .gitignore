@@ -1,0 +1,96 @@
+# ── MedOS PC repository ignore rules ──────────────────────────────────────────
+# This repository intentionally contains the bundled PC runtime payload and the
+# compiled Next.js build. Only private, generated, or non-PC material is ignored.
+
+# ── Android / phone exclusion (hard guard) ────────────────────────────────────
+/phone/
+/android/
+*.apk
+*.aab
+*.jks
+*.keystore
+keystore.properties
+local.properties
+setup_center/android.py
+setup_center/templates/android-guide.html
+tools/medroxi-sync/export_from_phone.py
+
+# ── Secrets and private local state ───────────────────────────────────────────
+.env
+.env.*
+!.env.example
+!.env.*.example
+!*.env.example
+secrets.json
+credentials.json
+token.json
+id_rsa*
+id_dsa*
+id_ecdsa*
+id_ed25519*
+*.pfx
+*.p12
+
+# ── Personal/build inputs that are not source ─────────────────────────────────
+/data/
+/models/
+/epocrates-imd/
+/utdpathways/
+phone-data/
+medos-phone-data.zip
+/scratch/
+/_backups/
+/MedOS Update/
+/.tmp/
+.tmp/
+archive/
+*.log
+*.pid
+*.err
+
+# ── Python caches ─────────────────────────────────────────────────────────────
+__pycache__/
+*.py[cod]
+*.pyo
+.pytest_cache/
+.mypy_cache/
+.ruff_cache/
+.cache/
+
+# ── Generated TypeScript / test output ────────────────────────────────────────
+tsconfig.tsbuildinfo
+app/test-results/
+.chrome-qbank-check*/
+.edge-qbank-check*/
+.edge-qbank-startcheck*/
+.edge-qbank-tutorcheck*/
+.codex-run/
+
+# ── Local tooling metadata ────────────────────────────────────────────────────
+.claude/
+.idea/
+.vscode/
+.DS_Store
+Thumbs.db
+desktop.ini
+
+# ── Release archives/exes (the EXE is a GitHub Release asset, not a repo file) ─
+/*.7z
+/*.zip
+/*.rar
+/release/*.7z
+/release/*.zip
+/release/*.rar
+/release/*.exe
+/dist/
+
+# ── Installer build output: keep scripts, ignore generated payload/stub ───────
+/installer/build/*
+!/installer/build/*.py
+!/installer/build/*.ps1
+
+# ── Video/screen recordings ───────────────────────────────────────────────────
+*.mp4
+*.mov
+*.avi
+*.mkv

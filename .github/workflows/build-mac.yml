@@ -1,0 +1,79 @@
+name: Build macOS bundle
+
+# Manual trigger: repo → Actions tab → "Build macOS bundle" → Run workflow.
+# A hosted Apple Mac builds the zero-setup runtime pack AND boots it to prove it
+# runs on macOS — you never need a Mac of your own.
+on:
+  workflow_dispatch:
+    inputs:
+      mode:
+        description: "Bundle size: lite (no AI ML stack, smaller) or full"
+        type: choice
+        options: [lite, full]
+        default: lite
+      arch:
+        description: "Target Mac CPU (arm64 = Apple Silicon, x86_64 = Intel)"
+        type: choice
+        options: [arm64, x86_64]
+        default: arm64
+
+permissions:
+  contents: read
+
+jobs:
+  build:
+    # arm64 → Apple-Silicon runner; x86_64 → Intel runner.
+    runs-on: ${{ inputs.arch == 'x86_64' && 'macos-13' || 'macos-14' }}
+    timeout-minutes: 90
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Build macOS runtime pack
+        run: |
+          mkdir -p "$RUNNER_TEMP/out"
+          bash PACK_RELEASE_MAC.sh --${{ inputs.mode }} --arch ${{ inputs.arch }} --no-zip --out "$RUNNER_TEMP/out"
+          bundle="$(ls -d "$RUNNER_TEMP/out"/MedOS-mac-* | head -n1)"
+          echo "BUNDLE=$bundle" >> "$GITHUB_ENV"
+          echo "BUNDLE_NAME=$(basename "$bundle")" >> "$GITHUB_ENV"
+
+      - name: Smoke test on this real Mac (no data needed)
+        run: |
+          cd "$BUNDLE"
+          bash mac/start.sh --no-browser
+          ok=0
+          for i in $(seq 1 60); do
+            if curl -fsS http://127.0.0.1:8002/health >/dev/null 2>&1; then ok=1; break; fi
+            sleep 2
+          done
+          echo "---- /health ----"; curl -fsS http://127.0.0.1:8002/health || true; echo
+          echo "---- frontend ----"; curl -fsS -o /dev/null -w "HTTP %{http_code}\n" http://127.0.0.1:3000 || true
+          bash mac/stop.sh || true
+          if [ "$ok" != "1" ]; then
+            echo "::error::Backend did not become healthy on macOS — see backend.err below"
+            tail -n 60 "$BUNDLE/app/backend.err" 2>/dev/null || true
+            exit 1
+          fi
+          echo "✅ Bundle boots and the backend is healthy on macOS."
+
+      - name: Package tar.gz + SHA-256
+        run: |
+          cd "$RUNNER_TEMP/out"
+          tar -czf "$RUNNER_TEMP/$BUNDLE_NAME.tar.gz" "$BUNDLE_NAME"
+          cd "$RUNNER_TEMP"
+          shasum -a 256 "$BUNDLE_NAME.tar.gz" > "$BUNDLE_NAME.tar.gz.sha256"
+          ls -lh "$RUNNER_TEMP"/*.tar.gz
+
+      # Download the result from the run's "Artifacts" section once it finishes.
+      # NOTE: on a PRIVATE repo with the free plan, Actions artifact storage is
+      # limited (~500 MB). If this upload errors on quota, switch delivery to a
+      # GitHub Release instead (no size quota) — ask and I'll flip this step.
+      - name: Upload bundle
+        uses: actions/upload-artifact@v4
+        with:
+          name: ${{ env.BUNDLE_NAME }}
+          path: |
+            ${{ runner.temp }}/*.tar.gz
+            ${{ runner.temp }}/*.sha256
+          retention-days: 3
+          compression-level: 0

@@ -1,0 +1,48 @@
+{
+  "manifest_version": 3,
+  "name": "MedOS Reference Sidebar",
+  "description": "Chrome-wide MedOS reference underlines and side panel backed by the local MedOS database.",
+  "version": "0.2.0",
+  "minimum_chrome_version": "114",
+  "permissions": [
+    "activeTab",
+    "sidePanel",
+    "storage",
+    "tabs"
+  ],
+  "host_permissions": [
+    "http://127.0.0.1:8002/*",
+    "http://localhost:8002/*",
+    "http://127.0.0.1:3000/*",
+    "http://localhost:3000/*"
+  ],
+  "background": {
+    "service_worker": "service_worker.js"
+  },
+  "action": {
+    "default_title": "Open MedOS Reference"
+  },
+  "side_panel": {
+    "default_path": "sidepanel.html"
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "<all_urls>"
+      ],
+      "exclude_matches": [
+        "http://127.0.0.1:3000/*",
+        "http://localhost:3000/*",
+        "http://127.0.0.1:8002/*",
+        "http://localhost:8002/*"
+      ],
+      "css": [
+        "content_styles.css"
+      ],
+      "js": [
+        "content_script.js"
+      ],
+      "run_at": "document_idle"
+    }
+  ]
+}

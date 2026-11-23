@@ -1,0 +1,246 @@
+{
+  "version": 3,
+  "pages404": true,
+  "appType": "app",
+  "caseSensitive": false,
+  "basePath": "",
+  "redirects": [
+    {
+      "source": "/:path+/",
+      "destination": "/:path+",
+      "internal": true,
+      "priority": true,
+      "statusCode": 308,
+      "regex": "^(?:/((?:[^/]+?)(?:/(?:[^/]+?))*))/$"
+    }
+  ],
+  "headers": [],
+  "onMatchHeaders": [],
+  "rewrites": {
+    "beforeFiles": [],
+    "afterFiles": [
+      {
+        "source": "/api/:path*",
+        "destination": "http://127.0.0.1:8002/:path*",
+        "regex": "^/api(?:/((?:[^/]+?)(?:/(?:[^/]+?))*))?(?:/)?$"
+      }
+    ],
+    "fallback": []
+  },
+  "dynamicRoutes": [
+    {
+      "page": "/api/anki/media/[...path]",
+      "regex": "^/api/anki/media/(.+?)(?:/)?$",
+      "routeKeys": {
+        "nxtPpath": "nxtPpath"
+      },
+      "namedRegex": "^/api/anki/media/(?<nxtPpath>.+?)(?:/)?$"
+    }
+  ],
+  "staticRoutes": [
+    {
+      "page": "/",
+      "regex": "^/(?:/)?$",
+      "routeKeys": {},
+      "namedRegex": "^/(?:/)?$"
+    },
+    {
+      "page": "/_global-error",
+      "regex": "^/_global\\-error(?:/)?$",
+      "routeKeys": {},
+      "namedRegex": "^/_global\\-error(?:/)?$"
+    },
+    {
+      "page": "/_not-found",
+      "regex": "^/_not\\-found(?:/)?$",
+      "routeKeys": {},
+      "namedRegex": "^/_not\\-found(?:/)?$"
+    },
+    {
+      "page": "/acls",
+      "regex": "^/acls(?:/)?$",
+      "routeKeys": {},
+      "namedRegex": "^/acls(?:/)?$"
+    },
+    {
+      "page": "/admin",
+      "regex": "^/admin(?:/)?$",
+      "routeKeys": {},
+      "namedRegex": "^/admin(?:/)?$"
+    },
+    {
+      "page": "/amboss",
+      "regex": "^/amboss(?:/)?$",
+      "routeKeys": {},
+      "namedRegex": "^/amboss(?:/)?$"
+    },
+    {
+      "page": "/anatomy",
+      "regex": "^/anatomy(?:/)?$",
+      "routeKeys": {},
+      "namedRegex": "^/anatomy(?:/)?$"
+    },
+    {
+      "page": "/anki",
+      "regex": "^/anki(?:/)?$",
+      "routeKeys": {},
+      "namedRegex": "^/anki(?:/)?$"
+    },
+    {
+      "page": "/api/lexi-calc/list",
+      "regex": "^/api/lexi\\-calc/list(?:/)?$",
+      "routeKeys": {},
+      "namedRegex": "^/api/lexi\\-calc/list(?:/)?$"
+    },
+    {
+      "page": "/calculators",
+      "regex": "^/calculators(?:/)?$",
+      "routeKeys": {},
+      "namedRegex": "^/calculators(?:/)?$"
+    },
+    {
+      "page": "/chat",
+      "regex": "^/chat(?:/)?$",
+      "routeKeys": {},
+      "namedRegex": "^/chat(?:/)?$"
+    },
+    {
+      "page": "/content",
+      "regex": "^/content(?:/)?$",
+      "routeKeys": {},
+      "namedRegex": "^/content(?:/)?$"
+    },
+    {
+      "page": "/differential",
+      "regex": "^/differential(?:/)?$",
+      "routeKeys": {},
+      "namedRegex": "^/differential(?:/)?$"
+    },
+    {
+      "page": "/diseases",
+      "regex": "^/diseases(?:/)?$",
+      "routeKeys": {},
+      "namedRegex": "^/diseases(?:/)?$"
+    },
+    {
+      "page": "/drugs",
+      "regex": "^/drugs(?:/)?$",
+      "routeKeys": {},
+      "namedRegex": "^/drugs(?:/)?$"
+    },
+    {
+      "page": "/favicon.ico",
+      "regex": "^/favicon\\.ico(?:/)?$",
+      "routeKeys": {},
+      "namedRegex": "^/favicon\\.ico(?:/)?$"
+    },
+    {
+      "page": "/graph",
+      "regex": "^/graph(?:/)?$",
+      "routeKeys": {},
+      "namedRegex": "^/graph(?:/)?$"
+    },
+    {
+      "page": "/help",
+      "regex": "^/help(?:/)?$",
+      "routeKeys": {},
+      "namedRegex": "^/help(?:/)?$"
+    },
+    {
+      "page": "/labs",
+      "regex": "^/labs(?:/)?$",
+      "routeKeys": {},
+      "namedRegex": "^/labs(?:/)?$"
+    },
+    {
+      "page": "/lexi",
+      "regex": "^/lexi(?:/)?$",
+      "routeKeys": {},
+      "namedRegex": "^/lexi(?:/)?$"
+    },
+    {
+      "page": "/library",
+      "regex": "^/library(?:/)?$",
+      "routeKeys": {},
+      "namedRegex": "^/library(?:/)?$"
+    },
+    {
+      "page": "/library/custom",
+      "regex": "^/library/custom(?:/)?$",
+      "routeKeys": {},
+      "namedRegex": "^/library/custom(?:/)?$"
+    },
+    {
+      "page": "/library/uworld",
+      "regex": "^/library/uworld(?:/)?$",
+      "routeKeys": {},
+      "namedRegex": "^/library/uworld(?:/)?$"
+    },
+    {
+      "page": "/login",
+      "regex": "^/login(?:/)?$",
+      "routeKeys": {},
+      "namedRegex": "^/login(?:/)?$"
+    },
+    {
+      "page": "/pathways",
+      "regex": "^/pathways(?:/)?$",
+      "routeKeys": {},
+      "namedRegex": "^/pathways(?:/)?$"
+    },
+    {
+      "page": "/qbank",
+      "regex": "^/qbank(?:/)?$",
+      "routeKeys": {},
+      "namedRegex": "^/qbank(?:/)?$"
+    },
+    {
+      "page": "/sanford",
+      "regex": "^/sanford(?:/)?$",
+      "routeKeys": {},
+      "namedRegex": "^/sanford(?:/)?$"
+    },
+    {
+      "page": "/search",
+      "regex": "^/search(?:/)?$",
+      "routeKeys": {},
+      "namedRegex": "^/search(?:/)?$"
+    },
+    {
+      "page": "/umls",
+      "regex": "^/umls(?:/)?$",
+      "routeKeys": {},
+      "namedRegex": "^/umls(?:/)?$"
+    },
+    {
+      "page": "/uptodate",
+      "regex": "^/uptodate(?:/)?$",
+      "routeKeys": {},
+      "namedRegex": "^/uptodate(?:/)?$"
+    },
+    {
+      "page": "/utdddx",
+      "regex": "^/utdddx(?:/)?$",
+      "routeKeys": {},
+      "namedRegex": "^/utdddx(?:/)?$"
+    }
+  ],
+  "dataRoutes": [],
+  "rsc": {
+    "header": "rsc",
+    "varyHeader": "rsc, next-router-state-tree, next-router-prefetch, next-router-segment-prefetch",
+    "prefetchHeader": "next-router-prefetch",
+    "didPostponeHeader": "x-nextjs-postponed",
+    "contentTypeHeader": "text/x-component",
+    "suffix": ".rsc",
+    "prefetchSegmentHeader": "next-router-segment-prefetch",
+    "prefetchSegmentSuffix": ".segment.rsc",
+    "prefetchSegmentDirSuffix": ".segments",
+    "clientParamParsing": false,
+    "dynamicRSCPrerender": false
+  },
+  "rewriteHeaders": {
+    "pathHeader": "x-nextjs-rewritten-path",
+    "queryHeader": "x-nextjs-rewritten-query"
+  }
+}

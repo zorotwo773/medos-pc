@@ -1,0 +1,105 @@
+overlays:
+  - drug:
+      generic_name: Metformin Hydrochloride
+      rxcui: "235743"
+    indications:
+      - text: Diabetes mellitus, type 2, treatment
+        rank: 1
+    dosing_rules:
+      - indication: Diabetes mellitus, type 2, treatment
+        population: adult
+        route: PO
+        dose_form: tablet
+        fixed_dose_low: 500
+        fixed_dose_high: 500
+        dose_unit: mg
+        frequency_code: bid
+        divisions_per_day: 2
+        max_mg_per_day: 2000
+        default_duration_days: 30
+        schedule_context: maintenance
+        notes: "Reviewed adult default: immediate-release 500 mg twice daily with meals; titrate clinically."
+
+  - drug:
+      generic_name: Atorvastatin Calcium
+      rxcui: "83366"
+    indications:
+      - text: Hyperlipidemia and ASCVD risk reduction
+        rank: 1
+    dosing_rules:
+      - indication: Hyperlipidemia and ASCVD risk reduction
+        population: adult
+        route: PO
+        dose_form: tablet
+        fixed_dose_low: 20
+        fixed_dose_high: 20
+        dose_unit: mg
+        frequency_code: once_daily
+        divisions_per_day: 1
+        max_mg_per_day: 80
+        default_duration_days: 30
+        schedule_context: maintenance
+        notes: "Reviewed adult default: moderate-intensity 20 mg once daily; adjust intensity to ASCVD risk and LDL-C response."
+
+  - drug:
+      generic_name: Lisinopril
+      rxcui: "29046"
+    indications:
+      - text: Hypertension
+        rank: 1
+    dosing_rules:
+      - indication: Hypertension
+        population: adult
+        route: PO
+        dose_form: tablet
+        fixed_dose_low: 10
+        fixed_dose_high: 10
+        dose_unit: mg
+        frequency_code: once_daily
+        divisions_per_day: 1
+        max_mg_per_day: 40
+        default_duration_days: 30
+        schedule_context: maintenance
+        notes: "Reviewed adult default: 10 mg once daily for hypertension when not volume depleted and not on a diuretic."
+
+  - drug:
+      generic_name: Levothyroxine Sodium
+      rxcui: "40144"
+    indications:
+      - text: Hypothyroidism
+        rank: 1
+    dosing_rules:
+      - indication: Hypothyroidism
+        population: adult
+        route: PO
+        dose_form: tablet
+        mg_per_kg_low: 1.6
+        mg_per_kg_high: 1.6
+        dose_basis: per_day
+        dose_unit: mcg
+        frequency_code: once_daily
+        divisions_per_day: 1
+        default_duration_days: 30
+        schedule_context: maintenance
+        notes: "Reviewed adult default: full replacement about 1.6 mcg/kg/day once daily; individualize by age, cardiac risk, TSH, and pregnancy status."
+
+  - drug:
+      generic_name: Amlodipine Besylate
+      rxcui: "104416"
+    indications:
+      - text: Hypertension
+        rank: 1
+    dosing_rules:
+      - indication: Hypertension
+        population: adult
+        route: PO
+        dose_form: tablet
+        fixed_dose_low: 5
+        fixed_dose_high: 5
+        dose_unit: mg
+        frequency_code: once_daily
+        divisions_per_day: 1
+        max_mg_per_day: 10
+        default_duration_days: 30
+        schedule_context: maintenance
+        notes: "Reviewed adult default: 5 mg once daily for hypertension; lower starting dose for small, frail, elderly, or hepatic impairment."

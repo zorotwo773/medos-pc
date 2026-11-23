@@ -1,0 +1,18 @@
+# source	target
+backend/main.py	C:\MedOS\app\backend\main.py
+backend/pdf_export.py	C:\MedOS\app\backend\pdf_export.py
+backend/routers/export.py	C:\MedOS\app\backend\routers\export.py
+backend/content_transfer.py	C:\MedOS\app\backend\content_transfer.py
+backend/routers/content.py	C:\MedOS\app\backend\routers\content.py
+components/layout/TopBar.tsx	C:\MedOS\app\components\layout\TopBar.tsx
+components/layout/SettingsPanel.tsx	C:\MedOS\app\components\layout\SettingsPanel.tsx
+components/layout/ExportPdfButton.tsx	C:\MedOS\app\components\layout\ExportPdfButton.tsx
+components/qbank/QuizEngine.tsx	C:\MedOS\app\components\qbank\QuizEngine.tsx
+components/content/TransferPanel.tsx	C:\MedOS\app\components\content\TransferPanel.tsx
+app/globals.css	C:\MedOS\app\app\globals.css
+app/layout.tsx	C:\MedOS\app\app\layout.tsx
+lib/exportPdf.ts	C:\MedOS\app\lib\exportPdf.ts
+tools/7z/7z.exe	C:\MedOS\tools\7z\7z.exe
+tools/7z/7z.dll	C:\MedOS\tools\7z\7z.dll
+tools/7z/License.txt	C:\MedOS\tools\7z\License.txt
+tools/7z/readme.txt	C:\MedOS\tools\7z\readme.txt

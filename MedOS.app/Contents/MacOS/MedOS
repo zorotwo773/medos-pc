@@ -1,0 +1,23 @@
+#!/bin/sh
+set -eu
+show_error() {
+  /bin/echo "MedOS: $1" >&2
+  /usr/bin/osascript - "$1" <<'APPLESCRIPT' >/dev/null 2>&1 || true
+on run arguments
+  display dialog (item 1 of arguments) with title "MedOS" buttons {"OK"} default button "OK" with icon stop
+end run
+APPLESCRIPT
+}
+SCRIPT_DIR=$(CDPATH= cd -- "$(dirname -- "$0")" && pwd)
+TARGET_ROOT=$(CDPATH= cd -- "$SCRIPT_DIR/../../.." && pwd)
+if [ ! -r "$TARGET_ROOT/mac/start.sh" ]; then
+  show_error "MedOS cannot find its launch files. Keep MedOS.app inside the complete, extracted MedOS folder and open MedOS.command there. If its drive is disconnected, reconnect it."
+  exit 2
+fi
+if /bin/bash "$TARGET_ROOT/mac/start.sh" "$@"; then
+  exit 0
+else
+  STATUS=$?
+  show_error "MedOS could not start (exit $STATUS). Open MedOS.command in the MedOS folder to see the error, or use Save diagnostics in Setup Center."
+  exit "$STATUS"
+fi

@@ -1,0 +1,65 @@
+{
+  "archive_encrypted": true,
+  "build_timestamp": "2026-09-15T22:14:06Z",
+  "exclusions": [
+    "phone products and Android signing material",
+    "live environments and API keys",
+    "user/session/progress/synchronization/torrent state",
+    "logs, caches, tests, scratch, and build reports",
+    "redundant archives including collection.media.7z",
+    "Git and editor/agent metadata"
+  ],
+  "filename": "MedOS-universal-desktop-1.1.5.zip",
+  "frontend_version": "0.1.0",
+  "git_branch": "codex/release-reliability",
+  "git_dirty": false,
+  "git_head": "57add922b173da1cf35c84d685246193ccbabb9d",
+  "included_components": [
+    {
+      "name": "application",
+      "included": true,
+      "bytes": 1223854592
+    },
+    {
+      "name": "setup-center",
+      "included": true,
+      "bytes": 520572
+    },
+    {
+      "name": "windows-runtimes",
+      "included": true,
+      "bytes": 1080392225
+    },
+    {
+      "name": "mac-runtimes",
+      "included": true,
+      "bytes": 890249193
+    },
+    {
+      "name": "linux-bootstrap",
+      "included": true,
+      "bytes": 11610
+    },
+    {
+      "name": "canonical-data",
+      "included": true,
+      "bytes": 49670606554
+    }
+  ],
+  "mac_architectures": [
+    "arm64",
+    "x64"
+  ],
+  "node_version": "22.11.0",
+  "python_version": "Python 3.12.7",
+  "schema_version": 1,
+  "source_labels": {
+    "books": "live-books",
+    "mac_tools": "optional-runtimes",
+    "repository": "working-tree"
+  },
+  "payload": {
+    "file_count": 211255,
+    "uncompressed_bytes": 52866497857
+  }
+}

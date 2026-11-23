@@ -1,0 +1,104 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="color-scheme" content="light dark">
+  <title>Install MedOS</title>
+  <link rel="stylesheet" href="styles.css">
+  <script src="app.js" defer></script>
+</head>
+<body>
+  <a class="skip-link" href="#setup">Skip to MedOS setup</a>
+  <header class="site-header">
+    <div class="brand" aria-label="MedOS">
+      <span class="brand-mark" aria-hidden="true">M+</span>
+      <span>
+        <strong>MedOS</strong>
+        <small id="brand-subtitle">Setup</small>
+      </span>
+    </div>
+    <p class="offline-badge"><span aria-hidden="true">●</span> Offline-ready</p>
+  </header>
+
+  <main id="setup" tabindex="-1">
+    <section class="hero" aria-labelledby="welcome-title">
+      <p class="eyebrow" id="welcome-eyebrow">Checking this computer…</p>
+      <h1 id="welcome-title">Set up MedOS</h1>
+      <p class="lede" id="welcome-lede">MedOS brings its own Python and Node runtimes, so nothing is downloaded and no internet connection is needed.</p>
+      <dl class="facts" aria-label="Setup information">
+        <div><dt>This computer</dt><dd id="fact-platform">Detecting…</dd></div>
+        <div><dt>Your work</dt><dd>Stored per user</dd></div>
+        <div><dt>Internet</dt><dd>Not required</dd></div>
+      </dl>
+    </section>
+
+    <form id="setup-form" novalidate>
+      <section class="panel" id="plan-panel" aria-labelledby="plan-title">
+        <div class="step-heading"><span aria-hidden="true">1</span><div><h2 id="plan-title">Choose how to set up MedOS</h2><p id="plan-help">Reading the release on this drive…</p></div></div>
+        <fieldset id="mode" class="choice-grid modes" aria-describedby="plan-help">
+          <legend class="visually-hidden">Setup type</legend>
+        </fieldset>
+      </section>
+
+      <section class="panel" id="destination-panel" aria-labelledby="destination-title" hidden>
+        <div class="step-heading"><span aria-hidden="true">2</span><div><h2 id="destination-title">Choose where to put it</h2><p id="destination-help">Pick a disk with enough free space.</p></div></div>
+        <fieldset id="destination" class="choice-grid" aria-describedby="destination-help">
+          <legend class="visually-hidden">Destination</legend>
+        </fieldset>
+      </section>
+
+      <section class="panel submit-panel" aria-labelledby="start-title">
+        <div>
+          <h2 id="start-title">Ready when you are</h2>
+          <p id="action-help">MedOS prepares its writable state, creates one desktop shortcut, starts its bundled services, checks them, and opens MedOS.</p>
+        </div>
+        <div class="actions">
+          <button id="start-medos" type="submit" aria-describedby="action-help" disabled>Start MedOS</button>
+        </div>
+      </section>
+    </form>
+
+    <section class="panel" id="progress-panel" aria-labelledby="progress-title" hidden>
+      <div class="step-heading"><span aria-hidden="true">↻</span><div><h2 id="progress-title">Setting up MedOS</h2><p id="phase">Preparing MedOS</p></div></div>
+      <progress id="progress" max="100" value="0">0%</progress>
+      <div class="progress-summary">
+        <p><strong id="progress-percent">0%</strong><span id="bytes">0 B of 0 B</span></p>
+        <p><span>Speed</span><strong id="speed">Calculating…</strong></p>
+        <p><span>Time left</span><strong id="eta">Calculating…</strong></p>
+      </div>
+      <p id="status-message" class="status-message">Preparing MedOS…</p>
+      <p id="heartbeat" class="heartbeat"><span id="heartbeat-pulse" class="heartbeat-pulse" aria-hidden="true"></span><span id="heartbeat-text">Connecting to the local MedOS service…</span></p>
+      <div class="actions compact">
+        <button id="pause" type="button" class="secondary">Pause</button>
+        <button id="resume" type="button" class="secondary" disabled>Resume</button>
+        <button id="cancel" type="button" class="danger">Cancel safely</button>
+      </div>
+    </section>
+
+    <section class="panel" id="result-panel" aria-labelledby="result-title" hidden>
+      <div class="step-heading complete"><span aria-hidden="true">✓</span><div><h2 id="result-title">MedOS is ready</h2><p id="result-summary">MedOS started and passed its local health check.</p></div></div>
+      <dl class="result-list">
+        <div><dt>Running from</dt><dd id="result-target">This folder</dd></div>
+        <div><dt>Medical data</dt><dd id="result-data">Preserved</dd></div>
+        <div><dt>Health check</dt><dd id="result-health">Verified</dd></div>
+      </dl>
+      <div id="failure-details" class="failure-details" hidden>
+        <p id="failure-summary" class="failure-summary"></p>
+        <p id="failure-actions" class="help"></p>
+      </div>
+      <div class="actions">
+        <button id="open-medos" type="button">Open MedOS</button>
+        <button id="retry" type="button" class="secondary">Try again</button>
+        <button id="diagnostics" type="button" class="secondary">Save diagnostics</button>
+      </div>
+      <p id="diagnostic-location" class="help"></p>
+    </section>
+
+    <div id="status-announcer" class="visually-hidden" role="status" aria-live="polite" aria-atomic="true"></div>
+    <div id="error-announcer" class="visually-hidden" role="alert" aria-live="assertive" aria-atomic="true"></div>
+  </main>
+
+  <footer><p>MedOS runs locally. It does not upload your medical library.</p></footer>
+</body>
+</html>

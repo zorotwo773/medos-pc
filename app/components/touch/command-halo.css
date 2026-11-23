@@ -1,0 +1,395 @@
+.command-halo-layer {
+  position: fixed;
+  inset: 0;
+  z-index: 90;
+  width: 100vw;
+  height: 100dvh;
+  padding-top: env(safe-area-inset-top);
+  padding-right: env(safe-area-inset-right);
+  padding-bottom: env(safe-area-inset-bottom);
+  padding-left: env(safe-area-inset-left);
+  background: color-mix(in srgb, var(--bg-base) 18%, transparent);
+  backdrop-filter: blur(1.5px);
+  -webkit-backdrop-filter: blur(1.5px);
+  isolation: isolate;
+  touch-action: none;
+}
+
+.command-halo-dialog {
+  position: fixed;
+  inset: 0;
+  width: 100vw;
+  height: 100dvh;
+  outline: none;
+  color: var(--text-primary);
+  font-family: var(--font-sans);
+}
+
+.command-halo-header {
+  position: fixed;
+  top: max(10px, env(safe-area-inset-top));
+  left: 50%;
+  z-index: 5;
+  display: flex;
+  min-height: 48px;
+  align-items: center;
+  gap: 14px;
+  padding: 0 8px 0 14px;
+  transform: translateX(-50%);
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  background: var(--chrome-bg);
+  box-shadow: var(--shadow-md);
+  font-family: var(--font-mono);
+  font-size: 10px;
+  letter-spacing: .14em;
+  text-transform: uppercase;
+}
+
+.command-halo-utility,
+.command-halo-sheet button,
+.command-halo-context-panel button {
+  min-width: 48px;
+  min-height: 48px;
+}
+
+.command-halo-utility {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 0 10px;
+  border: 0;
+  border-left: 1px solid var(--border);
+  background: transparent;
+  color: var(--accent);
+  cursor: pointer;
+  font: inherit;
+  letter-spacing: .08em;
+  text-transform: uppercase;
+}
+
+.command-halo-mode-switcher {
+  position: fixed;
+  top: max(68px, calc(env(safe-area-inset-top) + 58px));
+  left: 50%;
+  z-index: 5;
+  display: flex;
+  transform: translateX(-50%);
+  overflow: hidden;
+  border: 1px solid var(--border);
+  border-radius: 9px;
+  background: var(--chrome-bg);
+  box-shadow: var(--shadow-sm);
+}
+
+.command-halo-mode-switcher button {
+  min-width: 76px;
+  min-height: 48px;
+  padding: 0 14px;
+  border: 0;
+  border-right: 1px solid var(--border);
+  background: transparent;
+  color: var(--text-muted);
+  cursor: pointer;
+  font-family: var(--font-mono);
+  font-size: 9px;
+  letter-spacing: .12em;
+  text-transform: uppercase;
+}
+
+.command-halo-mode-switcher button:last-child {
+  border-right: 0;
+}
+
+.command-halo-mode-switcher button[aria-selected="true"] {
+  background: var(--accent-glow);
+  color: var(--accent);
+  box-shadow: inset 0 -3px 0 var(--accent);
+  font-weight: 700;
+}
+
+.command-halo-radial {
+  position: fixed;
+  left: var(--halo-center-x);
+  top: var(--halo-center-y);
+  z-index: 1;
+  width: var(--halo-diameter);
+  height: var(--halo-diameter);
+  transform: translate(-50%, -50%);
+  border: 1px solid var(--border);
+  border-radius: 50%;
+  background:
+    repeating-conic-gradient(from -90deg, transparent 0deg 24.5deg, color-mix(in srgb, var(--border) 74%, transparent) 24.5deg 25.5deg),
+    color-mix(in srgb, var(--bg-card) 94%, transparent);
+  box-shadow: var(--shadow-lg);
+  animation: command-halo-enter .18s cubic-bezier(.2, .8, .2, 1) both;
+}
+
+.command-halo-layer[data-dock="left"] .command-halo-radial {
+  clip-path: inset(0 0 0 50%);
+}
+
+.command-halo-layer[data-dock="right"] .command-halo-radial {
+  clip-path: inset(0 50% 0 0);
+}
+
+.command-halo-menu {
+  position: fixed;
+  inset: 0;
+  z-index: 2;
+  pointer-events: none;
+}
+
+.command-halo-petal {
+  position: fixed;
+  left: clamp(calc(84px + env(safe-area-inset-left)), var(--halo-petal-x), calc(100vw - 84px - env(safe-area-inset-right)));
+  top: clamp(calc(32px + env(safe-area-inset-top)), var(--halo-petal-y), calc(100dvh - 32px - env(safe-area-inset-bottom)));
+  display: flex;
+  width: 152px;
+  align-items: center;
+  gap: 9px;
+  padding: 0 12px;
+  transform: translate(-50%, -50%);
+  border: 1px solid var(--border);
+  border-radius: 999px;
+  background: color-mix(in srgb, var(--bg-card) 96%, transparent);
+  box-shadow: var(--shadow-sm);
+  color: var(--text-secondary);
+  cursor: pointer;
+  pointer-events: auto;
+  text-align: left;
+  transition: transform .12s ease, box-shadow .12s ease, border-color .12s ease;
+  animation: command-halo-petal-enter .2s cubic-bezier(.2, .8, .2, 1) both;
+}
+
+.command-halo-layer[data-dock="right"] .command-halo-petal {
+  flex-direction: row-reverse;
+  text-align: right;
+}
+
+.command-halo-petal:hover,
+.command-halo-petal:focus-visible,
+.command-halo-petal[data-active="true"] {
+  transform: translate(-50%, -50%) scale(1.045);
+  border-color: var(--accent);
+  outline: 3px solid color-mix(in srgb, var(--accent) 28%, transparent);
+  outline-offset: 2px;
+  box-shadow: var(--shadow-md);
+  color: var(--accent);
+}
+
+.command-halo-petal[data-available="false"],
+.command-halo-sheet button[data-available="false"] {
+  opacity: .42;
+}
+
+.command-halo-sheet button[data-available="false"] .command-halo-icon:last-child {
+  margin-left: auto;
+}
+
+.command-halo-petal-copy {
+  display: flex;
+  min-width: 0;
+  flex: 1;
+  flex-direction: column;
+  line-height: 1.12;
+}
+
+.command-halo-petal-copy > span {
+  overflow: hidden;
+  font-size: 13px;
+  font-weight: 650;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.command-halo-petal-copy small {
+  color: var(--text-muted);
+  font-family: var(--font-mono);
+  font-size: 8px;
+  letter-spacing: .1em;
+  text-transform: uppercase;
+}
+
+.command-halo-icon {
+  flex: 0 0 auto;
+  font-size: 21px;
+  font-variation-settings: "FILL" 0, "wght" 320, "GRAD" 0, "opsz" 21;
+}
+
+.command-halo-center {
+  position: fixed;
+  left: clamp(calc(29px + env(safe-area-inset-left)), var(--halo-center-x), calc(100vw - 29px - env(safe-area-inset-right)));
+  top: clamp(calc(29px + env(safe-area-inset-top)), var(--halo-center-y), calc(100dvh - 29px - env(safe-area-inset-bottom)));
+  z-index: 4;
+  display: flex;
+  width: 58px;
+  height: 58px;
+  align-items: center;
+  justify-content: center;
+  transform: translate(-50%, -50%);
+  border: 1px solid var(--border-strong);
+  border-radius: 50%;
+  background: var(--chrome-bg);
+  box-shadow: var(--shadow-lg);
+  color: var(--accent);
+  cursor: pointer;
+}
+
+.command-halo-center:focus-visible,
+.command-halo-utility:focus-visible,
+.command-halo-sheet button:focus-visible,
+.command-halo-context-panel button:focus-visible,
+.command-halo-mode-switcher button:focus-visible {
+  outline: 3px solid var(--accent);
+  outline-offset: 2px;
+}
+
+.command-halo-sheet,
+.command-halo-context-panel {
+  position: fixed;
+  top: 50%;
+  z-index: 6;
+  width: min(304px, calc(100vw - 32px));
+  max-height: calc(100dvh - max(32px, env(safe-area-inset-top)) - max(32px, env(safe-area-inset-bottom)));
+  overflow-y: auto;
+  transform: translateY(-50%);
+  border: 1px solid var(--border-strong);
+  border-radius: 12px;
+  background: var(--chrome-bg);
+  box-shadow: var(--shadow-lg);
+  animation: command-halo-sheet-enter .18s cubic-bezier(.2, .8, .2, 1) both;
+  touch-action: pan-y;
+}
+
+.command-halo-layer[data-dock="left"] .command-halo-sheet,
+.command-halo-layer[data-dock="left"] .command-halo-context-panel {
+  left: clamp(224px, 35vw, 372px);
+}
+
+.command-halo-layer[data-dock="right"] .command-halo-sheet,
+.command-halo-layer[data-dock="right"] .command-halo-context-panel {
+  right: clamp(224px, 35vw, 372px);
+}
+
+.command-halo-sheet > header {
+  position: sticky;
+  top: 0;
+  z-index: 1;
+  display: flex;
+  min-height: 52px;
+  align-items: center;
+  justify-content: space-between;
+  padding-left: 16px;
+  border-bottom: 1px solid var(--border);
+  background: var(--chrome-bg);
+}
+
+.command-halo-sheet h2,
+.command-halo-context-panel h2 {
+  margin: 0;
+  color: var(--text-primary);
+  font-family: var(--font-serif);
+  font-size: 19px;
+  font-weight: 600;
+}
+
+.command-halo-sheet h3 {
+  margin: 10px 14px 4px;
+  color: var(--text-muted);
+  font-family: var(--font-mono);
+  font-size: 9px;
+  letter-spacing: .14em;
+  text-transform: uppercase;
+}
+
+.command-halo-sheet button,
+.command-halo-context-panel button {
+  display: flex;
+  width: 100%;
+  align-items: center;
+  gap: 10px;
+  padding: 0 14px;
+  border: 0;
+  border-bottom: 1px solid color-mix(in srgb, var(--border) 72%, transparent);
+  background: transparent;
+  color: var(--text-secondary);
+  cursor: pointer;
+  font: inherit;
+  text-align: left;
+}
+
+.command-halo-sheet button:hover,
+.command-halo-context-panel button:hover {
+  background: var(--bg-card-hover);
+  color: var(--accent);
+}
+
+.command-halo-context-panel {
+  padding: 16px;
+}
+
+.command-halo-context-panel h2 {
+  margin-bottom: 10px;
+}
+
+.command-halo-context-panel p {
+  margin: 0;
+  padding: 16px 0;
+  color: var(--text-muted);
+  font-size: 13px;
+}
+
+.command-halo-context-panel small {
+  margin-left: auto;
+  color: var(--text-muted);
+  font-family: var(--font-mono);
+  font-size: 8px;
+  letter-spacing: .08em;
+}
+
+@keyframes command-halo-enter {
+  from { opacity: 0; transform: translate(-50%, -50%) scale(.92); }
+  to { opacity: 1; transform: translate(-50%, -50%) scale(1); }
+}
+
+@keyframes command-halo-petal-enter {
+  from { opacity: 0; transform: translate(-50%, -50%) scale(.9); }
+  to { opacity: 1; transform: translate(-50%, -50%) scale(1); }
+}
+
+@keyframes command-halo-sheet-enter {
+  from { opacity: 0; transform: translateY(-50%) translateX(-8px); }
+  to { opacity: 1; transform: translateY(-50%) translateX(0); }
+}
+
+@media (max-width: 760px) {
+  .command-halo-header {
+    left: auto;
+    right: max(8px, env(safe-area-inset-right));
+    transform: none;
+  }
+
+  .command-halo-mode-switcher {
+    left: auto;
+    right: max(8px, env(safe-area-inset-right));
+    transform: none;
+  }
+
+  .command-halo-layer[data-dock] .command-halo-sheet,
+  .command-halo-layer[data-dock] .command-halo-context-panel {
+    right: max(12px, env(safe-area-inset-right));
+    left: max(12px, env(safe-area-inset-left));
+    width: auto;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .command-halo-radial,
+  .command-halo-petal,
+  .command-halo-sheet,
+  .command-halo-context-panel {
+    animation: none;
+    transition: none;
+  }
+}

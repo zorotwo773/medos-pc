@@ -1,0 +1,100 @@
+# syntax=docker/dockerfile:1.7
+#
+# MedOS backend container
+# Target: linux/arm64 (Oracle Cloud Ampere A1) and linux/amd64 (local dev/smoke)
+# Python 3.12 + FastAPI + CPU torch + faiss-cpu + PyMuPDF
+#
+# Build:   docker buildx build --platform linux/arm64 -f infra/Dockerfile.backend -t medos-backend:latest .
+# Run:     compose handles it — see infra/docker-compose.yml
+
+# ────────────────────────────────────────────────────────────────
+# Stage 1: builder — compile wheels into a venv
+# ────────────────────────────────────────────────────────────────
+FROM python:3.12-slim-bookworm AS builder
+
+ENV PYTHONDONTWRITEBYTECODE=1 \
+    PYTHONUNBUFFERED=1 \
+    PIP_NO_CACHE_DIR=1 \
+    PIP_DISABLE_PIP_VERSION_CHECK=1
+
+# System build deps. mupdf-dev needed only if PyMuPDF falls back to source build;
+# manylinux/aarch64 wheels for fitz exist on PyPI so this is belt-and-braces.
+RUN apt-get update && apt-get install -y --no-install-recommends \
+        build-essential \
+        gcc \
+        g++ \
+        git \
+        curl \
+        ca-certificates \
+        libgomp1 \
+    && rm -rf /var/lib/apt/lists/*
+
+# Create venv we'll copy into the runtime stage
+RUN python -m venv /opt/venv
+ENV PATH="/opt/venv/bin:$PATH"
+
+# Install Python deps. Torch CPU wheel is auto-selected on linux/arm64 and via
+# the explicit index URL on linux/amd64 — keeps the smoke build slim too.
+WORKDIR /build
+COPY backend/requirements.txt ./requirements.txt
+
+RUN pip install --upgrade pip wheel setuptools && \
+    if [ "$(uname -m)" = "aarch64" ]; then \
+        pip install --no-cache-dir torch>=2.0.0; \
+    else \
+        pip install --no-cache-dir --index-url https://download.pytorch.org/whl/cpu torch>=2.0.0; \
+    fi && \
+    pip install --no-cache-dir -r requirements.txt && \
+    pip install --no-cache-dir itsdangerous>=2.2.0
+
+# ────────────────────────────────────────────────────────────────
+# Stage 2: runtime — slim image with venv + app code
+# ────────────────────────────────────────────────────────────────
+FROM python:3.12-slim-bookworm AS runtime
+
+ENV PYTHONDONTWRITEBYTECODE=1 \
+    PYTHONUNBUFFERED=1 \
+    PATH="/opt/venv/bin:$PATH" \
+    MEDOS_ROOT=/medos \
+    BACKEND_PORT=8002
+
+# Runtime-only system libs. libgomp1 for faiss/torch OpenMP, libgl1+libglib2.0-0
+# for any imaging deps, curl for healthchecks.
+RUN apt-get update && apt-get install -y --no-install-recommends \
+        libgomp1 \
+        libgl1 \
+        libglib2.0-0 \
+        curl \
+        ca-certificates \
+    && rm -rf /var/lib/apt/lists/*
+
+COPY --from=builder /opt/venv /opt/venv
+
+# Non-root user. Data volume is bind-mounted r/w so the uid must match host.
+# We default to 1000:1000 (Oracle's `ubuntu` user) — override at build time
+# with --build-arg APP_UID=… if your host user differs.
+ARG APP_UID=1000
+ARG APP_GID=1000
+RUN groupadd --gid ${APP_GID} medos && \
+    useradd  --uid ${APP_UID} --gid ${APP_GID} --shell /bin/bash --create-home medos
+
+WORKDIR /app
+COPY --chown=medos:medos backend/ ./backend/
+# public/ holds cliniccons_disease_database.json which backend reads
+COPY --chown=medos:medos public/ ./public/
+
+# /medos/data will be the bind-mount target (see compose). Ensure it exists
+# so config.py path resolution doesn't crash before mount.
+RUN mkdir -p /medos/data && chown -R medos:medos /medos /app
+
+USER medos
+
+EXPOSE 8002
+
+# Healthcheck hits the backend's /health endpoint (defined in main.py)
+HEALTHCHECK --interval=30s --timeout=5s --start-period=120s --retries=3 \
+    CMD curl -fsS http://127.0.0.1:8002/health || exit 1
+
+WORKDIR /app/backend
+
+CMD ["uvicorn", "main:app", "--host", "0.0.0.0", "--port", "8002", "--workers", "1", "--proxy-headers", "--forwarded-allow-ips", "*"]

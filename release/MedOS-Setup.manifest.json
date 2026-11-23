@@ -1,0 +1,65 @@
+{
+  "product": "MedOS",
+  "version": "1.1.5",
+  "built_at": "2026-11-22T21:26:47Z",
+  "root": "C:\\MedOS",
+  "file_count": 58492,
+  "uncompressed_bytes": 2230055269,
+  "included_dirs": [
+    "app",
+    "tools",
+    "setup_center",
+    "docs",
+    "linux",
+    "mac",
+    "MedOS.app"
+  ],
+  "included_root_files": [
+    "START.ps1",
+    "START.bat",
+    "STOP.ps1",
+    "STOP.bat",
+    "launch.vbs",
+    "ALLOW_LAN.bat",
+    "ALLOW_LAN.ps1",
+    "EXPORT_PROGRESS.bat",
+    "EXPORT_PROGRESS.py",
+    "IMPORT_PROGRESS.bat",
+    "IMPORT_PROGRESS.py",
+    "medos.ico",
+    "medos.icns",
+    "README.md",
+    "DISTRIBUTION.md",
+    "UPGRADE.md",
+    "PROJECT_STRUCTURE.md",
+    "medos_data_manifest.md",
+    "MedOS_USER_GUIDE.md",
+    "MedOS_USER_GUIDE.pdf",
+    "MedOS-Phone-README.md",
+    "MedOS-Phone-Install.txt",
+    "MedOS-Companion-README.txt",
+    "MedOS-Companion.apk",
+    "MedOS.command",
+    "MedOS-Setup.command",
+    "MedOS-Stop.command",
+    "START HERE - LINUX.sh"
+  ],
+  "excluded": [
+    "data/ (all user content packs)",
+    "android-companion/ (APK build toolchain)",
+    "MedOS Update/ (old code-only update kit)",
+    ".medos-updates/, _backups/, scratch/",
+    ".medos-setup/ + setup-drive.json (stale integrity receipt)",
+    ".env files, logs, pid files, caches, __pycache__"
+  ],
+  "installer": {
+    "mode": "single-exe",
+    "files": [
+      "D:\\MedOS-installer-dist\\MedOS-Setup.exe"
+    ],
+    "bytes": 536028340,
+    "sha256": "ca73eb542bff331eee6f68db3972b7128c4fb1eeaa72a7c0795a24d939439c98",
+    "payload_sha256": "9d8be2facf51ee11b36d777bff06e09e6e1720919699d0a884828ccd0d78b7e7"
+  },
+  "max_file_bytes": 1940000000
+}

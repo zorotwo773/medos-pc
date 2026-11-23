@@ -1,0 +1,2077 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="Complete MedOS 1.1.5 installation, upgrade, user, Android, and troubleshooting guide.">
+  <title>MedOS 1.1.5 Complete Release and User Guide</title>
+  <style>
+:root {
+  color-scheme: light;
+  --ink: #16231f;
+  --muted: #5a6863;
+  --paper: #ffffff;
+  --wash: #f3f8f6;
+  --line: #d7e2de;
+  --brand: #0c6b56;
+  --brand-dark: #084d3f;
+  --accent: #d97706;
+  --code: #eef3f1;
+}
+* { box-sizing: border-box; }
+html { scroll-behavior: smooth; }
+body {
+  margin: 0;
+  color: var(--ink);
+  background: var(--wash);
+  font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Arial, sans-serif;
+  font-size: 17px;
+  line-height: 1.66;
+}
+.topbar {
+  height: 8px;
+  background: linear-gradient(90deg, var(--brand-dark), var(--brand), #22a17e, var(--accent));
+}
+main {
+  width: min(1040px, calc(100% - 32px));
+  margin: 34px auto 70px;
+  padding: 64px clamp(24px, 6vw, 82px) 80px;
+  background: var(--paper);
+  border: 1px solid var(--line);
+  border-radius: 18px;
+  box-shadow: 0 20px 55px rgba(15, 43, 35, 0.09);
+}
+h1, h2, h3, h4 { color: #0d3128; line-height: 1.22; letter-spacing: -0.02em; }
+h1 { margin: 0 0 14px; font-size: clamp(2.05rem, 5vw, 3.35rem); }
+h2 { margin: 2.8em 0 0.7em; padding-top: 0.2em; font-size: clamp(1.6rem, 3vw, 2.15rem); border-bottom: 2px solid var(--line); padding-bottom: 0.35em; }
+h3 { margin: 2em 0 0.55em; font-size: 1.28rem; }
+h4 { margin: 1.5em 0 0.45em; font-size: 1.08rem; }
+.heading-link { margin-left: 0.45em; color: transparent; font-weight: 400; text-decoration: none; }
+h1:hover .heading-link, h2:hover .heading-link, h3:hover .heading-link, h4:hover .heading-link, .heading-link:focus { color: #8ba69d; }
+p { margin: 0.75em 0 1.05em; }
+a { color: var(--brand); text-decoration-thickness: 1px; text-underline-offset: 3px; }
+strong { color: #102c25; }
+hr { border: 0; border-top: 1px solid var(--line); margin: 2.6em 0; }
+blockquote {
+  margin: 1.4em 0;
+  padding: 0.9em 1.1em;
+  background: #f7fbf9;
+  border-left: 5px solid var(--brand);
+  border-radius: 0 10px 10px 0;
+  color: #314a43;
+}
+blockquote p { margin: 0.25em 0; }
+ul, ol { padding-left: 1.55em; }
+li { margin: 0.35em 0; }
+li::marker { color: var(--brand); font-weight: 700; }
+table { width: 100%; border-collapse: collapse; margin: 1.3em 0 1.8em; font-size: 0.94em; }
+th { background: #eaf4f0; color: #123b31; text-align: left; }
+th, td { border: 1px solid var(--line); padding: 0.7em 0.8em; vertical-align: top; }
+tbody tr:nth-child(even) { background: #fafcfb; }
+code {
+  padding: 0.12em 0.34em;
+  border-radius: 5px;
+  background: var(--code);
+  color: #753c06;
+  font-family: "Cascadia Mono", "SFMono-Regular", Consolas, monospace;
+  font-size: 0.88em;
+  overflow-wrap: anywhere;
+}
+pre { padding: 1em; overflow-x: auto; border-radius: 10px; background: #10251f; color: #e9fff7; }
+pre code { padding: 0; color: inherit; background: transparent; }
+main > p:nth-of-type(-n+2) { color: var(--muted); font-weight: 600; }
+main > h2:first-of-type { margin-top: 2em; }
+.footer {
+  width: min(1040px, calc(100% - 32px));
+  margin: -45px auto 45px;
+  color: var(--muted);
+  text-align: center;
+  font-size: 13px;
+}
+@media (max-width: 720px) {
+  body { font-size: 16px; }
+  main { width: 100%; margin: 0; padding: 34px 18px 60px; border: 0; border-radius: 0; box-shadow: none; }
+  .topbar { height: 6px; }
+  table { display: block; overflow-x: auto; white-space: normal; }
+  .footer { width: 100%; margin: 0; padding: 18px; background: var(--paper); }
+}
+@media print {
+  @page { margin: 16mm; }
+  body { background: white; font-size: 10.5pt; }
+  .topbar, .footer { display: none; }
+  main { width: auto; margin: 0; padding: 0; border: 0; box-shadow: none; }
+  h1 { font-size: 26pt; }
+  h2 { break-before: page; font-size: 18pt; }
+  h2:first-of-type { break-before: auto; }
+  h3, h4 { break-after: avoid; }
+  table, blockquote, pre { break-inside: avoid; }
+  a { color: inherit; text-decoration: none; }
+  .heading-link { display: none; }
+}
+</style>
+</head>
+<body>
+  <div class="topbar" aria-hidden="true"></div>
+  <main><h1 id="medos-1-1-5-complete-release-upgrade-and-user-guide">MedOS 1.1.5 Complete Release, Upgrade, and User Guide<a class="heading-link" href="#medos-1-1-5-complete-release-upgrade-and-user-guide" aria-label="Link to this section">#</a></h1>
+<p><strong>For Windows, Apple Silicon and Intel Mac, Linux, Android, and browser access from iPhone/iPad</strong></p>
+<p><strong>Desktop candidate:</strong> 1.1.5 · <strong>Android candidate:</strong> 1.1.3 (version code 5) · <strong>Guide date:</strong> September 15, 2026</p>
+<p>This is the canonical guide for the 1.1.5 release candidate and its cumulative update. It preserves the complete clinical-workspace handbook from the 1.1.4 guide. Current instructions below take precedence over older readmes. Exact final artifact names, sizes, checksums, and platform validation results belong to the accompanying <code>release.json</code> and checksum sidecars; do not infer them from historical figures in Appendix A.</p>
+<blockquote>
+<p><strong>Who this guide is for:</strong> Doctors, trainees, and other users who want clear steps first. Technical and maintainer details are collected near the end.</p>
+</blockquote>
+<blockquote>
+<p><strong>Clinical notice:</strong> MedOS is an educational and reference workspace. It does not replace clinical judgment, institutional policy, a verified prescribing source, or consultation with an appropriate specialist. Independently verify decisions that affect patient care.</p>
+</blockquote>
+<h3 id="what-medos-is-and-why-it-exists">What MedOS is and why it exists<a class="heading-link" href="#what-medos-is-and-why-it-exists" aria-label="Link to this section">#</a></h3>
+<p>MedOS turns an offline medical library, reference databases, question banks, study progress, calculators, and a clinical concept index into one local workspace. It is designed for doctors and trainees who want to search once, read across several installed sources, study questions, and keep their work on their own device instead of constantly moving among unrelated websites, apps, and PDFs.</p>
+<p>Its three central purposes are:</p>
+<ol>
+<li><strong>Reference:</strong> read installed UpToDate, AMBOSS, UWorld reference material, First Aid, textbooks, drug information, diseases, anatomy, laboratory references, and calculators.</li>
+<li><strong>Study:</strong> build UWorld/AMBOSS-style blocks, take NBME/CMS-style examinations, use additional ABIM banks, review explanations, and preserve per-user progression.</li>
+<li><strong>Connection:</strong> use UMLS/RxNorm, global search, related-source links, the Concept Graph, and the reference hover layer to connect the same disease, drug, finding, code, image, table, question, and book chapter across sources.</li>
+</ol>
+<p>MedOS is <strong>local-first and offline-capable</strong>. The desktop application is a local web application served by the computer itself; seeing <code>127.0.0.1</code> in the browser does not mean MedOS is on the public internet. Optional online lookups, AI providers, torrent retrieval, and LAN access are separate features that the user controls.</p>
+<blockquote>
+<p><strong>Content responsibility:</strong> MedOS is software, not a grant of rights to third-party books, articles, question banks, images, or databases. Each user and distributor must have permission to possess, use, and share the content in their copy. Do not redistribute licensed or copyrighted content without authorization.</p>
+</blockquote>
+<hr>
+<h2 id="contents">Contents<a class="heading-link" href="#contents" aria-label="Link to this section">#</a></h2>
+<ol>
+<li><a href="#1-start-here-the-safest-choice">Start here: the safest choice</a></li>
+<li><a href="#2-upgrade-without-losing-qbank-progress">Upgrade without losing Qbank progress</a></li>
+<li><a href="#3-install-on-windows-mac-or-linux">Install on Windows, Mac, or Linux</a></li>
+<li><a href="#4-passwords-uptodate-preparation-first-launch-wi-fi-and-daily-use">Passwords, UpToDate preparation, first launch, Wi-Fi, and daily use</a></li>
+<li><a href="#5-desktop-features-and-qbanks">Desktop features and Qbanks</a></li>
+<li><a href="#6-android-phone-installation-and-use">Android phone installation and use</a></li>
+<li><a href="#7-what-changed-since-the-july-7-release">What changed since the July 7 release</a></li>
+<li><a href="#8-troubleshooting-and-recovery">Troubleshooting and recovery</a></li>
+<li><a href="#9-privacy-backup-and-important-file-locations">Privacy, backup, and important file locations</a></li>
+<li><a href="#10-technical-and-maintainer-appendix">Technical and maintainer appendix</a></li>
+<li><a href="#11-release-verification-record">Release verification record</a></li>
+<li><a href="#12-complete-troubleshooting-index">Complete troubleshooting index</a></li>
+<li><a href="#13-optional-help-with-chatgpt-or-codex">Optional help with ChatGPT or Codex</a></li>
+<li><a href="#appendix-a-historical-1-1-4-distributions">Historical 1.1.4 distribution appendix</a></li>
+</ol>
+<hr>
+<h2 id="release-at-a-glance">Release at a glance<a class="heading-link" href="#release-at-a-glance" aria-label="Link to this section">#</a></h2>
+<p>Use the complete extracted MedOS folder. Windows and both Mac architectures use bundled runtimes. Linux has a maintained launcher that installs its native core dependencies on first setup. The Android APK/data kit is a separate product with its own version and checksums.</p>
+<table>
+<thead>
+<tr>
+<th>Device</th>
+<th>Start here</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>Windows 10/11 x64</td>
+<td><code>START HERE - WINDOWS.cmd</code> → <strong>Start MedOS</strong></td>
+</tr>
+<tr>
+<td>Apple Silicon or Intel Mac</td>
+<td>Open <code>MedOS.app</code> <strong>inside the complete folder</strong></td>
+</tr>
+<tr>
+<td>Linux</td>
+<td>In a terminal in the complete folder, run <code>bash &quot;START HERE - LINUX.sh&quot;</code></td>
+</tr>
+<tr>
+<td>Android</td>
+<td>Install the current signed APK over the existing app; import phone data only when required</td>
+</tr>
+</tbody></table>
+<p>Windows activation creates one MedOS shortcut and no second copy of medical data. Keep the complete folder in its permanent location, including when it lives on an external SSD.</p>
+<p><strong>Already have 1.1.4?</strong> Use the cumulative <strong>MedOS Update</strong> kit in Section 2. It preserves medical data and private settings while replacing the complete application build. A changed <code>BUILD_ID</code> or failed hash check must be repaired with a coherent update; changing the marker or skipping verification cannot make mixed files safe to run.</p>
+<p>The four additional desktop banks remain available: MKSAP 19 (1,870 questions), BoardVitals 2025 (1,890), AMBOSS ABIM 2025 (2,082), and UWorld ABIM March 2026 (1,249). Installed sources and platform differences are described in Sections 5 and 6.</p>
+<hr>
+<h2 id="1-start-here-the-safest-choice">1. Start here: the safest choice<a class="heading-link" href="#1-start-here-the-safest-choice" aria-label="Link to this section">#</a></h2>
+<h3 id="before-extracting">Before extracting<a class="heading-link" href="#before-extracting" aria-label="Link to this section">#</a></h3>
+<ol>
+<li>Make sure the download completed and matches its checksum sidecar. Use the measured compressed and expanded sizes in <code>release.json</code> to plan free space, including space for both ZIP and extracted files when kept on one disk. Historical 1.1.4 sizes do not describe the new candidate.</li>
+<li>Decide where the complete folder will permanently remain before starting MedOS. Copying or extracting the whole folder is the local installation; the launcher does not make another copy of the medical library.</li>
+<li>If the archive is encrypted, use the download password supplied for that exact artifact. It is separate from MedOS sign-in and from the UpToDate content key. Do not put the ZIP password in <code>UTD_PASSWORD</code>.</li>
+<li>Use 7-Zip or WinRAR on Windows, or a current ZIP utility on Mac. If the operating system&#39;s built-in extractor says the password is wrong or the archive is unsupported, use one of these supported tools.</li>
+<li>Extract the <strong>entire</strong> archive. Do not run Setup from inside the ZIP and do not extract only selected files.</li>
+</ol>
+<p>Use a short, permanent path when possible:</p>
+<ul>
+<li>Windows example: <code>C:\MedOS-Universal</code></li>
+<li>Mac example: <code>MedOS-Universal</code> in the user&#39;s home folder or another writable local folder</li>
+<li>External storage: a normal writable folder on the SSD, not the root of the disk</li>
+</ul>
+<p>Avoid deeply nested folders, cloud-sync folders that may offload files, and read-only locations.</p>
+<h3 id="which-installation-choice-should-i-use">Which installation choice should I use?<a class="heading-link" href="#which-installation-choice-should-i-use" aria-label="Link to this section">#</a></h3>
+<table>
+<thead>
+<tr>
+<th>Your situation</th>
+<th>Choose</th>
+<th>What happens</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>MedOS should remain on this computer after the downloaded ZIP or SSD is removed</td>
+<td><strong>Copy/extract the whole folder to the computer, then run from this folder</strong></td>
+<td>The permanent folder already is the complete local installation.</td>
+</tr>
+<tr>
+<td>The complete ZIP has been extracted to a permanent folder on this computer and you do not want a second data copy</td>
+<td><strong>Use MedOS from this folder / Start MedOS</strong></td>
+<td>The complete folder is activated in place; only small user-specific setup is created.</td>
+</tr>
+<tr>
+<td>MedOS is on an external SSD that will stay connected during use</td>
+<td><strong>Use MedOS from this folder</strong></td>
+<td>MedOS runs from that complete SSD folder.</td>
+</tr>
+<tr>
+<td>The page shows <strong>Full install — Copies 414 MB</strong> or <strong>Space-saving</strong></td>
+<td><strong>This is an older setup workflow; use the current cumulative update</strong></td>
+<td>414 MB described only an old activation set. To move the installation, copy the whole folder before starting it.</td>
+</tr>
+</tbody></table>
+<p><strong>Recommended for downloaded ZIP users:</strong> extract once to the folder where MedOS will permanently remain, then start it in place. <strong>Recommended for SSD users:</strong> run it in place and keep the SSD connected.</p>
+<h3 id="rules-for-a-portable-in-place-folder">Rules for a portable/in-place folder<a class="heading-link" href="#rules-for-a-portable-in-place-folder" aria-label="Link to this section">#</a></h3>
+<ul>
+<li>Keep the complete extracted folder together. Do not move only <code>app</code>, <code>data</code>, or a launcher.</li>
+<li>Do not rename or move it while MedOS is running.</li>
+<li>If the complete folder is moved later on Windows, run <code>START HERE - WINDOWS.cmd</code> again from the new location. On Mac, open <code>MedOS.app</code> from the moved complete folder.</li>
+<li>Do not delete hidden <code>.medos-payload</code>, <code>.medos-setup</code>, or release-marker files. Setup uses them to prove that the data and runtime belong together.</li>
+<li>Copying the whole extracted folder to another Windows or Mac computer is supported. Use that computer&#39;s Windows entry point or Mac app once so it can select the correct runtime and create/localize its launcher state.</li>
+</ul>
+<h3 id="system-requirements">System requirements<a class="heading-link" href="#system-requirements" aria-label="Link to this section">#</a></h3>
+<h4 id="desktop">Desktop<a class="heading-link" href="#desktop" aria-label="Link to this section">#</a></h4>
+<ul>
+<li><strong>Windows:</strong> Windows 10 or 11, 64-bit</li>
+<li><strong>Mac:</strong> macOS 12 Monterey or newer, Apple silicon or Intel</li>
+<li><strong>Linux:</strong> Python 3.11–3.14 (3.12 recommended), Node.js 22 LTS version 22.13 or newer recommended (minimum runtime 20.9), and npm. Use a writable native Linux filesystem when possible.</li>
+<li><strong>Storage:</strong> use the candidate <code>release.json</code>; allow additional room for update backups, user-added content, and an optional prepared UpToDate cache.</li>
+<li><strong>Memory:</strong> 8 GB minimum; 16 GB recommended for smoother use with a browser, large searches, and multiple reader tabs.</li>
+<li><strong>Browser:</strong> a current Chrome, Edge, Safari, or Firefox release. Chrome or Edge generally provides the most consistent desktop experience.</li>
+<li><strong>Internet:</strong> intact Windows/Mac bundles support offline core startup. Linux needs network access for first setup (<code>requirements-core.txt</code>, <code>linux/requirements-lock.txt</code>, and <code>npm ci</code>); later core use is offline. Online lookups, AI, and downloads remain optional.</li>
+</ul>
+<h4 id="android">Android<a class="heading-link" href="#android" aria-label="Link to this section">#</a></h4>
+<ul>
+<li>Android 9 or newer</li>
+<li>Check the current Android manifest for APK/data sizes. The historical 1.1.2 phone data was about 11.9 GB; that is not the new APK size.</li>
+<li>Allow approximately <strong>25 GB free during import</strong> so the phone can temporarily hold both the ZIP and the imported data. After a successful import, the ZIP in Downloads can be removed.</li>
+<li>Keep the phone awake and MedOS in the foreground during the large initial import.</li>
+</ul>
+<p>Actual free-space needs can change with future content kits. Follow the preflight or kit manifest supplied with that release when it reports a larger requirement.</p>
+<hr>
+<h2 id="2-upgrade-without-losing-qbank-progress">2. Upgrade without losing Qbank progress<a class="heading-link" href="#2-upgrade-without-losing-qbank-progress" aria-label="Link to this section">#</a></h2>
+<h3 id="the-safest-five-minute-preparation">The safest five-minute preparation<a class="heading-link" href="#the-safest-five-minute-preparation" aria-label="Link to this section">#</a></h3>
+<p>Do this in the <strong>old working version</strong> before installing the update:</p>
+<ol>
+<li>Open MedOS and sign in to the same MedOS username you normally use.</li>
+<li>Open <strong>Admin → Progression Sync</strong>.</li>
+<li>Select <strong>Export progression</strong> and save the downloaded <code>.json</code> file somewhere outside the old MedOS folder, such as Documents.</li>
+<li>Close MedOS completely.</li>
+<li>Keep the old MedOS folder unchanged until the new version opens and your progress is confirmed.</li>
+</ol>
+<p>The progression export includes used and marked question identifiers across supported banks, sessions/progression information, and search history. Import is designed to merge by question ID, so importing the same file again does not duplicate answers.</p>
+<blockquote>
+<p>If an older MedOS folder has <code>EXPORT_PROGRESS.bat</code>, it can still be used there. That is a legacy convenience, not the primary instruction for this universal release. Use the in-app <strong>Admin → Progression Sync</strong> controls whenever available.</p>
+</blockquote>
+<h3 id="upgrade-to-the-new-complete-desktop-folder">Upgrade to the new complete desktop folder<a class="heading-link" href="#upgrade-to-the-new-complete-desktop-folder" aria-label="Link to this section">#</a></h3>
+<ol>
+<li>Extract the new release completely to a <strong>new permanent folder</strong>.</li>
+<li>Start the new folder using <code>START HERE - WINDOWS.cmd</code> or <code>MedOS.app</code>.</li>
+<li>Sign in with the same MedOS username.</li>
+<li>Check one recently answered Qbank item and one marked item.</li>
+<li>If progression is absent, import the saved JSON with merge mode.</li>
+<li>Keep the old folder until the new release and progression are confirmed.</li>
+</ol>
+<p>Do not extract a complete universal release over a running old folder. A separate folder gives you a simple rollback and avoids partially mixing runtime revisions.</p>
+<h3 id="cumulative-update-without-downloading-the-medical-library-again">Cumulative update without downloading the medical library again<a class="heading-link" href="#cumulative-update-without-downloading-the-medical-library-again" aria-label="Link to this section">#</a></h3>
+<p>The <strong>MedOS Update</strong> kit accepts an existing <strong>1.1.4 or 1.1.5</strong> desktop installation. Stop MedOS first. Keep a progression export and a private backup of important user state before applying any update.</p>
+<ol>
+<li><p>Extract the update ZIP <strong>into the existing complete MedOS folder</strong>. This creates a child folder named <strong><code>MedOS Update</code></strong>. Do not extract the full desktop release over the old installation.</p>
+</li>
+<li><p>Open <code>MedOS Update</code> and run the updater for your system:</p>
+<ul>
+<li>Windows: double-click <strong><code>APPLY UPDATE - WINDOWS.cmd</code></strong>.</li>
+<li>Mac: open <strong><code>APPLY UPDATE - MAC.command</code></strong>; follow the trusted-app approval steps in Section 3 if macOS asks.</li>
+<li>Linux: from the complete MedOS folder, run <code>python3 &quot;MedOS Update/apply_update.py&quot; --root . --kit &quot;MedOS Update&quot;</code>.</li>
+</ul>
+</li>
+<li><p>Let verification and the update finish. The updater backs up old application files and restores the complete <code>.next</code> build together with matching code and release metadata. It preserves <code>data/</code>, private <code>.env</code>, and user progression.</p>
+</li>
+<li><p>Start with the current platform entry point. Confirm sign-in, a recently used Qbank item, a marked item, and an UpToDate article.</p>
+</li>
+<li><p>Keep the update backup until those checks pass. Use the updater&#39;s recorded backup information if recovery is needed.</p>
+</li>
+</ol>
+<p>If verification reports a mixed <code>BUILD_ID</code>, missing chunk, or hash mismatch, preserve the installation and apply the complete trusted kit again. Do not edit <code>BUILD_ID</code>, copy selected chunks from another build, change manifests to match broken files, or disable integrity checks. An older Setup ZIP or root launcher is not equivalent to this cumulative update.</p>
+<p>For a different base release, use a new complete folder and progression export/import. The old 1.1.4 torrents and split-pack instructions are historical; do not use their magnet as the 1.1.5 candidate. New torrent distribution requires its own newly measured identity.</p>
+<h3 id="upgrade-by-using-a-new-portable-in-place-folder">Upgrade by using a new portable/in-place folder<a class="heading-link" href="#upgrade-by-using-a-new-portable-in-place-folder" aria-label="Link to this section">#</a></h3>
+<p>A newly extracted portable folder is a new release location. Progress from a separate old folder does not automatically appear there.</p>
+<ol>
+<li>Export progression from the old version.</li>
+<li>Extract and activate the new complete folder in place.</li>
+<li>Open the new MedOS.</li>
+<li>Go to <strong>Admin → Progression Sync → Import progression</strong>.</li>
+<li>Leave <strong>Replace instead of merge</strong> unchecked for the safest normal upgrade.</li>
+<li>Select the exported <code>.json</code> file and verify the reported import result.</li>
+</ol>
+<p>Use <strong>Replace instead of merge</strong> only when you intentionally want the imported file to become the authoritative progression record.</p>
+<h3 id="if-you-forgot-to-export-first">If you forgot to export first<a class="heading-link" href="#if-you-forgot-to-export-first" aria-label="Link to this section">#</a></h3>
+<p>Do not delete or modify the old folder. Reopen the old MedOS version and export progression. If the old app no longer starts, keep the folder and see <a href="#progress-missing-after-an-upgrade">Progress missing after an upgrade</a> before attempting manual file copying.</p>
+<h3 id="important-mutable-desktop-data">Important mutable desktop data<a class="heading-link" href="#important-mutable-desktop-data" aria-label="Link to this section">#</a></h3>
+<p>The most important recognized files include:</p>
+<ul>
+<li><code>data/qbank_state.sqlite3</code> — Qbank used/marked state and sessions</li>
+<li><code>anki_progress.sqlite</code> — Anki progress</li>
+<li><code>anki_userdecks.sqlite</code> — user-created Anki deck information</li>
+<li><code>users.sqlite</code> — local MedOS accounts where present</li>
+<li><code>app/backend/.env</code> — optional private configuration and API keys</li>
+</ul>
+<p>Never copy these files while MedOS is running. The supported progression JSON export/import is safer across database revisions than manually replacing a database.</p>
+<h3 id="updating-the-android-app-without-losing-data">Updating the Android app without losing data<a class="heading-link" href="#updating-the-android-app-without-losing-data" aria-label="Link to this section">#</a></h3>
+<p>Do <strong>not</strong> uninstall the existing phone app. Install the new APK over it. Android preserves app-private data only when the package identity and signing certificate match. The supplied Android kit records both so Setup can verify release continuity.</p>
+<hr>
+<h2 id="3-install-on-windows-mac-or-linux">3. Install on Windows, Mac, or Linux<a class="heading-link" href="#3-install-on-windows-mac-or-linux" aria-label="Link to this section">#</a></h2>
+<h3 id="windows-10-or-11">Windows 10 or 11<a class="heading-link" href="#windows-10-or-11" aria-label="Link to this section">#</a></h3>
+<ol>
+<li>Extract the entire universal ZIP.</li>
+<li>Open the extracted folder.</li>
+<li>Double-click <strong><code>START HERE - WINDOWS.cmd</code></strong>.</li>
+<li>If Windows displays a security prompt, confirm that the file is inside the extracted MedOS release you received from the trusted distributor.</li>
+<li>Setup opens a local page in the browser. It is served only for this setup session and uses an authentication token.</li>
+<li>Click <strong>Start MedOS</strong>. No install destination is requested and no large medical data is copied.</li>
+<li>Keep the black launcher window open until the page says MedOS is ready.</li>
+<li>At completion, use the new <strong>MedOS</strong> shortcut. The page also opens the app after checking the frontend and backend services.</li>
+</ol>
+<p>Windows does not need a system Python or Node installation. Setup uses the bundled release runtimes. Administrator access should not be required for the recommended per-user destination.</p>
+<h3 id="apple-silicon-or-intel-mac">Apple Silicon or Intel Mac<a class="heading-link" href="#apple-silicon-or-intel-mac" aria-label="Link to this section">#</a></h3>
+<ol>
+<li>Extract the complete release to a permanent writable location.</li>
+<li>Open <strong><code>MedOS.app</code> inside that folder</strong>. Keep it beside <code>app</code>, <code>data</code>, and the bundled runtimes. Use an alias or Dock item for convenience.</li>
+<li>If macOS blocks a trusted, verified copy, first attempt to open it, then visit <strong>System Settings → Privacy &amp; Security → Open Anyway</strong> and confirm the prompt. On macOS 15 Sequoia and later, Control-click is no longer the approval override for unsigned or unnotarized software. See <a href="https://developer.apple.com/news/?id=saqachfa">Apple&#39;s runtime-protection notice</a> and <a href="https://support.apple.com/102445">Apple&#39;s approval instructions</a>.</li>
+<li>Let the native arm64 or x64 runtime start the local services. If the browser opens an old <code>0.0.0.0</code> address, reopen from the current launcher; the local app uses <code>http://127.0.0.1:3000</code>.</li>
+</ol>
+<p>Do not move just the <code>.app</code> bundle, disable Gatekeeper globally, or treat a source/structure test as a native Mac acceptance test. Native Mac testing for this candidate remains pending until reported in <code>release.json</code>.</p>
+<p>A dialog asking you to reconnect or locate the MedOS drive is a <strong>folder-location problem</strong>, not a macOS security approval. Reconnect the drive and open <code>MedOS.app</code> inside the complete folder. If macOS relocates the app during security handling or the launcher reports missing files, open <strong><code>MedOS.command</code> from the same complete folder</strong> as the dialog directs. Keep all medical data and bundled runtimes together.</p>
+<h3 id="linux">Linux<a class="heading-link" href="#linux" aria-label="Link to this section">#</a></h3>
+<p>The maintained entry point is <strong><code>START HERE - LINUX.sh</code></strong>. Keep the complete folder on a writable native Linux filesystem where possible. Mounted Windows/exFAT locations can have different permission and symbolic-link behavior.</p>
+<p>Use a <strong>dedicated extracted copy for Linux</strong>. First setup replaces the frontend dependencies with native Linux packages and may remove Windows-native dependencies. Keep a separate complete copy for Windows or Mac so their offline dependencies remain available. Updating the Linux copy preserves its medical data and progress; rerun the Linux entry point afterward to refresh dependencies when needed.</p>
+<ol>
+<li><p>Install Python <strong>3.11–3.14</strong> (3.12 recommended), Node.js <strong>22 LTS version 22.13+</strong> recommended (minimum runtime 20.9), and <strong>npm</strong> using your distribution&#39;s supported method.</p>
+</li>
+<li><p>Open a terminal in the complete MedOS folder and run:</p>
+<pre><code class="language-bash">bash &quot;START HERE - LINUX.sh&quot;
+</code></pre>
+</li>
+<li><p>On first setup, keep the network available while the launcher creates a local Python environment, installs <code>requirements-core.txt</code> together with the verified <code>linux/requirements-lock.txt</code> versions, and runs <code>npm ci</code> for native frontend dependencies.</p>
+</li>
+<li><p>Leave the terminal open. Use the displayed local address when the services are ready. Stop MedOS with <strong>Ctrl+C in that terminal</strong>.</p>
+</li>
+<li><p>On later runs, the installed core can work offline. Logs are under <strong><code>.medos-linux/logs</code></strong>.</p>
+</li>
+</ol>
+<p>PyTorch, transformers, FAISS, and an AI provider key are not required for core reading, Qbanks, or startup. Optional AI features have separate dependencies and configuration. The candidate passed startup, health, frontend, login, and encrypted-topic HTTP checks on Ubuntu 24.04 amd64 under WSL1 with Python 3.12.3 and Node 22.11.0. This is a WSL result; physical Linux-machine acceptance remains separate. See Section 11 for the platform evidence and limits.</p>
+<h3 id="what-the-launchers-do">What the launchers do<a class="heading-link" href="#what-the-launchers-do" aria-label="Link to this section">#</a></h3>
+<ul>
+<li>Uses the appropriate Windows/Mac entry point or maintained Linux launcher.</li>
+<li>Validates the release marker and required component manifests.</li>
+<li>Uses the complete folder in its current permanent location; it does not copy the medical library.</li>
+<li>Selects the matching bundled runtime.</li>
+<li>Shows the current startup phase and local-service health on Windows.</li>
+<li>Creates one MedOS shortcut, launches MedOS, and checks both local services.</li>
+<li>Offers bounded verification/diagnostics through the published Windows setup tools; Mac troubleshooting uses the bundled launch scripts and logs.</li>
+</ul>
+<h3 id="what-setup-does-not-do">What Setup does not do<a class="heading-link" href="#what-setup-does-not-do" aria-label="Link to this section">#</a></h3>
+<ul>
+<li>It does not format, repartition, repair, or erase a disk.</li>
+<li>It does not intentionally overwrite user progression, private configuration, or imported content during a managed update.</li>
+<li>It does not install arbitrary system-wide Python, Node, Homebrew, or packages from an unapproved repository.</li>
+<li>It does not create a Stop shortcut.</li>
+<li>Intact bundled Windows/Mac startup is offline; Linux first setup installs native dependencies with network access.</li>
+<li>It does not make a portable folder magically independent of its data location; the whole folder must remain present and writable.</li>
+</ul>
+<h3 id="internet-assisted-repair">Internet-assisted repair<a class="heading-link" href="#internet-assisted-repair" aria-label="Link to this section">#</a></h3>
+<p>MedOS is offline-first. If an approved runtime file is missing, Setup may offer a controlled repair from a release-configured trusted source when internet access is available. It should not fetch arbitrary code or decide to install global package managers. A damaged medical-data component should be restored from a verified MedOS release rather than an unknown public source.</p>
+<h3 id="torrent-and-older-split-pack-downloads">Torrent and older split-pack downloads<a class="heading-link" href="#torrent-and-older-split-pack-downloads" aria-label="Link to this section">#</a></h3>
+<p>Use only the torrent/checksum identity explicitly named by the current release channel. Appendix A retains the 1.1.4 desktop and Android magnet records for identifying older downloads. A torrent is immutable: updating code requires a new torrent identity or the cumulative MedOS Update kit. A 100% torrent recheck does not prove that separately copied launchers or <code>.next</code> files belong to the same build.</p>
+<hr>
+<h2 id="4-passwords-uptodate-preparation-first-launch-wi-fi-and-daily-use">4. Passwords, UpToDate preparation, first launch, Wi-Fi, and daily use<a class="heading-link" href="#4-passwords-uptodate-preparation-first-launch-wi-fi-and-daily-use" aria-label="Link to this section">#</a></h2>
+<h3 id="do-not-confuse-the-three-kinds-of-password">Do not confuse the three kinds of password<a class="heading-link" href="#do-not-confuse-the-three-kinds-of-password" aria-label="Link to this section">#</a></h3>
+<table>
+<thead>
+<tr>
+<th>Credential</th>
+<th>Current rule</th>
+<th>What it controls</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><strong>Download ZIP password</strong></td>
+<td>Use the password supplied for the exact archive</td>
+<td>Extraction only; it is not an UpToDate key or account password</td>
+</tr>
+<tr>
+<td><strong>MedOS account password</strong></td>
+<td>Use your established account; the distributor supplies initial administrator credentials</td>
+<td>Local sign-in and per-user progression</td>
+</tr>
+<tr>
+<td><strong>UpToDate content key</strong></td>
+<td>The recognized shipped bundle works automatically; no <code>.env</code> edit is required</td>
+<td>Article/graphic content decryption</td>
+</tr>
+</tbody></table>
+<p>An explicit <code>UTD_PASSWORD</code> is still honored for custom content and takes priority over the shipped default. A stale or incorrect explicit override can therefore cause a content-key error. Preserve private configuration and change only a confirmed wrong override after backing it up. Passwords and content keys are not interchangeable.</p>
+<h3 id="change-a-medos-account-password-the-supported-method">Change a MedOS account password—the supported method<a class="heading-link" href="#change-a-medos-account-password-the-supported-method" aria-label="Link to this section">#</a></h3>
+<ol>
+<li>Sign in with an administrator account.</li>
+<li>Open <strong>Admin / User Management</strong>.</li>
+<li>Find the user and choose <strong>Password</strong>.</li>
+<li>Enter a new, unique password and save it.</li>
+<li>Sign out and test the new password before removing any backup or old installation.</li>
+</ol>
+<p>Use at least 12 characters for real shared installations, and do not reuse the archive password. Each doctor should have a separate account because Qbank progress and activity are keyed to the normalized username. An administrator can reset another user&#39;s password without deleting that user&#39;s progress.</p>
+<h3 id="advanced-account-recovery-when-every-administrator-is-locked-out">Advanced account recovery when every administrator is locked out<a class="heading-link" href="#advanced-account-recovery-when-every-administrator-is-locked-out" aria-label="Link to this section">#</a></h3>
+<p>Preserve the active account and progression databases. First verify that the intended folder is running and that a moved drive did not change <code>USERS_DB_PATH</code> or the active root. A database-unavailable error now identifies a database problem separately from an incorrect password.</p>
+<p>If another administrator can sign in, reset the affected account through <strong>Admin / User Management</strong>. Otherwise stop MedOS, make a private backup of the complete SQLite file set (including existing <code>-wal</code>/<code>-shm</code> companions), and request targeted recovery using sanitized diagnostics. Do not delete, replace, or create an empty users database to repair startup or sync. Do not hand-edit password hashes. Recreating users is an intentional administrative change and is not part of this update.</p>
+<h3 id="where-portable-in-place-user-state-lives">Where portable/in-place user state lives<a class="heading-link" href="#where-portable-in-place-user-state-lives" aria-label="Link to this section">#</a></h3>
+<p>The large library remains in the MedOS folder. A verified in-place installation also creates a small writable per-user state directory:</p>
+<ul>
+<li>Windows: <code>%LOCALAPPDATA%\MedOS\portable\&lt;drive-id&gt;\</code></li>
+<li>macOS: <code>~/Library/Application Support/MedOS/portable/&lt;drive-id&gt;/</code></li>
+</ul>
+<p>Its <code>config</code> directory can contain the portable <code>qbank_state.sqlite3</code>; <code>logs</code>, <code>pids</code>, <code>cache</code>, and <code>locator.json</code> support startup and relocation. The locator records the active complete MedOS folder. Custom content-key overrides and optional API keys remain in <code>&lt;MedOS folder&gt;/app/backend/.env</code>, and the normal accounts database remains <code>&lt;MedOS folder&gt;/data/users.sqlite</code> unless an explicit environment override says otherwise. Do not assume AppData contains every MedOS database.</p>
+<h3 id="uptodate-is-ready-without-manual-preparation">UpToDate is ready without manual preparation<a class="heading-link" href="#uptodate-is-ready-without-manual-preparation" aria-label="Link to this section">#</a></h3>
+<p>The shipped encrypted bundle now opens articles and graphics automatically. Its default key is used only when the encrypted dataset matches the verified shipped fingerprint. <strong>Do not add a ZIP password to <code>.env</code>; no manual <code>.env</code> edit is needed for the bundled UpToDate content.</strong> Custom <code>UTD_PASSWORD</code> overrides remain authoritative.</p>
+<p>Read-only validation of the shipped source found <strong>22,406 records: 22,376 readable articles and 30 records that decrypt successfully to empty content</strong>. Those 30 records return a clear unavailable-topic message. They are not reported as readable articles, and redownloading the same source cannot create their missing text.</p>
+<p><strong>Prepare UpToDate</strong> remains an optional Content Manager action for creating a local article cache and supporting workflows that build indexes from it:</p>
+<ol>
+<li>Open <strong>Content Manager → UpToDate → Prepare UpToDate</strong>.</li>
+<li>Allow approximately 9 GB of additional free space; a forced replacement may also need space for the existing cache.</li>
+<li>Keep MedOS and the source drive available until the job reports completion.</li>
+<li>Check one article and graphic afterward.</li>
+</ol>
+<p>Preparation validates every nonempty article, records verified empty source rows separately, and atomically replaces the cache only after successful validation. Wrong keys, malformed content, and incomplete output fail the job. A failed rebuild preserves the previous cache; an empty or corrupt old cache is not accepted merely because its filename exists. Do not delete the encrypted source.</p>
+<h3 id="uptodate-password-and-loading-errors">UpToDate password and loading errors<a class="heading-link" href="#uptodate-password-and-loading-errors" aria-label="Link to this section">#</a></h3>
+<table>
+<thead>
+<tr>
+<th>Message or symptom</th>
+<th>Response</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>Old package asks for <code>UTD_PASSWORD</code></td>
+<td>Apply the cumulative MedOS Update kit to the stopped supported installation</td>
+</tr>
+<tr>
+<td>Current package reports a content-key error</td>
+<td>Check for a custom explicit override and confirm the selected content folder; the ZIP password is separate</td>
+</tr>
+<tr>
+<td>Topic has no article content</td>
+<td>The source contains a verified empty record; choose another topic or content edition</td>
+</tr>
+<tr>
+<td>Cache is empty, partial, or corrupt</td>
+<td>Articles can use the valid encrypted source; retry optional preparation to repair the cache</td>
+</tr>
+<tr>
+<td>Preparation script is missing</td>
+<td>Apply the complete cumulative update, including matching code/build metadata</td>
+</tr>
+<tr>
+<td>Every article fails</td>
+<td>Save diagnostics and verify the content pack and active folder; preserve medical data</td>
+</tr>
+</tbody></table>
+<p>Never bypass decryption or integrity validation to make a status indicator turn green.</p>
+<h3 id="first-launch-checklist">First launch checklist<a class="heading-link" href="#first-launch-checklist" aria-label="Link to this section">#</a></h3>
+<ol>
+<li>Start MedOS using the single <strong>MedOS</strong> shortcut.</li>
+<li>Allow 30–60 seconds on the first start, especially when running from slower external storage.</li>
+<li>The default browser should open to <code>http://127.0.0.1:3000</code>.</li>
+<li>Confirm that the dashboard appears and that search returns a result.</li>
+<li>Open one Qbank and confirm a question loads.</li>
+<li>If upgrading, confirm your username and progression before removing the old release.</li>
+</ol>
+<p><code>127.0.0.1</code> means this computer. MedOS&#39;s local services can work without internet access.</p>
+<h3 id="sign-in-and-manage-users">Sign in and manage users<a class="heading-link" href="#sign-in-and-manage-users" aria-label="Link to this section">#</a></h3>
+<p>When the login gate is enabled, MedOS opens the <strong>Sign in</strong> page. The current built-in administrator username is <code>admin</code> and its initial fallback password is <code>NYC@727264</code>, unless the distributor set a different <code>MEDOS_ADMIN_PASSWORD</code>. Sign in and change the administrator password immediately; do not keep the shared default on a multi-user or network-accessible installation.</p>
+<p>After the first successful sign-in:</p>
+<ol>
+<li>Open <strong>Admin / User Management</strong>.</li>
+<li>Change the initial administrator password.</li>
+<li>Create a separate everyday account for each user rather than sharing the administrator account.</li>
+<li>Give administrator rights only to someone who needs to manage users or progression imports.</li>
+</ol>
+<p>The Admin page can create users, rename their display names, change passwords, grant or remove administrator rights, and delete users. Qbank progress is keyed to the MedOS username, so two doctors using separate accounts on one computer keep separate used/marked questions and statistics.</p>
+<p>Passwords are stored as salted PBKDF2-SHA256 hashes, not plain text. Normal sessions use signed, HttpOnly cookies and are remembered for a limited period. If the documented fallback does not work, the distributor may have overridden it; do not delete the user database as the first recovery step because that can remove locally managed accounts.</p>
+<h3 id="moving-around-the-workspace">Moving around the workspace<a class="heading-link" href="#moving-around-the-workspace" aria-label="Link to this section">#</a></h3>
+<p>MedOS behaves like a local clinical web workspace:</p>
+<ul>
+<li><strong>Global search:</strong> press <code>/</code> from most screens. If text is selected, the selected term can be used as the starting query.</li>
+<li><strong>Command Center:</strong> press <code>g</code>, release it, then press <code>k</code>, or select the Command Center button. On desktop it opens as a docked extension of the left sidebar, and the active page reflows beside it instead of being covered.</li>
+<li><strong>Settings:</strong> press <code>g s</code>.</li>
+<li><strong>Help:</strong> press <code>?</code> for the built-in quick guide and shortcut list.</li>
+<li><strong>Reader tabs:</strong> articles, books, questions, and reference views can remain open in MedOS tabs. Use <code>Ctrl+PageUp</code> and <code>Ctrl+PageDown</code> to cycle tabs.</li>
+<li><strong>Qbank keyboard use:</strong> number keys <code>1–8</code> or letters <code>A–H</code> choose an answer where applicable; left/right arrows move between questions.</li>
+</ul>
+<p>The most useful <code>g</code> shortcuts are:</p>
+<table>
+<thead>
+<tr>
+<th>Keys</th>
+<th>Opens</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><code>g d</code></td>
+<td>Dashboard</td>
+</tr>
+<tr>
+<td><code>g q</code></td>
+<td>Qbank</td>
+</tr>
+<tr>
+<td><code>g u</code></td>
+<td>UpToDate</td>
+</tr>
+<tr>
+<td><code>g a</code></td>
+<td>AMBOSS</td>
+</tr>
+<tr>
+<td><code>g w</code></td>
+<td>UWorld reference library</td>
+</tr>
+<tr>
+<td><code>g i</code></td>
+<td>Medical Library</td>
+</tr>
+<tr>
+<td><code>g o</code></td>
+<td>Content Manager</td>
+</tr>
+<tr>
+<td><code>g t</code></td>
+<td>Media Tray (when it contains collected items)</td>
+</tr>
+<tr>
+<td><code>g y</code></td>
+<td>Lexi</td>
+</tr>
+<tr>
+<td><code>g n</code></td>
+<td>Anki</td>
+</tr>
+<tr>
+<td><code>g m</code></td>
+<td>Create an Anki card from the current selection</td>
+</tr>
+<tr>
+<td><code>g c</code></td>
+<td>Clinical calculators</td>
+</tr>
+<tr>
+<td><code>g l</code></td>
+<td>Quick laboratory ranges</td>
+</tr>
+<tr>
+<td><code>g b</code></td>
+<td>LOINC laboratory panels</td>
+</tr>
+<tr>
+<td><code>g x</code></td>
+<td>UMLS concept lookup</td>
+</tr>
+<tr>
+<td><code>g j</code></td>
+<td>UpToDate Differential Diagnosis; legacy <code>g x d</code> remains accepted</td>
+</tr>
+<tr>
+<td><code>g f</code></td>
+<td>Differential builder</td>
+</tr>
+<tr>
+<td><code>g g</code></td>
+<td>Concept Graph</td>
+</tr>
+<tr>
+<td><code>g v</code></td>
+<td>Sanford Guide</td>
+</tr>
+<tr>
+<td><code>g h</code></td>
+<td>Chat/Tutor</td>
+</tr>
+</tbody></table>
+<p>The ten favorite calculator slots can be opened with <code>Ctrl+Alt+1</code> through <code>Ctrl+Alt+0</code>. The defaults include commonly used tools such as eGFR, Cockcroft-Gault, anion gap, A–a gradient, CHA₂DS₂-VASc, Wells PE, CURB-65, MELD, GCS, and BMI; they can be reassigned from the Calculators page.</p>
+<h3 id="dashboard-recent-activity-and-resuming-work">Dashboard, recent activity, and resuming work<a class="heading-link" href="#dashboard-recent-activity-and-resuming-work" aria-label="Link to this section">#</a></h3>
+<p>The dashboard is both a search launchpad and a return point. It can show recent articles, topics, PDFs, questions, and searches. <strong>Resume</strong> returns to the last supported item and its saved position; a resumable active examination receives priority. Optional auto-jump can return to the last location once per app start.</p>
+<p>Recent activity is associated with the signed-in MedOS account where supported, so clearing ordinary browser cache should not be treated as the main way to reset or recover progression.</p>
+<h3 id="the-reference-hover-layer">The reference hover layer<a class="heading-link" href="#the-reference-hover-layer" aria-label="Link to this section">#</a></h3>
+<p>The reference layer connects the otherwise separate databases. While reading supported articles, explanations, book material, or other clinical content, recognized terms are underlined. Hover with a mouse or tap on a touch device to open a compact reference card.</p>
+<p>Depending on the concept and installed data, a card may show:</p>
+<ul>
+<li>abbreviation expansion and preferred clinical name</li>
+<li>a concise definition and source</li>
+<li>UMLS concept identifier and semantic group</li>
+<li>synonyms</li>
+<li>ICD-10-CM and other linked terminology codes where available</li>
+<li>related concepts and other MedOS sources discussing the term</li>
+<li>a direct jump to a drug monograph, AMBOSS/UpToDate article, First Aid section, UMLS page, image, or Qbank exhibit</li>
+</ul>
+<p>Underlines are source- and concept-aware. Common source colors include AMBOSS blue, UpToDate green, Qbank/UWorld amber, Clinic Consult orange, Drug Reference gray, First Aid red, and UMLS teal. Once a concept is resolved, semantic styling can also help distinguish diseases, findings, drugs, procedures/anatomy, laboratory concepts, and genes. Color is a navigation aid, not a clinical severity indicator.</p>
+<p>The Command Center provides three reference modes:</p>
+<ul>
+<li><strong>Off:</strong> no underlines or hover cards.</li>
+<li><strong>Lite:</strong> uses terms already identified in the content and is the best choice for a slower computer.</li>
+<li><strong>Full:</strong> includes Lite behavior and scans for additional recognized terms; this is the broadest coverage.</li>
+</ul>
+<p>Some cards offer <strong>Clinical</strong> and <strong>Lay</strong> wording. Lay mode may use a cached or online MedlinePlus consumer-health summary when available. Tap outside the card or press <code>Esc</code> to close it.</p>
+<h3 id="articles-pdfs-images-tables-and-video">Articles, PDFs, images, tables, and video<a class="heading-link" href="#articles-pdfs-images-tables-and-video" aria-label="Link to this section">#</a></h3>
+<ul>
+<li>UpToDate and AMBOSS topics open as local reader pages with supported headings, concept links, and related-source navigation.</li>
+<li>Books open in the built-in PDF viewer with page navigation, zoom, and in-document search. Indexed books can open near the relevant chapter.</li>
+<li>MedOS uses a common media viewer for supported figures, Qbank exhibits/tables, images, audio, and video. It supports close, zoom for images, fullscreen, minimize, and a resizable window where appropriate.</li>
+<li>Press <code>Esc</code> to close the current pop-up, drawer, media view, or modal when that surface supports dismissal.</li>
+</ul>
+<h3 id="use-the-complete-desktop-app-from-another-devices-browser">Use the complete desktop app from another device&#39;s browser<a class="heading-link" href="#use-the-complete-desktop-app-from-another-devices-browser" aria-label="Link to this section">#</a></h3>
+<p>This is different from installing the Android app. A phone, iPad, tablet, or second laptop can open the <strong>full desktop MedOS interface</strong> through a browser while the main computer is running MedOS:</p>
+<ol>
+<li>Put both devices on the same trusted Wi-Fi.</li>
+<li>Enable MedOS network access in <strong>Settings</strong> on the desktop.</li>
+<li>Open the LAN address shown by MedOS, such as <code>http://192.168.1.42:3000</code>, on the other device.</li>
+<li>Sign in with the desired MedOS account.</li>
+</ol>
+<p>Because the browser is using the original desktop installation, it sees the same accounts and progression directly; there is no separate browser copy to synchronize. The host computer must remain awake and MedOS must keep running.</p>
+<h3 id="iphone-and-ipad-what-is-and-is-not-possible">iPhone and iPad: what is and is not possible<a class="heading-link" href="#iphone-and-ipad-what-is-and-is-not-possible" aria-label="Link to this section">#</a></h3>
+<p>An iPhone or iPad can use the complete desktop interface in Safari over trusted Wi-Fi, as described above. It cannot run the Windows <code>.bat</code>/<code>.exe</code> runtime or the macOS <code>MedOS.app</code> directly from a plugged-in SSD, and Safari cannot turn a folder on an attached drive into the MedOS backend. The SSD may be readable as storage, but iPadOS still needs an iPad application or a running computer to execute the server.</p>
+<p>The practical no-App-Store option is therefore:</p>
+<ol>
+<li>Connect the SSD to a Windows PC or Mac.</li>
+<li>Start MedOS on that computer.</li>
+<li>Enable private LAN access.</li>
+<li>Open the displayed LAN URL in Safari on the iPad.</li>
+</ol>
+<p>A future native iPad shell would require an Apple-compatible build, signing, entitlements, and distribution through an allowed Apple channel. A free browser/PWA shell can display a server that is already running elsewhere, but it cannot bypass iPadOS execution and filesystem restrictions to run the present desktop backend from USB. App Store publication requires an Apple Developer account and compliance with Apple&#39;s current review, privacy, licensing, and medical-app rules; content rights remain the distributor&#39;s responsibility.</p>
+<h3 id="daily-start-and-stop">Daily start and stop<a class="heading-link" href="#daily-start-and-stop" aria-label="Link to this section">#</a></h3>
+<ul>
+<li><strong>Start:</strong> double-click the MedOS shortcut.</li>
+<li><strong>Normal close:</strong> close the browser tab when finished. The launcher manages the normal local startup flow.</li>
+<li><strong>Troubleshooting stop:</strong> use the stop command only if services remain stuck. Ordinary users do not need a Stop desktop shortcut.</li>
+<li><strong>Portable use:</strong> connect or make available the complete MedOS folder before starting.</li>
+</ul>
+<h3 id="access-from-a-phone-or-tablet-on-the-same-wi-fi">Access from a phone or tablet on the same Wi-Fi<a class="heading-link" href="#access-from-a-phone-or-tablet-on-the-same-wi-fi" aria-label="Link to this section">#</a></h3>
+<p>The desktop can expose MedOS to trusted devices on the same local network.</p>
+<ol>
+<li>Connect both devices to the same trusted Wi-Fi network.</li>
+<li>Open MedOS desktop <strong>Settings</strong> and enable the relevant Wi-Fi/LAN access or sync control.</li>
+<li>If Windows asks whether to allow network access, choose the trusted/private network only.</li>
+<li>Use the LAN address shown by MedOS, for example <code>http://192.168.x.x:3000</code>, on the other device.</li>
+</ol>
+<p>Keep LAN access off on public, hospital-guest, hotel, or other untrusted networks unless you understand the exposure. A VPN, guest-network isolation, or a firewall can prevent devices from seeing each other even when the Wi-Fi name looks the same.</p>
+<h3 id="qbank-progression-sync-on-the-same-wi-fi">Qbank progression sync on the same Wi-Fi<a class="heading-link" href="#qbank-progression-sync-on-the-same-wi-fi" aria-label="Link to this section">#</a></h3>
+<p>In <strong>Settings → LAN Sync</strong>, MedOS can automatically merge Qbank progression among the user&#39;s MedOS devices on the same trusted Wi-Fi. The settings panel shows this device and discovered peers and allows sync to be paused. Manual <strong>Admin → Progression Sync</strong> export remains the recommended backup before an upgrade.</p>
+<h3 id="content-manager-and-torrent-retrieval">Content Manager and torrent retrieval<a class="heading-link" href="#content-manager-and-torrent-retrieval" aria-label="Link to this section">#</a></h3>
+<p>Desktop <strong>Content Manager</strong> can verify content rooms, import a content folder, and retrieve approved MedOS content through the release&#39;s self-contained torrent. It supports selective rooms, progress, pause/resume, recheck, and optional seeding. If the in-app torrent runtime is unavailable, the same <code>.torrent</code> or magnet can be opened in a compatible BitTorrent client using the exact MedOS save location shown by the app.</p>
+<p><strong>Prepare UpToDate</strong> starts a background, one-time local conversion of <code>data/uptodate/utdasset.sqlite</code> into the faster <code>utdasset_decrypted.sqlite</code> article cache (roughly 7.8 GB). It uses CPU and disk but no internet. Keep MedOS running and the source drive connected until the log says <strong>DONE</strong>. The job writes a <code>.tmp</code> database first and atomically replaces the final cache only after completion, so the encrypted source remains intact if the job is interrupted.</p>
+<p>Torrent status does not replace file verification. After a download or relocation, use Content Manager/Setup verification so MedOS confirms the actual expected files.</p>
+<hr>
+<h2 id="5-desktop-features-and-qbanks">5. Desktop features and Qbanks<a class="heading-link" href="#5-desktop-features-and-qbanks" aria-label="Link to this section">#</a></h2>
+<h3 id="main-workspace">Main workspace<a class="heading-link" href="#main-workspace" aria-label="Link to this section">#</a></h3>
+<table>
+<thead>
+<tr>
+<th>Area</th>
+<th>What it is for</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><strong>Dashboard and global search</strong></td>
+<td>Search across installed medical sources and jump directly to a question, article, drug, book, or concept.</td>
+</tr>
+<tr>
+<td><strong>Qbank</strong></td>
+<td>Build tutor or timed question blocks, review explanations, mark items, and track progression.</td>
+</tr>
+<tr>
+<td><strong>NBME/CMS simulator</strong></td>
+<td>Full-screen, multi-block exam workflow with breaks, answers hidden until completion, resumable exam state, and end-of-exam reporting.</td>
+</tr>
+<tr>
+<td><strong>UpToDate and AMBOSS</strong></td>
+<td>Read locally available clinical articles and follow concept links.</td>
+</tr>
+<tr>
+<td><strong>Library</strong></td>
+<td>Open the included PDF/textbook collection and use supported search/navigation tools.</td>
+</tr>
+<tr>
+<td><strong>Diseases</strong></td>
+<td>Browse structured clinical reference material.</td>
+</tr>
+<tr>
+<td><strong>Drugs</strong></td>
+<td>Drug reference, RxNorm-linked information, and dosing material. Always verify patient-specific prescribing independently.</td>
+</tr>
+<tr>
+<td><strong>UMLS</strong></td>
+<td>Look up concepts, CUIs, synonyms, and linked coding information such as ICD-10 where available.</td>
+</tr>
+<tr>
+<td><strong>Anatomy</strong></td>
+<td>Browse anatomy reference material.</td>
+</tr>
+<tr>
+<td><strong>Calculators</strong></td>
+<td>Use clinical calculators with visible inputs and results. Confirm inputs and applicability before clinical use.</td>
+</tr>
+<tr>
+<td><strong>Labs &amp; LOINC</strong></td>
+<td>Review lab and panel reference information with LOINC links where included.</td>
+</tr>
+<tr>
+<td><strong>Differential</strong></td>
+<td>Organize a differential diagnosis; it is a thinking aid, not an autonomous diagnosis.</td>
+</tr>
+<tr>
+<td><strong>Concept Graph</strong></td>
+<td>Explore relationships among medical concepts and sources.</td>
+</tr>
+<tr>
+<td><strong>Anki</strong></td>
+<td>Review spaced-repetition cards and supported user decks.</td>
+</tr>
+<tr>
+<td><strong>Reference hover layer</strong></td>
+<td>View explanations for recognized medical terms throughout supported pages.</td>
+</tr>
+<tr>
+<td><strong>Chat/Tutor</strong></td>
+<td>Optional AI-assisted study. It remains off until a user supplies supported API configuration and should not receive identifiable patient information.</td>
+</tr>
+</tbody></table>
+<h3 id="how-the-sources-work-together">How the sources work together<a class="heading-link" href="#how-the-sources-work-together" aria-label="Link to this section">#</a></h3>
+<p>MedOS is more than a folder of unrelated references. A UMLS-based concept layer normalizes abbreviations, synonyms, drugs, diseases, findings, procedures, and codes. The practical workflow is:</p>
+<ol>
+<li>Search once across installed sources.</li>
+<li>Open the most appropriate source result.</li>
+<li>Hover or tap a recognized term for a quick definition.</li>
+<li>Follow the same concept to another article, drug entry, book chapter, question, First Aid section, code, or related-concept graph without retyping it.</li>
+</ol>
+<p>For example, “MI,” “myocardial infarction,” and “heart attack” can resolve to the same underlying concept. Drug names are additionally normalized through RxNorm. The exact codes and links shown depend on the locally installed content and should be checked against an authoritative current source when used clinically.</p>
+<h3 id="global-search">Global search<a class="heading-link" href="#global-search" aria-label="Link to this section">#</a></h3>
+<p>Press <code>/</code>, enter a clinical term, drug, syndrome, abbreviation, calculator, or question concept, and review the grouped sources. Results can include UpToDate, AMBOSS, books/chapters, First Aid, UWorld reference material, Qbanks, drugs, calculators, diseases, and UMLS concepts. A result opens in its native MedOS reader rather than being treated as a definitive answer from the snippet alone.</p>
+<p>Search keeps source diversity so a very large database does not bury every other category. Book results use clinical-reference ranking: Harrison&#39;s is a strong general internal-medicine source, while a subspecialty standard such as Brenner &amp; Rector may rank first for a clearly renal query. A user can mark a book as a priority reference with its star control.</p>
+<p>The full Search Results page resolves the entered phrase to a clinical concept without waiting for a UMLS result card to appear in the loaded window. It then uses the same cross-library media collector as Concept Graph to show related images and tables inside the main results column. Image/table filter counts include these linked resources, and <strong>Show all</strong> expands beyond the first 24 cards. Known abbreviations use the preferred clinical expansion, so <code>PE</code> enriches pulmonary embolism rather than an unrelated UMLS abbreviation match.</p>
+<h3 id="library-and-adding-books">Library and adding books<a class="heading-link" href="#library-and-adding-books" aria-label="Link to this section">#</a></h3>
+<p>The Library organizes the offline PDF collection by specialty. Supported books have searchable outlines or chapter indexes, and First Aid has specialized snippet/heading support. Books placed into the managed library through the app&#39;s supported workflow are indexed in the background so they can appear in Library and global search. Keep user-added books within the active managed library rather than dropping them into arbitrary release-manifest directories.</p>
+<p>On the phone, most large PDF books are intentionally optional. Use <strong>More → Manage Storage → Find desktop</strong> to download selected books from a running desktop over trusted Wi-Fi.</p>
+<h3 id="reference-modules-in-more-detail">Reference modules in more detail<a class="heading-link" href="#reference-modules-in-more-detail" aria-label="Link to this section">#</a></h3>
+<ul>
+<li><strong>UpToDate:</strong> local topic reader with related-source links and supported graphics. No UpToDate web login is required to read the installed offline material.</li>
+<li><strong>AMBOSS:</strong> local article reader connected to related concepts and parallel sources. Current
+builds render in-article references as visible keyboard-accessible links and use the bundled
+full-resolution clinical figure with its stored title/description in reader and print output.</li>
+<li><strong>UWorld reference library:</strong> explanatory articles and media separate from the UWorld Qbank itself.</li>
+<li><strong>Drug Reference and Lexi:</strong> generic/brand lookup, drug classes, indications, dosing/frequency material, warnings, structured sections, and RxNorm-linked naming where available. Always verify dose, route, renal/hepatic adjustment, interaction, pregnancy, and institutional policy independently.</li>
+<li><strong>Diseases / Clinic Consult:</strong> concise clinical overviews, codes, and available algorithms/flowcharts.</li>
+<li><strong>Anatomy:</strong> layered anatomical reference with definitions and supported 3D/orthopedic material.</li>
+<li><strong>Calculators:</strong> searchable clinical calculators with favorite slots and visible inputs/results. Check the calculator&#39;s intended population, units, exclusions, and date/version.</li>
+<li><strong>Labs and LOINC:</strong> quick normal-range reference plus standardized panel/code browsing. Laboratory reference ranges vary by laboratory, assay, age, sex, pregnancy, and unit system.</li>
+<li><strong>Anki:</strong> local card review plus quick creation from selected text. Anki progression and user-deck data should be backed up separately from Qbank progression.</li>
+<li><strong>UMLS:</strong> preferred concept name, CUI, semantic group, definitions, codes, and relationships where present.</li>
+<li><strong>Differential and Concept Graph:</strong> tools for organizing possibilities and exploring relationships. They do not diagnose a patient.</li>
+<li><strong>Sanford Guide / Clinical pathways / ACLS-related tools:</strong> use the installed views for reference and workflow support, but follow current licensed guidance, local policy, and real-time resuscitation leadership.</li>
+</ul>
+<h3 id="qbank-workflow">Qbank workflow<a class="heading-link" href="#qbank-workflow" aria-label="Link to this section">#</a></h3>
+<ol>
+<li>Open <strong>Qbank</strong>.</li>
+<li>Select a bank and subject/category.</li>
+<li>Choose tutor or timed behavior where offered.</li>
+<li>Select the number of questions and unused/marked/incorrect filters.</li>
+<li>Start the block, answer, and review.</li>
+<li>Use the dashboard and progression views to monitor completion.</li>
+</ol>
+<p>For NBME/CMS forms, use the simulator&#39;s own block and break controls. Do not rely on a browser refresh as an exam-control action. The current exam workflow records resumable state so an unintended close is less likely to lose the entire attempt.</p>
+<h3 id="tutor-timed-and-exam-behavior">Tutor, Timed, and exam behavior<a class="heading-link" href="#tutor-timed-and-exam-behavior" aria-label="Link to this section">#</a></h3>
+<ul>
+<li><strong>Tutor:</strong> reveals the answer and explanation during the block and is best for deliberate study.</li>
+<li><strong>Timed:</strong> keeps explanations hidden until review and runs the selected timer.</li>
+<li><strong>NBME/CMS exam:</strong> uses multi-block exam behavior with breaks, an exam-focused interface, laboratory values/notes where supported, and continuously saved resumable state.</li>
+</ul>
+<p>The builder can filter unused, marked, or broader question pools, choose systems/subjects, and set ordering or focus where supported by the selected bank. Available options differ among UWorld-style banks, the additional ABIM banks, and fixed-form NBME/CMS assessments.</p>
+<h3 id="qbank-review-and-analytics">Qbank review and analytics<a class="heading-link" href="#qbank-review-and-analytics" aria-label="Link to this section">#</a></h3>
+<p>MedOS stores used and marked IDs, session/block records, answers, and supported timing/statistics per username. Review views can include recent test performance, right/wrong/omitted counts, system or subject breakdowns, average time, and progression over multiple sessions.</p>
+<p>For eligible NBME forms, the report can display an estimated three-digit score, likely range, percentile/distribution context, and a per-block breakdown. Conversions are form-specific estimates rather than official NBME/USMLE results. A form without a defensible conversion should show percent correct rather than inventing a three-digit score. Step 3 self-assessments and CMS forms may therefore use percentage reporting.</p>
+<p>Questions and their media are served through the matching bank. Images can open in the common viewer; supported exhibit/table links are reformatted for readability. If a stem loads but an image or exhibit does not, verify the bank rather than copying media from another bank directory.</p>
+<h3 id="additional-qbanks-carried-forward-from-desktop-1-1-4">Additional Qbanks carried forward from desktop 1.1.4<a class="heading-link" href="#additional-qbanks-carried-forward-from-desktop-1-1-4" aria-label="Link to this section">#</a></h3>
+<p>The following were added to the export and validated before packaging:</p>
+<ul>
+<li><strong>MKSAP 19:</strong> 1,870 valid questions</li>
+<li><strong>BoardVitals 2025:</strong> 1,890 valid questions</li>
+<li><strong>AMBOSS ABIM 2025:</strong> 2,082 valid questions</li>
+<li><strong>UWorld ABIM March 2026:</strong> 1,249 valid questions</li>
+</ul>
+<p>Their database integrity checks passed, and all four are part of the completed desktop search index. If one is absent from the Qbank picker after installation, run <strong>Verify/Repair</strong>; do not manually rename its data directory.</p>
+<h3 id="search-and-reading-tips">Search and reading tips<a class="heading-link" href="#search-and-reading-tips" aria-label="Link to this section">#</a></h3>
+<ul>
+<li>Start with a specific clinical term, drug, syndrome, or concept.</li>
+<li>Use source filters when the result list is broad.</li>
+<li>Open the source result to see its native context rather than relying only on a search snippet.</li>
+<li>On Android, suggestions and installed-source search are optimized for fast on-device use; the exact desktop and phone result mix can differ because their installed content differs.</li>
+</ul>
+<h3 id="detailed-desktop-feature-handbook">Detailed desktop feature handbook<a class="heading-link" href="#detailed-desktop-feature-handbook" aria-label="Link to this section">#</a></h3>
+<h4 id="dashboard-history-and-reader-tabs">Dashboard, history, and reader tabs<a class="heading-link" href="#dashboard-history-and-reader-tabs" aria-label="Link to this section">#</a></h4>
+<p>The dashboard is the return point for the workspace. It shows quick entry points, recent reading, recent searches, Qbank activity, and a <strong>Resume</strong> action. MedOS saves supported article, PDF, question, and examination locations so returning to the app does not require finding the item again. A resumable active examination has priority over ordinary recent reading.</p>
+<p>The top reader tabs behave like an internal browser. Articles, books, reference pages, media, and the current Qbank session can stay open together. <code>Ctrl+T</code> creates a new tab, <code>Ctrl+W</code> closes the current tab, and <code>Ctrl+PageUp</code>/<code>Ctrl+PageDown</code> cycles tabs. The Qbank uses one stable resumable tab: opening another source does not intentionally destroy the active block, and selecting that Qbank tab returns to the unfinished session.</p>
+<h4 id="search-suggestions-filters-and-related-media">Search, suggestions, filters, and related media<a class="heading-link" href="#search-suggestions-filters-and-related-media" aria-label="Link to this section">#</a></h4>
+<p>The <code>/</code> shortcut opens global search from supported screens. Suggestions are shared across the home search, sidebar/Command Center search, full Search page, and Concept Graph rather than existing only on the dashboard. Database-specific search boxes remain source-specific so, for example, an UpToDate search suggests UpToDate titles instead of unrelated books.</p>
+<p>The full results page loads a bounded first window and can progressively load more. Filters show sources and result types such as articles, books/PDFs, questions, images, and tables. Text results appear before the related image/table collection so the answer list is not pushed below a large media grid. Related media uses the same concept-linked collector as Concept Graph and resolves both full assets and thumbnails; an absent thumbnail must not be treated as proof that the full local image is absent.</p>
+<p>Autocomplete is a navigation aid, not a diagnosis or spelling authority. Review the source title and context before relying on a result.</p>
+<h4 id="qbank-builder-block-continuity-and-review">Qbank builder, block continuity, and review<a class="heading-link" href="#qbank-builder-block-continuity-and-review" aria-label="Link to this section">#</a></h4>
+<p>The builder remembers the last selected bank and Step. If the user was working in UWorld Step 2, reopening the builder returns to that selection until the user changes it. Available controls depend on the bank but can include:</p>
+<ul>
+<li>Tutor or Timed mode</li>
+<li>number of questions and allotted time</li>
+<li>unused, marked, incorrect, or all-question pools</li>
+<li>systems, subsystems, subjects, or fixed assessment blocks</li>
+<li>search focus and ordering such as random, hardest, newest, or QID</li>
+<li>Prep/Practice tracking preference</li>
+</ul>
+<p>In Tutor mode, feedback appears after an answer and <strong>Previous</strong>, <strong>Next</strong>, and <strong>Save &amp; Exit</strong> remain below the complete explanation instead of floating over its text. In Timed mode, answers/explanations remain hidden until review. Number keys <code>1–8</code> or letters <code>A–H</code> can choose an answer when the screen is not focused on a text field; arrow keys navigate where enabled.</p>
+<p>NBME/CMS forms use their own simulator. Depending on the form, the user can choose native blocks or shorter practice blocks. The simulator supports fullscreen testing, a running block timer, break screens, laboratory values, scratch notes, hidden grading until completion, continuously saved state, per-block reporting, and a final review. A three-digit estimate is shown only when a form-specific conversion is available and remains an unofficial estimate.</p>
+<p>Progress records used/answered and marked question IDs, block/session state, answers, timing, and supported analytics per username. Review can show accuracy and average time by system or subject, recent score trends, right/wrong/omitted totals, and NBME progression.</p>
+<h4 id="uptodate-reader">UpToDate reader<a class="heading-link" href="#uptodate-reader" aria-label="Link to this section">#</a></h4>
+<p>The installed UpToDate reader provides local title search, topic outlines, collapsible headings, related-source navigation, in-article find, graphics, tables, and a print/PDF view. Article text comes from a validated prepared cache when available, otherwise from per-article decryption. The recognized bundled dataset works without manual configuration. A custom explicit <code>UTD_PASSWORD</code> remains authoritative; a wrong override can affect encrypted articles or graphics even when thumbnails or an older prepared article cache still display.</p>
+<p>Use <strong>Print / Save PDF</strong> for a clean article export. The print view expands supported local content and uses locally stored figures and tables. It does not fetch missing web content.</p>
+<h4 id="amboss-reader">AMBOSS reader<a class="heading-link" href="#amboss-reader" aria-label="Link to this section">#</a></h4>
+<p>AMBOSS articles open as clean local HTML with an outline, cross-source references, clinical figures, and the global reference layer. Current builds make in-article references visible, clickable, and keyboard accessible. A clinical figure uses the full local image rather than an embedded thumbnail and carries its stored title/description so it is not displayed without context.</p>
+<p>The print/PDF view uses the full local asset, readable caption, and article context. It excludes generic hover/glossary dumps and includes linked visual/table content only when a meaningful originating label exists.</p>
+<h4 id="uworld-reference-library">UWorld reference library<a class="heading-link" href="#uworld-reference-library" aria-label="Link to this section">#</a></h4>
+<p>The UWorld reference library is separate from the Qbank. It contains explanatory articles, images, and tables that can be opened directly, reached from search, or followed from linked concepts. Its article, table, and media actions use the same reader/media system as the other desktop databases.</p>
+<h4 id="library-and-book-archive">Library and book archive<a class="heading-link" href="#library-and-book-archive" aria-label="Link to this section">#</a></h4>
+<p>The Library groups PDF books by specialty, recognizes indexed chapters, and can jump from global search to a relevant chapter or page. Library search matches both book titles and chapter titles. Nonmatching shelves and empty category sections are hidden during filtering so a user searching “Harrison” does not have to scroll past blank sections. Priority stars can raise a preferred book in clinical-reference ranking.</p>
+<p>Use the supported <strong>Add book</strong> workflow for personal PDFs. MedOS records the book, updates the chapter index when possible, and refreshes global search in the background. Do not place a personal PDF inside a manifest-owned release directory that repair may later restore.</p>
+<p>The PDF viewer supports page navigation, zoom, document search, deterministic indexed-page jumps, open separately, and browser printing. If a chapter link opens the wrong page, record the book title, requested chapter, expected page, and actual page before rebuilding an index.</p>
+<h4 id="universal-media-viewer-and-media-tray">Universal media viewer and Media Tray<a class="heading-link" href="#universal-media-viewer-and-media-tray" aria-label="Link to this section">#</a></h4>
+<p>Database images and tables—including AMBOSS, UpToDate, UWorld, Qbank exhibits, Concept Graph results, and supported disease/pathway material—open in the common viewer. Depending on the media type and browser, actions include:</p>
+<ul>
+<li>zoom, pan, rotate/reset, fullscreen, minimize, and resize</li>
+<li>Copy, Save, Share, Open separately, Print/PDF, and Add to Tray</li>
+<li>source label, title/caption, and relevant attribution/context</li>
+<li>rich-table copy, tab-separated text, or CSV where supported</li>
+</ul>
+<p>When an image is zoomed enough to pan, panning takes priority over drag-to-another-app. Return to fitted view before dragging. Browser security can block direct clipboard/image sharing; <strong>Open separately</strong> is the reliable fallback.</p>
+<p><strong>Add to Tray</strong> is temporary. It stores up to 12 collected items in the current browser session (bounded to roughly 2 MB of serialized content); it does not copy the source into the MedOS folder or database. Reorder, save, share, or print the collection before clearing/reloading the session.</p>
+<h4 id="reference-hover-layer-and-umls">Reference hover layer and UMLS<a class="heading-link" href="#reference-hover-layer-and-umls" aria-label="Link to this section">#</a></h4>
+<p>Recognized terms are marked from glossary abbreviations, the reference index, UMLS, RxNorm, source links, and Qbank visual indexes. A reference card can show the preferred term, abbreviation expansion, definition/source, semantic group, CUI, synonyms, ICD-10-CM or other installed codes, related concepts, and links into other MedOS sources.</p>
+<p>The <strong>Off / Lite / Full</strong> selector controls cost. Lite uses terms already marked in the content and is best on slower hardware; Full also scans the rendered page for more matches. Clinical/Lay wording can switch between clinician-facing and patient-friendly definitions where available. MedlinePlus consumer summaries require internet when not already cached.</p>
+<p>UMLS concept pages and the Concept Graph expose relationships, but a relationship is not proof of causation, diagnosis, contraindication, or treatment. Use the linked source and current clinical guidance.</p>
+<h4 id="drugs-lexi-diseases-anatomy-pathways-and-acls">Drugs, Lexi, diseases, anatomy, pathways, and ACLS<a class="heading-link" href="#drugs-lexi-diseases-anatomy-pathways-and-acls" aria-label="Link to this section">#</a></h4>
+<p>Drug search accepts generic and supported brand names and can show class, indications, dosing/frequency material, warnings, interactions, and RxNorm normalization. Verify dose, route, indication, age/weight, kidney/liver function, pregnancy/lactation, interactions, formulation, and local policy before clinical use.</p>
+<p>Diseases/Clinic Consult provides concise overviews and installed algorithms. Anatomy provides definitions and supported image/3D/orthopedic material. Sanford, pathways, and ACLS views support reference and workflow but never replace current guidelines, a code leader, or institutional protocol.</p>
+<h4 id="calculators-labs-and-loinc">Calculators, Labs, and LOINC<a class="heading-link" href="#calculators-labs-and-loinc" aria-label="Link to this section">#</a></h4>
+<p>Calculators are searchable and expose their inputs and results. Ten favorites can be assigned to <code>Ctrl+Alt+1</code> through <code>Ctrl+Alt+0</code>. Confirm units, population, exclusions, equation version, and clinical interpretation. Laboratory ranges vary by laboratory, assay, age, sex, pregnancy, and units; MedOS ranges are quick references. LOINC panels provide standardized coding/navigation, not a local laboratory&#39;s validated reference interval.</p>
+<h4 id="anki">Anki<a class="heading-link" href="#anki" aria-label="Link to this section">#</a></h4>
+<p>MedOS can review the installed Anki collection and media and create a card from selected text with <code>g m</code>. Qbank progression export does not replace a backup of <code>anki_progress.sqlite</code>, <code>anki_userdecks.sqlite</code>, and user-created media. The public torrent ships <code>collection.media.7z</code> instead of tens of thousands of loose media files; first start can extract it locally. Content Manager uses a completion identity to avoid repeatedly walking roughly 74,000 files, so a small old display such as 113.5 MB can be a reporting defect rather than missing cards.</p>
+<h4 id="content-manager">Content Manager<a class="heading-link" href="#content-manager" aria-label="Link to this section">#</a></h4>
+<p>Content Manager is the operational view for installed rooms. It can run bounded health probes, show green/yellow/red status, import supported content, prepare UpToDate, expose the embedded torrent, select rooms for download, pause/resume/recheck, and seed after download. A green result means the functional probe passed; a filename merely existing is not enough.</p>
+<p>The <strong>Prepare UpToDate</strong> job and torrent jobs run in the backend after the button is pressed. Closing only the Content Manager page does not necessarily stop the backend task, but stopping MedOS or disconnecting its source can interrupt it. Read the displayed task state before starting another copy or duplicate job.</p>
+<h4 id="optional-ai-chat-tutor">Optional AI Chat/Tutor<a class="heading-link" href="#optional-ai-chat-tutor" aria-label="Link to this section">#</a></h4>
+<p>AI features are disabled until a user deliberately supplies a supported provider key in <code>app/backend/.env</code>, such as <code>NVIDIA_API_KEY</code>, <code>GEMINI_API_KEY</code>, <code>OPENAI_API_KEY</code>, or <code>ANTHROPIC_API_KEY</code> where that provider is supported by the installed build. Restart MedOS after changing <code>.env</code>.</p>
+<p>AI requires internet, may send the entered prompt and attached context to the chosen provider, and can be wrong. Never submit patient-identifiable information or rely on it as the sole basis for diagnosis, treatment, prescribing, or emergency care.</p>
+<hr>
+<h2 id="6-android-phone-installation-and-use">6. Android phone installation and use<a class="heading-link" href="#6-android-phone-installation-and-use" aria-label="Link to this section">#</a></h2>
+<h3 id="two-ways-to-use-medos-on-a-phone-or-tablet">Two ways to use MedOS on a phone or tablet<a class="heading-link" href="#two-ways-to-use-medos-on-a-phone-or-tablet" aria-label="Link to this section">#</a></h3>
+<table>
+<thead>
+<tr>
+<th></th>
+<th>Browser access to desktop</th>
+<th>Native Android app</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><strong>What it is</strong></td>
+<td>The phone browser opens the complete MedOS running on the computer</td>
+<td>A separately installed offline Android application</td>
+</tr>
+<tr>
+<td><strong>Needs the computer running?</strong></td>
+<td>Yes</td>
+<td>No after data import</td>
+</tr>
+<tr>
+<td><strong>Internet required?</strong></td>
+<td>No; both devices need the same local network</td>
+<td>No for installed content</td>
+</tr>
+<tr>
+<td><strong>Device support</strong></td>
+<td>Any modern phone/tablet browser, including iPhone/iPad</td>
+<td>Android 9 or newer</td>
+</tr>
+<tr>
+<td><strong>Feature set</strong></td>
+<td>The full desktop application</td>
+<td>A phone-focused subset with native readers, search, Qbank, calculators, ACLS tools, and storage management</td>
+</tr>
+<tr>
+<td><strong>Progress location</strong></td>
+<td>The desktop account&#39;s data directly</td>
+<td>Phone-local data that can reconcile supported Qbank progression with desktop over Wi-Fi</td>
+</tr>
+</tbody></table>
+<p>Use browser access at home when you want the entire workstation on a smaller screen. Use the Android app when the phone must work independently away from the computer.</p>
+<h3 id="requirements">Requirements<a class="heading-link" href="#requirements" aria-label="Link to this section">#</a></h3>
+<ul>
+<li>Android 9 or newer</li>
+<li>Enough free storage for the APK and selected phone data</li>
+<li>The phone unlocked and awake during copy/import</li>
+<li>Permission for the chosen file app to install an APK when Android asks</li>
+</ul>
+<h3 id="ordinary-installation-or-update">Ordinary installation or update<a class="heading-link" href="#ordinary-installation-or-update" aria-label="Link to this section">#</a></h3>
+<ol>
+<li>In the extracted desktop release, open <strong><code>ANDROID - COPY TO PHONE</code></strong>.</li>
+<li>Open <strong><code>START HERE - ANDROID.html</code></strong> for the kit-specific summary.</li>
+<li>Copy the supplied APK and phone-data ZIP to the phone&#39;s <strong>Downloads</strong> folder using USB file transfer or another trusted copy method.</li>
+<li>Tap the APK.</li>
+<li>If Android asks, allow this file app to install unknown apps, then confirm installation.</li>
+<li><strong>Do not uninstall an existing MedOS first.</strong> Installing over the existing signed app preserves its private data.</li>
+<li>Open MedOS on the phone.</li>
+<li>Choose <strong>Import data (.zip)</strong> and select the supplied phone-data ZIP.</li>
+<li>Keep MedOS open and the phone awake until import confirms completion.</li>
+<li>Retain the copied files until the app works. They can then be removed from Downloads to recover space.</li>
+</ol>
+<p>Use the current Android artifact manifest for the signed APK and data identity. The historical 1.1.2 torrent record is retained in Appendix A and is not the candidate APK.</p>
+<h3 id="what-is-native-on-the-phone">What is native on the phone<a class="heading-link" href="#what-is-native-on-the-phone" aria-label="Link to this section">#</a></h3>
+<p>The Android 1.1.3 candidate retains a native offline experience for installed search, clinical readers, drug material, calculators, and ACLS-related tools. Recent updates improved search speed and ranking, typo-aware suggestions, article outlines, reading navigation, source switching, calculator output, drug-reader safety, and handling of ACLS timers/voice actions.</p>
+<p>The app&#39;s main destinations include Home, Search, Clinical, Calculators, Qbank, and a More area for additional installed modules and storage management. Search is grouped by source so a large source does not hide smaller ones. Depending on the imported data, results can include First Aid, AMBOSS, UWorld reference material, UpToDate, drugs, Qbanks, diseases, calculators, and books.</p>
+<p>The native Qbank supports installed UWorld/AMBOSS-style banks with Tutor/Timed behavior, recent-block resume, used-question tracking, and phone-local flags. The inspected reusable phone-data ZIP contains UWorld Steps 1–3, AMBOSS Steps 1–3, AMBOSS ABIM 2025, and UWorld ABIM March 2026. MKSAP 19, BoardVitals, and the complete NBME/CMS desktop simulator are not established as phone-kit contents by that inventory.</p>
+<h3 id="inspected-desktop-and-phone-content">Inspected desktop and phone content<a class="heading-link" href="#inspected-desktop-and-phone-content" aria-label="Link to this section">#</a></h3>
+<p>This comparison comes from the desktop manifests/top-level metadata and the reusable phone-data ZIP&#39;s central directory inspected on September 15, 2026. Presence establishes packaged content, not a successful native-device read of every item. The old APK manifest alongside that ZIP was 1.1.2/code 4; the candidate APK is 1.1.3/code 5 and has its own identity.</p>
+<table>
+<thead>
+<tr>
+<th>Content</th>
+<th>Desktop</th>
+<th>Inspected phone-data ZIP</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>UpToDate</td>
+<td>Encrypted source and local search/reader support; optional prepared cache</td>
+<td>Encrypted asset database, title index, and table of contents</td>
+</tr>
+<tr>
+<td>AMBOSS clinical library</td>
+<td>Installed clinical library</td>
+<td>Clinical database and bundled assets</td>
+</tr>
+<tr>
+<td>UWorld reference library</td>
+<td>Installed reference packs</td>
+<td>Step 1 reference database and assets</td>
+</tr>
+<tr>
+<td>UWorld/AMBOSS Qbanks</td>
+<td>Step banks plus additional installed banks</td>
+<td>Steps 1–3 for both providers, plus AMBOSS ABIM and UWorld ABIM</td>
+</tr>
+<tr>
+<td>Other desktop banks</td>
+<td>MKSAP 19, BoardVitals, NBME/CMS, and other installed packs</td>
+<td>These are not listed in the inspected phone database inventory</td>
+</tr>
+<tr>
+<td>Drugs, calculators, diseases, concepts</td>
+<td>Installed desktop databases and indexes</td>
+<td>Drug reference, Lexi calculator, Cliniccons disease, glossary, UMLS-lite and concept/search indexes</td>
+</tr>
+<tr>
+<td>PDF books</td>
+<td>Large desktop library</td>
+<td>First Aid for USMLE Step 1 2026 and Harrison&#39;s 22nd edition</td>
+</tr>
+<tr>
+<td>ACLS material</td>
+<td>Desktop ACLS content</td>
+<td>ACLS and BLS provider manuals plus ACLS assets</td>
+</tr>
+<tr>
+<td>Anki and other large desktop rooms</td>
+<td>Available when installed on desktop</td>
+<td>Not established as phone-kit contents by this inventory</td>
+</tr>
+</tbody></table>
+<p>Additional books can be requested from a running desktop through <strong>Manage Storage</strong>. Use the actual current phone-data manifest before promising a source that is not listed here.</p>
+<h3 id="phone-to-desktop-progression-sync">Phone-to-desktop progression sync<a class="heading-link" href="#phone-to-desktop-progression-sync" aria-label="Link to this section">#</a></h3>
+<p>Use the same intended MedOS account on both devices. Start the desktop, enable trusted LAN access, and connect both devices to the same private Wi-Fi. Allow the configured MedOS service through the firewall on the private-network profile, then use the current desktop address and the correct shared sync token.</p>
+<p>The current repair distinguishes connection/timeout, authorization/token, server/database, and malformed-response failures. A rejected request or unreadable database is not a successful empty export. If sync reports an account or database problem, preserve both devices&#39; progress and correct that specific problem before retrying. Do not uninstall the Android app, clear storage, or reset the desktop database to force sync.</p>
+<p>Export progression before a major change. Retry once after correcting the reported issue, then compare one used and one marked question. The source regression tests cover these failure paths; physical cross-device acceptance must be recorded separately.</p>
+<h3 id="manage-storage-on-android">Manage Storage on Android<a class="heading-link" href="#manage-storage-on-android" aria-label="Link to this section">#</a></h3>
+<p>Open <strong>More → Manage Storage</strong> to view installed content and available space. From there, supported content groups can be offloaded to recover storage. Content removed from the phone does not delete the desktop copy.</p>
+<p>To obtain selected books from desktop:</p>
+<ol>
+<li>Start MedOS on the desktop and enable trusted LAN access.</li>
+<li>Put the phone and computer on the same Wi-Fi.</li>
+<li>On the phone, open <strong>Manage Storage → Find desktop</strong>.</li>
+<li>Select an available book and keep both devices awake while it downloads.</li>
+</ol>
+<p>Most desktop PDF books are not included in the standard phone bundle. The current phone kit includes a focused selection, including First Aid and Harrison&#39;s material, and lets the user add only the books needed on the phone. A search result for a non-downloaded book can therefore appear as unavailable until the book is downloaded or data is re-imported.</p>
+<h3 id="desktop-and-phone-are-related-but-not-identical">Desktop and phone are related, but not identical<a class="heading-link" href="#desktop-and-phone-are-related-but-not-identical" aria-label="Link to this section">#</a></h3>
+<table>
+<thead>
+<tr>
+<th>Desktop 1.1.5 candidate</th>
+<th>Android 1.1.3 candidate</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>Full offline workspace with the large desktop data library and all four additional Qbanks</td>
+<td>Smaller on-device package focused on installed phone content and native workflows</td>
+</tr>
+<tr>
+<td>Setup chooses Windows, Mac arm64, or Mac x64 runtime</td>
+<td>Android installs an APK and separately imports its data ZIP</td>
+</tr>
+<tr>
+<td>Can run locally, from an extracted portable folder, or with SSD-hosted data</td>
+<td>Data lives in Android app-managed storage after import</td>
+</tr>
+<tr>
+<td>Desktop global search and Content Manager/torrent workflows</td>
+<td>Fast native installed-source search; no requirement to run the desktop frontend</td>
+</tr>
+<tr>
+<td>One desktop/app shortcut</td>
+<td>Standard Android launcher icon</td>
+</tr>
+</tbody></table>
+<p>Do not expect every large desktop book, Qbank, model, or administrative tool to be duplicated in the phone app. The two releases share the MedOS purpose and content pipeline but have device-appropriate interfaces and storage.</p>
+<h3 id="updating-phone-data">Updating phone data<a class="heading-link" href="#updating-phone-data" aria-label="Link to this section">#</a></h3>
+<p>Installing a newer APK updates the application. Importing a newer data package updates available offline content. Keep these as separate steps, and do not erase working app data before the replacement has been verified.</p>
+<hr>
+<h2 id="7-what-changed-since-the-july-7-release">7. What changed since the July 7 release<a class="heading-link" href="#7-what-changed-since-the-july-7-release" aria-label="Link to this section">#</a></h2>
+<h3 id="1-1-5-reliability-update">1.1.5 reliability update<a class="heading-link" href="#1-1-5-reliability-update" aria-label="Link to this section">#</a></h3>
+<ul>
+<li>Windows startup and in-place repair carry forward the latest launcher fixes. The current command is not the earlier source of the trailing-quote WinError 123 report.</li>
+<li>Mixed frontend builds are refused. The cumulative updater restores the whole <code>.next</code> build, matching source/runtime files, and release metadata together.</li>
+<li>Bundled UpToDate works without manual key configuration; preparation validates output and preserves a previous cache on failure.</li>
+<li>LAN sync reports typed failures and does not interpret errors as empty progression.</li>
+<li>Linux has a maintained core launcher; optional AI/ML dependencies do not gate core startup.</li>
+<li>Android candidate version 1.1.3/code 5 contains the targeted sync repairs. Its new APK identity must come from the current manifest.</li>
+</ul>
+<p>The feature improvements below are preserved historical changes between the July 6 baseline and desktop 1.1.4/Android 1.1.2. They describe the retained handbook features, not newly repeated physical-device tests or new 1.1.5 artifact identities.</p>
+<h3 id="for-ordinary-users">For ordinary users<a class="heading-link" href="#for-ordinary-users" aria-label="Link to this section">#</a></h3>
+<h4 id="one-universal-portable-capable-desktop-release">One universal, portable-capable desktop release<a class="heading-link" href="#one-universal-portable-capable-desktop-release" aria-label="Link to this section">#</a></h4>
+<ul>
+<li>One release folder now carries Windows, Apple-silicon Mac, and Intel Mac runtimes.</li>
+<li>The launcher detects the real host system and chooses the correct native runtime.</li>
+<li>A fully extracted ZIP can be activated in place without duplicating the large medical data.</li>
+<li>Windows creates one normal MedOS shortcut and opens the app at completion.</li>
+<li>A complete folder can be moved or copied to another computer and activated again from its new location.</li>
+<li>The misleading 414 MB <strong>Full install</strong> path is now documented as a bounded activation set, not a full medical-data copy; it is not the relocation path for this package.</li>
+</ul>
+<h4 id="safer-and-clearer-installation">Safer and clearer installation<a class="heading-link" href="#safer-and-clearer-installation" aria-label="Link to this section">#</a></h4>
+<ul>
+<li>Visible current task, bytes, speed, ETA, and activity messages.</li>
+<li>Destination and free-space checks occur before copying.</li>
+<li>Copy operations are resumable and validate partial data before continuing.</li>
+<li>Managed updates preserve recognized progression, settings, and private configuration.</li>
+<li>New runtime files are staged before activation, with rollback after a failed health check.</li>
+<li>Setup can verify, repair, and produce privacy-filtered diagnostics.</li>
+<li>Export preparation blocks a release when required apps, runtimes, Qbanks, or pack data are incomplete.</li>
+</ul>
+<h4 id="mac-fixes">Mac fixes<a class="heading-link" href="#mac-fixes" aria-label="Link to this section">#</a></h4>
+<ul>
+<li>Added separate bundled Apple-silicon and Intel runtimes instead of depending on one Intel-only package.</li>
+<li>Physical architecture detection now handles Rosetta correctly.</li>
+<li>Mac launch is bound to a complete matching runtime.</li>
+<li>The Setup app and generated MedOS launcher are packaged with native executable metadata.</li>
+<li>The earlier diagnostics crash that treated progress data as the wrong object type was corrected, so saving diagnostics no longer fails with <code>dict ... total_bytes</code>.</li>
+</ul>
+<h4 id="portable-and-shortcut-fixes">Portable and shortcut fixes<a class="heading-link" href="#portable-and-shortcut-fixes" aria-label="Link to this section">#</a></h4>
+<ul>
+<li>Portable activation now uses the same verified extracted directory and does not create a second medical-data copy.</li>
+<li>Interrupted preparation and verified copied work can resume.</li>
+<li>Relocated but matching verified drive data is accepted.</li>
+<li>Startup/reopen handling was hardened.</li>
+<li>The normal desktop result is one MedOS shortcut; no Stop shortcut is created.</li>
+</ul>
+<h4 id="networking-and-content-fixes">Networking and content fixes<a class="heading-link" href="#networking-and-content-fixes" aria-label="Link to this section">#</a></h4>
+<ul>
+<li>Wi-Fi/LAN access and Qbank progression sync were consolidated into current app controls.</li>
+<li>Local URL handling was made more reliable after sleep, Wi-Fi reconnect, VPN changes, or adapter changes.</li>
+<li>Torrent content retrieval now uses the self-contained MedOS torrent, supports selection/recheck/pause/resume, and validates mapped pack paths.</li>
+<li>The historical 1.1.4 desktop torrent was client-compatible; its old identity and validation notes are retained in Appendix A.</li>
+<li>A separate verified Android kit torrent was created so the APK and phone data can be downloaded or seeded independently of the desktop payload.</li>
+<li>Content completeness and release identity are checked before export.</li>
+<li>AMBOSS question stems and images now use the unified desktop media resolver, including media stored outside the simplest legacy bank layout.</li>
+<li>Android shared/encrypted media resolution was repaired so imported question and article images can load from the phone&#39;s supported storage layouts.</li>
+</ul>
+<h4 id="search-reader-media-and-touch-improvements">Search, reader, media, and touch improvements<a class="heading-link" href="#search-reader-media-and-touch-improvements" aria-label="Link to this section">#</a></h4>
+<ul>
+<li>Global search uses bounded pagination, stable candidate selection, a progressive full-results page, and guarded retries instead of runaway request loops.</li>
+<li>Full Search Results now resolves the query concept independently and embeds Concept Graph&#39;s cross-library image/table aggregation in the main result flow. Media counts populate the Images/Tables filters even when the first text-result window contains no UMLS card.</li>
+<li>Search suggestions now use a shared autocomplete model on the home page, sidebar/Command Center, Search page, and Concept Graph; source-specific readers retain suggestions from their own content.</li>
+<li>Library search now matches books and chapter titles while hiding empty nonmatching shelves instead of leaving blank sections above the relevant book.</li>
+<li>PDF index/deep links land on the requested page more reliably; article and PDF print/export behavior was unified.</li>
+<li>AMBOSS print selects the bundled full-resolution figure rather than the 84×84 embedded preview,
+adds the stored clinical caption, and omits the former generic glossary-popup dump. Visual/table
+linked content is retained only with a readable originating label.</li>
+<li>AMBOSS article references are visually identifiable, clickable, and keyboard accessible.</li>
+<li>Images and tables support consistent expand, copy, save, share, drag, print/PDF, and citation-aware actions where available.</li>
+<li>Database-reader images and tables now open through the same universal media viewer used for Qbank media, including copy, save, print/PDF, share, open-separately, and tray actions where supported.</li>
+<li>Touch/tablet readers gained the contextual Command Halo and a temporary <strong>Media Tray</strong> for collecting up to 12 images, tables, or excerpts for reorder, share, or print/PDF.</li>
+<li><strong>Add to Tray</strong> stores content only in the current browser session; it does not copy an image into the MedOS folder or database. Save, share, or print it before closing/reloading if a permanent copy is needed.</li>
+<li>Command Center is docked into reserved left-sidebar space on desktop, preventing it from covering the active article or Qbank. Its general shortcut parser now supports two- and three-key sequences, keeps legacy <code>g x d</code>, and adds <code>g i</code> (Library), <code>g o</code> (Content Manager), and <code>g t</code> (Media Tray).</li>
+</ul>
+<h4 id="qbank-additions">Qbank additions<a class="heading-link" href="#qbank-additions" aria-label="Link to this section">#</a></h4>
+<ul>
+<li>MKSAP 19 and BoardVitals 2025 were added.</li>
+<li>AMBOSS ABIM 2025 (2,082 questions) was added.</li>
+<li>UWorld ABIM March 2026 (1,249 questions) was added.</li>
+<li>All four additional Qbanks are included in desktop global search.</li>
+<li>Progression export/import supports carrying question state across refreshed databases and releases by question ID.</li>
+<li>The main tab bar keeps one resumable active-Qbank tab, and the builder remembers the exact last
+bank/Step. Tutor navigation now follows the full explanation instead of overlaying its text.</li>
+</ul>
+<h4 id="anki-portable-size-reporting">Anki portable-size reporting<a class="heading-link" href="#anki-portable-size-reporting" aria-label="Link to this section">#</a></h4>
+<ul>
+<li>Space-limited portable copies may retain the verified extracted <code>collection.media</code> directory
+while omitting the redundant <code>collection.media.7z</code> archive.</li>
+<li>Content Manager reads the launcher&#39;s completion identity to report that media without walking
+74,000+ loose files. A former ~113.5 MB display could therefore be a counting error, not missing
+media; the current bounded result is consistent across the maintained D:, F:, and G: copies.</li>
+</ul>
+<h4 id="android-improvements">Android improvements<a class="heading-link" href="#android-improvements" aria-label="Link to this section">#</a></h4>
+<ul>
+<li>Faster first search and cached installed-search state.</li>
+<li>Broader, ranked cross-source clinical search with typo-aware suggestions and preserved term casing.</li>
+<li>Better article semantics, outlines, source headings, and reading navigation.</li>
+<li>Improved First Aid and drug-reader search/navigation behavior.</li>
+<li>More complete calculator results and safer formula/input validation.</li>
+<li>Hardened ACLS timers, state recovery, voice grammar, notifications, and bedside control behavior.</li>
+<li>Android package/update verification and a guided copy/import kit.</li>
+</ul>
+<h3 id="known-boundaries-stated-plainly">Known boundaries, stated plainly<a class="heading-link" href="#known-boundaries-stated-plainly" aria-label="Link to this section">#</a></h3>
+<ul>
+<li>The Mac app is not notarized; use the approval instructions in Section 3. Native Mac candidate testing remains pending.</li>
+<li>USB/extracted folders cannot safely autorun on modern Windows or macOS; the user must open the Windows entry point or Mac app once.</li>
+<li>In-place mode depends on the complete source folder staying available. To install locally, move the whole folder to the computer first.</li>
+<li>Phone and desktop content are not identical.</li>
+<li>Online repair is bounded to approved release resources; a complete release should install offline.</li>
+<li>Private <code>.env</code> remains user-owned. The current recognized UpToDate bundle does not require users to supply its content key.</li>
+<li>An old torrent/root/Setup ZIP can carry an older code revision. Use the cumulative updater for the supported base instead of mixing individual files.</li>
+<li>BitTorrent magnets are immutable. Application changes can be delivered as a small core update, but they cannot be inserted into an already published magnet without producing a new infohash.</li>
+</ul>
+<h3 id="previous-guide-instructions-intentionally-not-carried-forward">Previous-guide instructions intentionally not carried forward<a class="heading-link" href="#previous-guide-instructions-intentionally-not-carried-forward" aria-label="Link to this section">#</a></h3>
+<p>The prior guide also described older distribution variants. They are not the ordinary path for this published universal ZIP:</p>
+<ul>
+<li>Direct <code>START.bat</code>, <code>ALLOW_LAN.bat</code>, <code>EXPORT_PROGRESS.bat</code>, <code>STOP.bat</code>, and modular-pack commands are legacy/developer conveniences and are not guaranteed as top-level universal-package entry points. Use the current Windows/Mac entry point, Settings, Admin → Progression Sync, and bounded diagnostics first.</li>
+<li>Old pre-created <code>u1/u2/u3</code> account lists are not a release contract. Fresh installs seed/manage accounts according to current configuration; use the documented fallback only when it has not been overridden, then change it immediately.</li>
+<li>The unpacked Chrome/Edge reference-sidebar extension exists in the development source but its unpacked source folder is not part of the verified 1.1.4 public release allowlist, so this guide does not tell ordinary users to load it.</li>
+<li>Earlier phone instructions said Android 7 and roughly 12 GB free. The verified current application requires Android 9 or newer, and the ~11.91 GB data ZIP needs about 25 GB of temporary free space during import.</li>
+<li>Older instructions to delete account databases, overwrite application folders manually, or extract individual packs into a running installation are recovery/developer operations, not normal upgrade steps.</li>
+</ul>
+<hr>
+<h2 id="8-troubleshooting-and-recovery">8. Troubleshooting and recovery<a class="heading-link" href="#8-troubleshooting-and-recovery" aria-label="Link to this section">#</a></h2>
+<p>Start with the visible symptom below. Avoid deleting folders, reinstalling system Python/Node, or manually moving databases as a first response.</p>
+<h3 id="setup-appears-stuck-at-99">Setup appears stuck at 99%<a class="heading-link" href="#setup-appears-stuck-at-99" aria-label="Link to this section">#</a></h3>
+<p>The final percentage can include verification, permission normalization, shortcut creation, and health checks after the large copy has finished. On a slow SSD or antivirus-scanned local disk, this can take longer than earlier percentages.</p>
+<ol>
+<li>Read the current task and activity log; do not judge only by the percentage.</li>
+<li>Keep the computer awake and the source connected.</li>
+<li>If bytes, filename, or log text is still changing, allow it to finish.</li>
+<li>If the source was disconnected or Setup closed, reconnect it and reopen the same Setup entry point. Resume validates existing partial bytes before continuing.</li>
+<li>If Setup reports a health or verification failure, use its <strong>Repair</strong> or <strong>Save diagnostics</strong> action instead of starting a second copy into another folder.</li>
+</ol>
+<h3 id="setup-says-file-does-not-exist">Setup says “file does not exist”<a class="heading-link" href="#setup-says-file-does-not-exist" aria-label="Link to this section">#</a></h3>
+<ul>
+<li>Confirm the universal ZIP was completely extracted.</li>
+<li>Make sure hidden release folders were not omitted by a selective copy.</li>
+<li>Do not run Setup while browsing inside the ZIP.</li>
+<li>Do not paste an old Terminal command containing wildcard paths from a different installation.</li>
+<li>Reopen the Setup app from this release and let it locate the release marker itself.</li>
+<li>If one payload file is genuinely missing, use a fresh verified extraction or the bounded online repair offered by Setup.</li>
+</ul>
+<h3 id="windows-reports-winerror-123-or-shows-a-path-ending-in-a-quote">Windows reports <code>[WinError 123]</code> or shows a path ending in a quote<a class="heading-link" href="#windows-reports-winerror-123-or-shows-a-path-ending-in-a-quote" aria-label="Link to this section">#</a></h3>
+<p>That historical error involved an invalid path ending in a literal quotation mark. The current Windows command has the corrected path handling. A screenshot of the older error does not prove that the current command or the medical data is defective.</p>
+<ol>
+<li>Stop the failed instance and confirm which complete MedOS folder and launcher actually ran.</li>
+<li>Apply the complete current <strong>MedOS Update</strong> kit for base 1.1.4/1.1.5, then start <code>START HERE - WINDOWS.cmd</code> inside that folder.</li>
+<li>If a checksum or <code>BUILD_ID</code> mismatch appears, stop and restore a coherent build with the updater. Do not bypass the check, edit the marker, or copy isolated <code>.next</code> chunks.</li>
+<li>If the exact current build still reports WinError 123, save the full error and sanitized diagnostics, including the platform and folder location.</li>
+</ol>
+<p>An older root folder, Setup ZIP, and exact original 1.1.4 archive can contain different application bytes. Keep their identities separate when reporting or repairing a failure.</p>
+<h3 id="the-diagnostics-zip-is-not-on-the-desktop">The diagnostics ZIP is not on the Desktop<a class="heading-link" href="#the-diagnostics-zip-is-not-on-the-desktop" aria-label="Link to this section">#</a></h3>
+<p>Current Setup saves diagnostics by default inside the selected managed installation at:</p>
+<p><code>&lt;MedOS installation&gt;/.medos-install/diagnostics.zip</code></p>
+<p>It may use another explicit location if you chose one. The previous Mac command that assumed a matching <code>/Applications/*/.medos-install/install-state.json</code> could stop before diagnostics were created, and an older renderer could crash with <code>AttributeError: &#39;dict&#39; object has no attribute &#39;total_bytes&#39;</code>. Current Setup uses typed progress and the managed target directly.</p>
+<p>Use <strong>Save diagnostics</strong> in the current Setup page, wait for the success message, and open the exact displayed path.</p>
+<h3 id="macos-blocks-medos-app-or-says-it-cannot-verify-the-developer">macOS blocks MedOS.app or says it cannot verify the developer<a class="heading-link" href="#macos-blocks-medos-app-or-says-it-cannot-verify-the-developer" aria-label="Link to this section">#</a></h3>
+<p>Follow the trusted-app approval steps in Section 3, then open <code>MedOS.app</code> inside the complete extracted folder. Keep security enabled. If macOS reports damage or malware rather than an unidentified developer, preserve the exact message and verify the trusted artifact before proceeding.</p>
+<h3 id="the-shortcut-opens-nothing">The shortcut opens nothing<a class="heading-link" href="#the-shortcut-opens-nothing" aria-label="Link to this section">#</a></h3>
+<ol>
+<li>Wait 30–60 seconds, then browse to <code>http://127.0.0.1:3000</code>.</li>
+<li>Confirm the portable/extracted folder still exists at the same path.</li>
+<li>If it was moved, run <code>START HERE - WINDOWS.cmd</code> again from the complete folder, or open <code>MedOS.app</code> there on Mac.</li>
+<li>On Windows, rerun the entry point to recreate the shortcut. On Mac, use the bundled launcher/log troubleshooting steps.</li>
+<li>Check the backend and frontend log paths listed in the technical appendix.</li>
+</ol>
+<h3 id="the-shortcut-works-but-has-the-wrong-icon">The shortcut works but has the wrong icon<a class="heading-link" href="#the-shortcut-works-but-has-the-wrong-icon" aria-label="Link to this section">#</a></h3>
+<p>The icon does not change MedOS data or functionality. On Windows, rerun <code>START HERE - WINDOWS.cmd</code> to recreate the shortcut. On Mac, remove an obsolete alias only after confirming that <code>MedOS.app</code> inside the complete folder opens correctly. Keep just one user-facing MedOS shortcut/alias.</p>
+<h3 id="medos-opens-but-a-page-says-the-backend-is-unavailable">MedOS opens, but a page says the backend is unavailable<a class="heading-link" href="#medos-opens-but-a-page-says-the-backend-is-unavailable" aria-label="Link to this section">#</a></h3>
+<ol>
+<li>Wait briefly; the frontend can appear before the backend completes its first start.</li>
+<li>Refresh once after 30 seconds.</li>
+<li>Avoid starting MedOS repeatedly; multiple launches can compete for the same local ports.</li>
+<li>Rerun the current launcher from the complete folder and review its health/log output.</li>
+<li>Save diagnostics if either local endpoint still fails.</li>
+</ol>
+<p>If Setup says <code>no bounded repair is defined for issue: backend-unreachable</code>, the Setup UI itself cannot infer whether the problem is a stale port, wrong root, missing runtime, antivirus block, or backend exception. This is not a request to redownload all content. Check <code>app/backend.err</code> first, then apply only a trusted core/launcher hotfix if the log identifies a code/runtime problem.</p>
+<h3 id="mac-installation-completes-but-articles-questions-or-backend-data-do-not-load">Mac installation completes but articles/questions or backend data do not load<a class="heading-link" href="#mac-installation-completes-but-articles-questions-or-backend-data-do-not-load" aria-label="Link to this section">#</a></h3>
+<p>This is separate from an installation that never completes.</p>
+<ol>
+<li>Open <code>MedOS.app</code> or the Mac launcher <strong>inside the complete release folder</strong>. A copied app bundle by itself cannot find the databases.</li>
+<li>Confirm the external SSD or extracted folder is still mounted and writable.</li>
+<li>If the folder moved, open the launcher from its new location so managed root/locator values are refreshed.</li>
+<li>For UpToDate only, apply the current content repair and check Content Manager; the recognized bundled content does not need manual <code>.env</code> configuration.</li>
+<li>Test an AMBOSS article and a Qbank. If every source fails, inspect Mac/backend logs; if only one source fails, inspect that content room in Content Manager.</li>
+<li>Do not install a random system Python/Node. The release contains arm64 and x64 Mac runtimes and selects the physical architecture, including Apple-silicon Macs running a translated process.</li>
+</ol>
+<h3 id="sign-in-fails-or-returns-to-the-login-page">Sign-in fails or returns to the login page<a class="heading-link" href="#sign-in-fails-or-returns-to-the-login-page" aria-label="Link to this section">#</a></h3>
+<ol>
+<li>Confirm the username and password; usernames are normalized and passwords are case-sensitive. For an unmodified release, the fallback administrator credentials are <code>admin</code> / <code>NYC@727264</code>; a distributor may override them.</li>
+<li>Make sure only one MedOS installation is running. A browser pointed at one frontend while another backend is using the local port can cause session confusion.</li>
+<li>Close the MedOS browser tabs, stop the stuck instance through Setup/launcher recovery, then start the intended release once.</li>
+<li>If another administrator can sign in, use <strong>Admin / User Management</strong> to reset the affected user&#39;s password.</li>
+<li>Do not delete <code>users.sqlite</code> unless you explicitly intend to discard local account records and have backed it up.</li>
+</ol>
+<p>If login works but progression appears empty, first check that the same username is being used. Qbank progress is separated by user.</p>
+<h3 id="the-portable-folder-was-moved-or-renamed">The portable folder was moved or renamed<a class="heading-link" href="#the-portable-folder-was-moved-or-renamed" aria-label="Link to this section">#</a></h3>
+<p>On Windows, run <code>START HERE - WINDOWS.cmd</code> again from the moved complete folder and click <strong>Start MedOS</strong> so the shortcut points to the new location. On Mac, open <code>MedOS.app</code> from the moved complete folder. Never keep using an old shortcut that points to a disconnected drive.</p>
+<h3 id="not-enough-disk-space">Not enough disk space<a class="heading-link" href="#not-enough-disk-space" aria-label="Link to this section">#</a></h3>
+<ul>
+<li>Use the measured expanded size in <code>release.json</code>, with additional room for updates, backups, and optional cache preparation.</li>
+<li>When retaining the ZIP on the same disk, budget for both the measured archive and expanded sizes from <code>release.json</code>.</li>
+<li>To save internal space, run the complete folder from an external SSD and keep it connected.</li>
+<li>Do not use the 414 MB Full/Space-saving option to move the library; move the whole folder.</li>
+</ul>
+<h3 id="progress-missing-after-an-upgrade">Progress missing after an upgrade<a class="heading-link" href="#progress-missing-after-an-upgrade" aria-label="Link to this section">#</a></h3>
+<ol>
+<li>Stop and keep the old installation unchanged.</li>
+<li>Confirm that the same MedOS username is selected; progression can be user-specific.</li>
+<li>In the new version, open <strong>Admin → Progression Sync</strong> and import the saved JSON with merge mode.</li>
+<li>If no JSON was exported, start the old version and export it now.</li>
+<li>For a managed in-place update, save diagnostics and preserve both old and new folders before manual recovery.</li>
+</ol>
+<p>Technical recovery may copy recognized SQLite state only while both versions are stopped and only after backups are made. Very old browser-only releases may have progression in browser local storage; preserve the original browser profile and installation for specialist recovery.</p>
+<h3 id="a-qbank-is-missing-or-shows-no-questions">A Qbank is missing or shows no questions<a class="heading-link" href="#a-qbank-is-missing-or-shows-no-questions" aria-label="Link to this section">#</a></h3>
+<ol>
+<li>Confirm the release was completely extracted.</li>
+<li>Open Content Manager and inspect the affected content room.</li>
+<li>Run Setup verification/repair.</li>
+<li>Do not rename Qbank data folders or edit <code>packs-map.json</code> manually.</li>
+<li>If the database exists but the app still reports zero questions, save diagnostics and identify the bank name.</li>
+</ol>
+<h3 id="a-qbank-question-or-amboss-article-shows-a-broken-image">A Qbank question or AMBOSS article shows a broken image<a class="heading-link" href="#a-qbank-question-or-amboss-article-shows-a-broken-image" aria-label="Link to this section">#</a></h3>
+<ol>
+<li>Record the bank/article name and QID or article title.</li>
+<li>Open the same media through its image/table control. If the full viewer works but the inline thumbnail does not, this is a resolver/thumbnail issue rather than absent data.</li>
+<li>Confirm the database and its supplied media folder kept their original relative locations.</li>
+<li>Apply the current app/core hotfix that includes the unified media resolver. Do not copy an image from another bank into the broken bank.</li>
+<li>If the current build still fails, save diagnostics and report the exact local media URL shown by the viewer where possible.</li>
+</ol>
+<p>AMBOSS article figures should display the stored clinical title/description and use the full local asset in print/PDF. Unexplained image grids, tiny thumbnails in PDFs, or non-clickable related-article terms indicate an older reader/core and can be corrected with an app-only update.</p>
+<h3 id="search-or-concept-graph-shows-a-missing-uptodate-thumbnail">Search or Concept Graph shows a missing UpToDate thumbnail<a class="heading-link" href="#search-or-concept-graph-shows-a-missing-uptodate-thumbnail" aria-label="Link to this section">#</a></h3>
+<p>Open the item. If the full image loads, the underlying media exists and only the thumbnail mapping failed. Use the current app/core revision, which shares the Concept Graph media resolver with Search Results and retrieves the proper UpToDate thumbnail/full asset. If neither works, verify the UpToDate content key and content room.</p>
+<h3 id="anki-reports-about-113-5-mb-instead-of-the-expected-collection-size">Anki reports about 113.5 MB instead of the expected collection size<a class="heading-link" href="#anki-reports-about-113-5-mb-instead-of-the-expected-collection-size" aria-label="Link to this section">#</a></h3>
+<p>Do not immediately recopy or re-hash tens of thousands of files. The old count could see only the database/archive while overlooking the already extracted <code>collection.media</code> directory. Current Content Manager uses the launcher&#39;s verified extraction identity and reports the bounded media completion without walking roughly 74,000 loose files. Reopen after applying the current core hotfix and use <strong>Re-verify</strong> only if cards or media actually fail.</p>
+<h3 id="wi-fi-lan-access-does-not-work">Wi-Fi/LAN access does not work<a class="heading-link" href="#wi-fi-lan-access-does-not-work" aria-label="Link to this section">#</a></h3>
+<ol>
+<li>Confirm both devices are on the same trusted network and guest isolation is off.</li>
+<li>Enable the current LAN/Wi-Fi control in MedOS Settings.</li>
+<li>On Windows, allow MedOS on <strong>Private</strong> networks when prompted.</li>
+<li>Temporarily disconnect a VPN to test; VPN/virtual adapters can change the selected LAN address.</li>
+<li>Use the current address shown by MedOS rather than an address saved from a previous day.</li>
+<li>Keep local-only use at <code>127.0.0.1:3000</code>; use the displayed <code>192.168...</code> or similar address only from another device.</li>
+</ol>
+<h3 id="torrent-content-is-paused-incomplete-or-not-detected">Torrent content is paused, incomplete, or not detected<a class="heading-link" href="#torrent-content-is-paused-incomplete-or-not-detected" aria-label="Link to this section">#</a></h3>
+<ol>
+<li>Open Content Manager and review the selected rooms and current mode.</li>
+<li>Select <strong>Resume</strong> or <strong>Recheck</strong>.</li>
+<li>Keep the exact save path shown by MedOS; a wrong parent folder can create a nested duplicate that the app will not use.</li>
+<li>If in-app libtorrent is unavailable, open the provided torrent in a compatible client and use the instructed save location.</li>
+<li>After completion, run verification. A client&#39;s “100%” means its torrent pieces match, not necessarily that MedOS is configured to the correct folder.</li>
+</ol>
+<h3 id="android-refuses-to-install-the-apk">Android refuses to install the APK<a class="heading-link" href="#android-refuses-to-install-the-apk" aria-label="Link to this section">#</a></h3>
+<ul>
+<li>Permit the specific file app to install unknown apps when Android asks.</li>
+<li>Do not uninstall the existing MedOS as a troubleshooting shortcut.</li>
+<li>If Android reports an incompatible signature, stop: obtain the proper update from the same trusted distribution chain.</li>
+<li>Confirm Android 9 or newer and sufficient storage.</li>
+</ul>
+<h3 id="android-data-import-fails">Android data import fails<a class="heading-link" href="#android-data-import-fails" aria-label="Link to this section">#</a></h3>
+<ol>
+<li>Keep the original data ZIP; do not extract it manually into app storage.</li>
+<li>Confirm free space and keep the phone awake.</li>
+<li>Reopen MedOS and select <strong>Import data (.zip)</strong> again.</li>
+<li>Choose the exact supplied phone-data ZIP, not the universal desktop ZIP.</li>
+<li>If an error names a damaged or unsafe archive entry, recopy the verified phone-data ZIP.</li>
+</ol>
+<h3 id="what-to-send-when-asking-for-technical-help">What to send when asking for technical help<a class="heading-link" href="#what-to-send-when-asking-for-technical-help" aria-label="Link to this section">#</a></h3>
+<ul>
+<li>Operating system and version</li>
+<li>Windows / Mac Apple silicon / Mac Intel / Android model</li>
+<li>Whether the complete folder is on an internal disk or external SSD</li>
+<li>The exact visible error text or a clear photo</li>
+<li>The Setup phase and last activity-log line</li>
+<li>Whether the source is a downloaded folder or external SSD</li>
+<li>The privacy-filtered diagnostics ZIP, if Setup successfully created it</li>
+</ul>
+<p>Do not send <code>.env</code>, raw databases, passwords, API keys, or patient-identifiable information.</p>
+<hr>
+<h2 id="9-privacy-backup-and-important-file-locations">9. Privacy, backup, and important file locations<a class="heading-link" href="#9-privacy-backup-and-important-file-locations" aria-label="Link to this section">#</a></h2>
+<h3 id="privacy-model">Privacy model<a class="heading-link" href="#privacy-model" aria-label="Link to this section">#</a></h3>
+<p>MedOS is designed to work locally. Core search, reading, and installed content do not require uploading the medical library. Optional AI features can contact the configured AI provider, and torrent/content retrieval contacts network peers or configured sources. Review those features before enabling them.</p>
+<ul>
+<li>Do not enter identifiable patient information into optional AI chat.</li>
+<li>Use LAN features only on a trusted network.</li>
+<li>Treat API keys and <code>.env</code> files as secrets.</li>
+<li>A checksum proves file integrity, not by itself who published the file. Obtain the archive and checksum through a trusted channel.</li>
+</ul>
+<h3 id="offline-core-and-optional-online-lookups">Offline core and optional online lookups<a class="heading-link" href="#offline-core-and-optional-online-lookups" aria-label="Link to this section">#</a></h3>
+<p>The installed library, Qbanks, local search, readers, calculators, and concept databases work offline. Some optional panels can enrich a page when internet access is present:</p>
+<ul>
+<li>drug pages may query the public FDA label API</li>
+<li>UMLS/disease views may query ClinicalTrials.gov for current studies</li>
+<li>glossary/reference Lay mode may query MedlinePlus</li>
+</ul>
+<p>These lookups use the drug, disease, code, or concept being viewed and cache supported results locally. They are not required for the offline workspace and should not be used with patient-identifiable free text. Optional AI Chat/Tutor is a separate online function and remains unavailable until the user deliberately configures a supported provider and API key.</p>
+<h3 id="recommended-backup-routine">Recommended backup routine<a class="heading-link" href="#recommended-backup-routine" aria-label="Link to this section">#</a></h3>
+<p>Before every upgrade or large content change:</p>
+<ol>
+<li>Export progression from <strong>Admin → Progression Sync</strong>.</li>
+<li>Save it outside the MedOS folder and, ideally, on a second device.</li>
+<li>Close MedOS.</li>
+<li>For important Anki/user configuration, back up the recognized mutable files or the managed mutable-data backup offered by Setup.</li>
+<li>Keep the prior working release until the new version and progress are confirmed.</li>
+</ol>
+<h3 id="important-desktop-locations">Important desktop locations<a class="heading-link" href="#important-desktop-locations" aria-label="Link to this section">#</a></h3>
+<p>Paths below are relative to the active MedOS installation unless stated otherwise.</p>
+<table>
+<thead>
+<tr>
+<th>Purpose</th>
+<th>Location</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>Qbank progression/session database</td>
+<td><code>data/qbank_state.sqlite3</code></td>
+</tr>
+<tr>
+<td>Anki progression</td>
+<td><code>anki_progress.sqlite</code></td>
+</tr>
+<tr>
+<td>User Anki data</td>
+<td><code>anki_userdecks.sqlite</code></td>
+</tr>
+<tr>
+<td>Local users, where present</td>
+<td><code>users.sqlite</code></td>
+</tr>
+<tr>
+<td>Optional private backend settings</td>
+<td><code>app/backend/.env</code></td>
+</tr>
+<tr>
+<td>Backend log</td>
+<td><code>app/backend.log</code> and <code>app/backend.err</code></td>
+</tr>
+<tr>
+<td>Frontend log</td>
+<td><code>app/frontend.log</code> and <code>app/frontend.err</code></td>
+</tr>
+<tr>
+<td>Setup/install metadata</td>
+<td><code>.medos-install/</code></td>
+</tr>
+<tr>
+<td>Default diagnostic bundle</td>
+<td><code>.medos-install/diagnostics.zip</code></td>
+</tr>
+</tbody></table>
+<p>Some state may be placed in a small per-user location by portable activation. Use Setup&#39;s displayed active target rather than assuming that every writable file remains beside the large read-only payload.</p>
+<h3 id="do-not-include-these-in-a-support-upload">Do not include these in a support upload<a class="heading-link" href="#do-not-include-these-in-a-support-upload" aria-label="Link to this section">#</a></h3>
+<ul>
+<li><code>.env</code> files</li>
+<li>Full Qbank/account/progression databases</li>
+<li>API keys, tokens, passwords, or authorization headers</li>
+<li>Browser profiles</li>
+<li>Patient data</li>
+</ul>
+<p>The Setup diagnostics bundle is designed to include bounded log tails and system/release classifications while excluding database contents and redacting common secrets and home-folder names. Review any file before sending it.</p>
+<hr>
+<h2 id="10-technical-and-maintainer-appendix">10. Technical and maintainer appendix<a class="heading-link" href="#10-technical-and-maintainer-appendix" aria-label="Link to this section">#</a></h2>
+<h3 id="current-desktop-architecture">Current desktop architecture<a class="heading-link" href="#current-desktop-architecture" aria-label="Link to this section">#</a></h3>
+<p>MedOS desktop uses a prebuilt Next.js frontend and a FastAPI backend. Normal local endpoints are:</p>
+<ul>
+<li>Frontend: <code>http://127.0.0.1:3000</code></li>
+<li>Backend: local service used by the frontend (normally port 8002)</li>
+</ul>
+<p>Windows and Mac use the bundled runtimes. Linux installs native core dependencies locally on first setup. Runtime selection is host-specific:</p>
+<ul>
+<li>Windows bundled runtime</li>
+<li>macOS arm64 bundled runtime for Apple silicon</li>
+<li>macOS x64 bundled runtime for Intel</li>
+<li>Linux native Python environment and npm dependencies, started by <code>START HERE - LINUX.sh</code></li>
+</ul>
+<p>Setup checks the physical architecture on macOS so Rosetta does not incorrectly force an Intel application runtime on an Apple-silicon computer.</p>
+<h3 id="release-layout-concepts">Release layout concepts<a class="heading-link" href="#release-layout-concepts" aria-label="Link to this section">#</a></h3>
+<ul>
+<li><code>.medos-payload/desktop-external</code> — published desktop application/data payload</li>
+<li><code>.medos-payload/mac-tools/{arm64,x64}</code> — published Mac runtime payloads</li>
+<li><code>.medos-setup/manifests</code> — component inventories and hashes</li>
+<li><code>.medos-setup/preparation-report.json</code> — preparation outcome and release metadata</li>
+<li><code>setup-drive.json</code> plus checksum — release/drive identity</li>
+<li><code>setup_center/</code> — verified Setup implementation</li>
+<li><code>START HERE - WINDOWS.cmd</code> — Windows guided entry</li>
+<li><code>MedOS.app</code> — Mac entry point that selects the bundled arm64 or x64 runtime</li>
+<li><code>ANDROID - COPY TO PHONE/</code> — Android APK/data transfer kit</li>
+</ul>
+<p>Portable activation depends on matching release identity and a complete verified payload. It is not equivalent to launching random source files from an arbitrary directory.</p>
+<h3 id="update-preservation-model">Update preservation model<a class="heading-link" href="#update-preservation-model" aria-label="Link to this section">#</a></h3>
+<p>Files are classified as either manifest-owned immutable runtime/content or mutable user-owned state. A managed update stages immutable files, preserves recognized mutable paths, activates the new runtime, and performs health checks. Repair restores only bounded manifest-owned files and known executable permissions; it must not replace a mutable manifest path.</p>
+<h3 id="diagnostics-contract">Diagnostics contract<a class="heading-link" href="#diagnostics-contract" aria-label="Link to this section">#</a></h3>
+<p>Diagnostics include release/install identity, health classifications, endpoint results, host runtime information, and bounded log tails. They exclude database and environment-file contents and redact passwords, tokens, API keys, authorization values, and user-home names.</p>
+<p>The earlier Mac failure shown as:</p>
+<p><code>AttributeError: &#39;dict&#39; object has no attribute &#39;total_bytes&#39;</code></p>
+<p>was a CLI progress-rendering type error, not evidence that the user&#39;s medical database was damaged. Current diagnostics emit a typed progress event and have a regression test covering the terminal renderer.</p>
+<h3 id="advanced-configuration-safely-editing-app-backend-env">Advanced configuration: safely editing <code>app/backend/.env</code><a class="heading-link" href="#advanced-configuration-safely-editing-app-backend-env" aria-label="Link to this section">#</a></h3>
+<p><code>.env</code> is the private, plain-text configuration file loaded when MedOS starts. The public torrent intentionally excludes it; the launcher creates a local file. Stop MedOS before editing it, save it as UTF-8/plain text, use one <code>NAME=value</code> assignment per line, and restart afterward. Do not add spaces around the first <code>=</code> unless the value truly begins or ends with a space.</p>
+<p>Common values include:</p>
+<table>
+<thead>
+<tr>
+<th>Key</th>
+<th>Purpose</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><code>UTD_PASSWORD</code></td>
+<td>Optional explicit custom-content override; unnecessary for the recognized shipped bundle</td>
+</tr>
+<tr>
+<td><code>MEDOS_ADMIN_PASSWORD</code></td>
+<td>Initial password used only when seeding an empty users database</td>
+</tr>
+<tr>
+<td><code>MEDOS_SESSION_SECRET</code></td>
+<td>Random signing secret for login sessions; should be unique per installation</td>
+</tr>
+<tr>
+<td><code>USERS_DB_PATH</code></td>
+<td>Optional explicit accounts-database location</td>
+</tr>
+<tr>
+<td><code>MEDOS_ROOT</code></td>
+<td>Active complete MedOS root when data/runtime location must be explicit</td>
+</tr>
+<tr>
+<td><code>QBANK_STATE_DB</code></td>
+<td>Optional Qbank progression database override; portable activation may point it into per-user state</td>
+</tr>
+<tr>
+<td><code>LIBRARY_PATH</code>, <code>UTD_DB_PATH</code>, <code>AMBOSS_DIR</code></td>
+<td>Optional content-path overrides</td>
+</tr>
+<tr>
+<td><code>OPENAI_API_KEY</code>, <code>ANTHROPIC_API_KEY</code>, <code>GEMINI_API_KEY</code>, <code>NVIDIA_API_KEY</code></td>
+<td>Optional external AI credentials supported by the installed build</td>
+</tr>
+<tr>
+<td><code>MEDOS_SYNC_TOKEN</code></td>
+<td>Optional shared token for trusted-LAN progression sync</td>
+</tr>
+</tbody></table>
+<p>Never include <code>.env</code> in a public torrent, Git commit, diagnostics upload, screenshot, or support message. Before replacing it during an update, keep a private local backup. If the release folder moves, prefer rerunning the official launcher so it rewrites managed location values instead of manually changing every path.</p>
+<h3 id="maintainer-only-uptodate-content-key-rotation">Maintainer-only UpToDate content-key rotation<a class="heading-link" href="#maintainer-only-uptodate-content-key-rotation" aria-label="Link to this section">#</a></h3>
+<p>The value <code>hs;d,hghdk[;ak</code> is coupled to the encrypted rows in the shipped UpToDate source database. It is not an authentication password. Editing <code>.env</code> to a new value does not “secure” existing data; it simply causes AES/PBKDF2 decryption and full-resolution graphics to fail.</p>
+<p>A real rotation requires a new content build:</p>
+<ol>
+<li>Confirm that redistribution and transformation of the source content are authorized.</li>
+<li>Preserve an offline backup of the current encrypted source and record its release identity.</li>
+<li>Decrypt every protected <code>topic_asset</code>, <code>graphic_asset</code>, and <code>other_asset</code> row with the old key, preserving the exact row ID used as the salt and the expected compression/encoding.</li>
+<li>Re-encrypt every protected payload consistently with the new key. A partial rotation produces a database that appears healthy but fails unpredictably by topic or image.</li>
+<li>Rebuild <code>utdasset_decrypted.sqlite</code> from the newly encrypted source; never ship a stale cache from the old generation as proof of a successful rotation.</li>
+<li>Update the desktop configuration/bootstrap strategy and the Android content-key implementation together. The current Android source uses its own built-in matching value, so changing desktop alone breaks cross-platform parity.</li>
+<li>Rebuild the signed APK, desktop core, content manifests, preparation report, checksum sidecars, and all affected verification fixtures.</li>
+<li>Validate database integrity, decrypt every row or a release-approved exhaustive set, open representative topics/tables/graphics on Windows and both Mac architectures, and test Android import/reading.</li>
+<li>Rebuild any torrent containing changed bytes. The new payload necessarily has a new infohash and magnet.</li>
+</ol>
+<p>Relevant implementation locations for maintainers are <code>app/backend/utd_content.py</code>, <code>app/backend/utd_crypto.py</code>, <code>app/backend/utd_reader.py</code>, <code>app/backend/scripts/utd_decrypt_assets.py</code>, the launch/setup environment writers, and Android&#39;s <code>UtdCrypto.kt</code>. Do not publish a plaintext decrypted cache merely to avoid managing the key; it adds roughly 8.2 GB and changes the content-exposure model.</p>
+<h3 id="password-rotation-summary">Password rotation summary<a class="heading-link" href="#password-rotation-summary" aria-label="Link to this section">#</a></h3>
+<ul>
+<li><strong>Archive password:</strong> repack the archive and publish a new checksum. Existing archives keep their old password.</li>
+<li><strong>MedOS user password:</strong> change it in Admin/User Management; no data rebuild is required.</li>
+<li><strong>Initial admin password:</strong> changing <code>MEDOS_ADMIN_PASSWORD</code> affects only a newly created empty users database, not an existing administrator row.</li>
+<li><strong>Session secret:</strong> changing <code>MEDOS_SESSION_SECRET</code> signs everyone out but does not change account passwords or progression.</li>
+<li><strong>UpToDate content key:</strong> requires a coordinated content rebuild as described above; ordinary users must not rotate it.</li>
+<li><strong>AI/API keys:</strong> replace them with the provider, update <code>.env</code>, revoke the old key, and restart MedOS. Never store them in Git.</li>
+</ul>
+<h3 id="traceable-post-july-7-change-sources">Traceable post-July-7 change sources<a class="heading-link" href="#traceable-post-july-7-change-sources" aria-label="Link to this section">#</a></h3>
+<p>The July baseline used for this guide is commit <code>9b30b8e</code> dated July 6, 2026. Important later milestones include:</p>
+<table>
+<thead>
+<tr>
+<th>Commit</th>
+<th>Change</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><code>c0d659e</code>–<code>e6a2d30</code></td>
+<td>Safe manifests, destinations, resumable preparation, repair/diagnostics, guided Windows/Mac/Android setup, verified drive preparation</td>
+</tr>
+<tr>
+<td><code>0b4f2b4</code></td>
+<td>Keep verified Setup runtime immutable</td>
+</tr>
+<tr>
+<td><code>b8414ee</code></td>
+<td>Detect physical Mac architecture</td>
+</tr>
+<tr>
+<td><code>3e7ced6</code></td>
+<td>Bind Mac launch to a complete runtime</td>
+</tr>
+<tr>
+<td><code>73bffa5</code></td>
+<td>Show actionable Setup diagnostics</td>
+</tr>
+<tr>
+<td><code>8827f6a</code></td>
+<td>Resume launch and create one MedOS shortcut</td>
+</tr>
+<tr>
+<td><code>42434fa</code></td>
+<td>Activate MedOS in place</td>
+</tr>
+<tr>
+<td><code>5e1fe56</code></td>
+<td>Consolidate networking, torrent, and Qbank updates</td>
+</tr>
+<tr>
+<td><code>f6d2b8f</code></td>
+<td>Block incomplete exports</td>
+</tr>
+<tr>
+<td><code>7f119c8</code></td>
+<td>Consolidate latest desktop application</td>
+</tr>
+<tr>
+<td><code>7f51698</code></td>
+<td>Index completed Qbanks in global search</td>
+</tr>
+<tr>
+<td><code>ce9cb17</code></td>
+<td>Resume interrupted drive preparation</td>
+</tr>
+<tr>
+<td><code>d57c618</code></td>
+<td>Accept verified relocated drive data</td>
+</tr>
+<tr>
+<td><code>814e376</code>–<code>bbc997a</code></td>
+<td>Android 1.1.x clinical readers, search, calculators, ACLS hardening, and release verification</td>
+</tr>
+<tr>
+<td><code>315d118</code> and preceding release commits</td>
+<td>Final in-place Windows/Mac launchers, universal archive hardening, Android media hotfix, and extracted-portable documentation</td>
+</tr>
+<tr>
+<td><code>8f18141</code>–<code>54c107f</code></td>
+<td>Latest clinical-workspace hardening: UpToDate previews, global autocomplete, book/chapter search, docked Command Center, and unified database media viewers</td>
+</tr>
+<tr>
+<td><code>40b3802</code></td>
+<td>Beginner Git/GitHub collaboration and recovery guide</td>
+</tr>
+<tr>
+<td><code>1126d7b</code></td>
+<td>Client-compatible public MedOS torrent publication</td>
+</tr>
+</tbody></table>
+<p>Primary human-readable sources consolidated here include <code>README.md</code>, <code>MedOS_USER_GUIDE.md</code>, <code>UPGRADE.md</code>, <code>DISTRIBUTION.md</code>, <code>docs/SSD_SETUP_CENTER.md</code>, Android release/readme material, architecture notes, release plans/specifications, and Git history.</p>
+<h3 id="maintainer-cautions">Maintainer cautions<a class="heading-link" href="#maintainer-cautions" aria-label="Link to this section">#</a></h3>
+<ul>
+<li>Do not reintroduce top-level legacy-script instructions unless those files are actually published in the universal allowlist.</li>
+<li>Keep desktop version and Android version separate in release communication.</li>
+<li>Do not claim a physical-device pass based only on unit tests or archive inspection.</li>
+<li>Do not put archive passwords in the same public location as the encrypted archive.</li>
+<li>Preserve the exact release marker and manifest/checksum sidecars when relocating a portable payload.</li>
+<li>Optimize release preparation to avoid redundant whole-tree hashing of the 200,000+ file payload; repeated hashing can make a correct release appear stalled for hours.</li>
+</ul>
+<hr>
+<h2 id="11-release-verification-record">11. Release verification record<a class="heading-link" href="#11-release-verification-record" aria-label="Link to this section">#</a></h2>
+<h3 id="candidate-identity-and-limits">Candidate identity and limits<a class="heading-link" href="#candidate-identity-and-limits" aria-label="Link to this section">#</a></h3>
+<p>Desktop candidate <strong>1.1.5</strong> and Android candidate <strong>1.1.3/code 5</strong> are separate artifacts. Consult the delivered <code>release.json</code>, APK manifest, checksum sidecars, and final test report for measured sizes/hashes and acceptance status. No new full ZIP size, SHA-256, or torrent infohash is asserted in this guide before the artifact is built and measured.</p>
+<h3 id="evidence-recorded-during-this-repair">Evidence recorded during this repair<a class="heading-link" href="#evidence-recorded-during-this-repair" aria-label="Link to this section">#</a></h3>
+<ul>
+<li>Read-only validation of the exact shipped UpToDate source: <strong>22,406 records</strong>, including <strong>22,376 valid article bodies</strong> and <strong>30 verified empty records</strong>; no invalid nonempty record was found.</li>
+<li>Temporary real-content fixtures opened encrypted articles/graphics with blank <code>UTD_PASSWORD</code>, built a validated cache, and rendered the same article HTML from the prepared cache.</li>
+<li>Regression checks cover wrong keys, failed/partial preparation, preserved caches, typed sync failures, and core health during simulated optional ML import failures.</li>
+</ul>
+<table>
+<thead>
+<tr>
+<th>Platform</th>
+<th>Observed result</th>
+<th>Scope and limits</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>Windows, bundled Python 3.12.7 and Node 22.11.0</td>
+<td><strong>PASS:</strong> startup, health, frontend, login, encrypted-topic, and print requests returned HTTP 200</td>
+<td>Core local workflow with the bundled runtime; optional AI is separate.</td>
+</tr>
+<tr>
+<td>Ubuntu 24.04 amd64 under WSL1, Python 3.12.3 and Node 22.11.0</td>
+<td><strong>PASS:</strong> startup, health, frontend, login, and encrypted-topic requests returned HTTP 200</td>
+<td>Tested under WSL1. This does not establish a physical Linux-machine pass. New installations should use the recommended Node 22.13+ runtime.</td>
+</tr>
+<tr>
+<td>Android 1.1.3, version code 5</td>
+<td><strong>PASS:</strong> 563 JVM tests and 4 emulator tests</td>
+<td>Physical-device Wi-Fi sync acceptance remains pending.</td>
+</tr>
+<tr>
+<td>Apple Silicon and Intel Mac</td>
+<td>Native hardware acceptance <strong>pending</strong></td>
+<td>Source, package, and launcher checks do not replace opening the candidate on Mac hardware.</td>
+</tr>
+</tbody></table>
+<p>Consult the accompanying release record for any later acceptance results. Physical cross-device Wi-Fi sync and native Mac behavior are not claimed from unit or emulator tests.</p>
+<h3 id="what-the-historical-figures-mean">What the historical figures mean<a class="heading-link" href="#what-the-historical-figures-mean" aria-label="Link to this section">#</a></h3>
+<p>The exact existing archive is <code>MedOS-universal-desktop-20260902-2254-40b3802d.zip</code>, identified as 1.1.4. Its inspected metadata describes <strong>210,890 files</strong> and <strong>52,852,045,035 uncompressed bytes</strong>. Older guide inventories described a different 1.1.4 artifact; old root/Setup copies also differ. None of those figures are a size or hash for 1.1.5. The extracted folder&#39;s later <code>packs-map.json</code> is not asserted to be byte-identical to the archive&#39;s original metadata.</p>
+<hr>
+<h2 id="12-complete-troubleshooting-index">12. Complete troubleshooting index<a class="heading-link" href="#12-complete-troubleshooting-index" aria-label="Link to this section">#</a></h2>
+<p>Use this as a symptom-first index. The detailed explanations earlier in the guide remain authoritative.</p>
+<h3 id="installation-and-startup">Installation and startup<a class="heading-link" href="#installation-and-startup" aria-label="Link to this section">#</a></h3>
+<table>
+<thead>
+<tr>
+<th>Symptom</th>
+<th>Most likely cause</th>
+<th>First safe action</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>Archive will not open</td>
+<td>Wrong password syntax or unsupported extractor</td>
+<td>Use a supported extractor and the password supplied for that exact artifact.</td>
+</tr>
+<tr>
+<td>Windows “Extract All” rejects the archive</td>
+<td>Built-in extractor limitation</td>
+<td>Use a current 7-Zip or WinRAR release.</td>
+</tr>
+<tr>
+<td>Setup cannot find a file</td>
+<td>Partial/selective extraction or running inside archive preview</td>
+<td>Extract the entire release to a normal folder.</td>
+</tr>
+<tr>
+<td><code>[WinError 123]</code></td>
+<td>Invalid destination string, often a trailing <code>&quot;</code></td>
+<td>Use a short real folder path and the current launcher/core hotfix; keep existing data.</td>
+</tr>
+<tr>
+<td>Setup appears at 99%</td>
+<td>Final permissions, shortcut, or health work</td>
+<td>Read the changing activity/log; do not start a duplicate job.</td>
+</tr>
+<tr>
+<td>“Verified copied work is preserved”</td>
+<td>Copy succeeded but health/activation failed</td>
+<td>Correct the reported issue and resume; do not erase the target.</td>
+</tr>
+<tr>
+<td><code>backend-unreachable</code> with no bounded repair</td>
+<td>Startup/port/root/runtime exception needs a log</td>
+<td>Check <code>app/backend.err</code>, ensure one instance, then apply only a core fix if required.</td>
+</tr>
+<tr>
+<td>Browser opens but never redirects</td>
+<td>Services still starting or a backend/frontend error</td>
+<td>Wait 30 seconds, refresh once, and inspect both <code>.err</code> logs.</td>
+</tr>
+<tr>
+<td>Port 3000/8002 is busy</td>
+<td>Another MedOS instance is running</td>
+<td>Stop the old instance or reboot, then start the intended folder once.</td>
+</tr>
+<tr>
+<td>Shortcut opens old/disconnected drive</td>
+<td>Folder moved or drive letter changed</td>
+<td>Rerun the entry point from the current complete folder to recreate it.</td>
+</tr>
+<tr>
+<td>Shortcut icon is wrong</td>
+<td>OS icon/alias cache or obsolete shortcut</td>
+<td>Recreate the one MedOS shortcut; functionality is unaffected.</td>
+</tr>
+<tr>
+<td>Mac says unidentified developer</td>
+<td>App is not notarized</td>
+<td>Follow Section 3 and the System Settings approval flow for the trusted complete bundle.</td>
+</tr>
+<tr>
+<td>Mac app opens but no data loads</td>
+<td>App moved away from folder or stale root/locator</td>
+<td>Put/open the launcher in the complete folder and refresh managed location state.</td>
+</tr>
+<tr>
+<td>Mac launcher is not executable after torrent</td>
+<td>Torrent/filesystem did not preserve Unix mode</td>
+<td>Apply the trusted small Mac launcher overlay; do not redownload medical data.</td>
+</tr>
+</tbody></table>
+<h3 id="accounts-progress-and-configuration">Accounts, progress, and configuration<a class="heading-link" href="#accounts-progress-and-configuration" aria-label="Link to this section">#</a></h3>
+<table>
+<thead>
+<tr>
+<th>Symptom</th>
+<th>Most likely cause</th>
+<th>First safe action</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>Login says incorrect password</td>
+<td>Wrong/case-sensitive password, wrong running folder, or wrong users DB</td>
+<td>Confirm one instance and use Admin to reset the user.</td>
+</tr>
+<tr>
+<td>All known users disappeared</td>
+<td>Backend opened a different/new <code>users.sqlite</code> after relocation</td>
+<td>Stop MedOS, preserve both databases, inspect <code>USERS_DB_PATH</code>/root, and restore the correct path.</td>
+</tr>
+<tr>
+<td>Every admin is locked out</td>
+<td>No supported administrator can reset accounts</td>
+<td>Preserve the active database; use an existing administrator or targeted backed-up recovery.</td>
+</tr>
+<tr>
+<td>Progress looks empty after upgrade</td>
+<td>Different username or new progression DB</td>
+<td>Use the same username and import the saved progression JSON in merge mode.</td>
+</tr>
+<tr>
+<td>Portable progress is missing</td>
+<td>Portable drive identity/location changed or another state root is active</td>
+<td>Inspect the locator and <code>%LOCALAPPDATA%</code>/Application Support portable state before copying anything.</td>
+</tr>
+<tr>
+<td>AI Chat unavailable</td>
+<td>No supported provider key</td>
+<td>Add the user&#39;s own authorized API key to <code>.env</code>, restart, and avoid patient identifiers.</td>
+</tr>
+<tr>
+<td>Changing <code>.env</code> had no effect</td>
+<td>Backend was not restarted or file became <code>.env.txt</code></td>
+<td>Confirm the exact filename/plain-text line and restart MedOS.</td>
+</tr>
+</tbody></table>
+<h3 id="uptodate-and-clinical-content">UpToDate and clinical content<a class="heading-link" href="#uptodate-and-clinical-content" aria-label="Link to this section">#</a></h3>
+<table>
+<thead>
+<tr>
+<th>Symptom</th>
+<th>Most likely cause</th>
+<th>First safe action</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>UpToDate asks for a password</td>
+<td>Old code or custom-content override</td>
+<td>Apply the cumulative update; the recognized bundle works automatically.</td>
+</tr>
+<tr>
+<td>Content-key error</td>
+<td>Wrong custom override or a different dataset</td>
+<td>Verify the intended content key and folder; never use the ZIP password.</td>
+</tr>
+<tr>
+<td>Prepare script missing</td>
+<td>Older incomplete application payload</td>
+<td>Apply the complete cumulative update.</td>
+</tr>
+<tr>
+<td>Prepare was interrupted</td>
+<td>Computer slept, app stopped, or drive disconnected</td>
+<td>Keep source, reconnect, and retry; the encrypted DB is intact.</td>
+</tr>
+<tr>
+<td>UpToDate text works but graphics fail</td>
+<td>Wrong custom override or damaged/missing graphic source</td>
+<td>Check the selected bundle and override; preserve the cache and source.</td>
+</tr>
+<tr>
+<td>Qbank appears but no questions load</td>
+<td>Incomplete database/media, wrong map, or old core</td>
+<td>Verify the named bank and apply the current core; do not rename folders.</td>
+</tr>
+<tr>
+<td>AMBOSS question image is broken</td>
+<td>Old bank-specific media resolver</td>
+<td>Use the unified-media core hotfix and report QID if still broken.</td>
+</tr>
+<tr>
+<td>AMBOSS article shows contextless images</td>
+<td>Older reader rendered linked assets as a gallery</td>
+<td>Update the core; current reader keeps the image with its source text/caption.</td>
+</tr>
+<tr>
+<td>Article PDF contains thumbnails</td>
+<td>Older print view used embedded previews</td>
+<td>Apply the current core and regenerate PDF from <strong>Print / Save PDF</strong>.</td>
+</tr>
+<tr>
+<td>Related AMBOSS terms are plain text</td>
+<td>Older link conversion</td>
+<td>Update the core; current links are visible, clickable, and keyboard accessible.</td>
+</tr>
+<tr>
+<td>Search has no related images</td>
+<td>Old Search page did not call Concept Graph collector</td>
+<td>Update the core and use full Search Results.</td>
+</tr>
+<tr>
+<td>Search/Graph card has broken thumbnail but full image opens</td>
+<td>Thumbnail resolver mismatch</td>
+<td>Use the current core; do not recopy the full database.</td>
+</tr>
+<tr>
+<td>Library filter leaves blank shelves</td>
+<td>Old title-only filtering layout</td>
+<td>Update the core; current title/chapter search hides empty sections.</td>
+</tr>
+<tr>
+<td>PDF chapter opens wrong page</td>
+<td>Stale index or old asynchronous navigation</td>
+<td>Record expected/actual page, then update/reindex through supported tools.</td>
+</tr>
+<tr>
+<td>Anki shows only ~113.5 MB</td>
+<td>Old reporter ignored extracted media</td>
+<td>Apply current core and use bounded re-verification only if media fails.</td>
+</tr>
+</tbody></table>
+<h3 id="networking-and-torrents">Networking and torrents<a class="heading-link" href="#networking-and-torrents" aria-label="Link to this section">#</a></h3>
+<table>
+<thead>
+<tr>
+<th>Symptom</th>
+<th>Most likely cause</th>
+<th>First safe action</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>Phone/iPad cannot open desktop MedOS</td>
+<td>LAN disabled, firewall, VPN, or guest isolation</td>
+<td>Enable trusted LAN, use the current displayed IP, and test on private Wi-Fi.</td>
+</tr>
+<tr>
+<td>LAN address changed</td>
+<td>DHCP, sleep, VPN, or adapter change</td>
+<td>Use the address currently shown by MedOS.</td>
+</tr>
+<tr>
+<td>Torrent creates <code>MedOS\MedOS</code></td>
+<td>Save path was set to <code>...\MedOS</code> with subfolder enabled</td>
+<td>Move/repoint safely so Save in is the parent of <code>MedOS</code>.</td>
+</tr>
+<tr>
+<td>Torrent says files missing although data exists</td>
+<td>Wrong parent or old torrent metadata</td>
+<td>Use the current infohash and Force Re-check at the correct parent.</td>
+</tr>
+<tr>
+<td>Torrent warns about disk space while seeding existing data</td>
+<td>Client assumes a new allocation</td>
+<td>Continue only after confirming the exact data already exists at the mapped path.</td>
+</tr>
+<tr>
+<td>Two MedOS torrents appear</td>
+<td>Old and new jobs were both added</td>
+<td>Remove the obsolete job without deleting files; keep current infohash.</td>
+</tr>
+<tr>
+<td>Torrent is 100% but MedOS fails</td>
+<td>Torrent integrity is not application configuration</td>
+<td>Run the current launcher and inspect content/health diagnostics; bundled UpToDate is automatic.</td>
+</tr>
+<tr>
+<td>Old magnet does not contain a new fix</td>
+<td>Magnets are immutable</td>
+<td>Apply a small core hotfix or use a newly published torrent infohash.</td>
+</tr>
+</tbody></table>
+<h3 id="android-2">Android<a class="heading-link" href="#android-2" aria-label="Link to this section">#</a></h3>
+<table>
+<thead>
+<tr>
+<th>Symptom</th>
+<th>Most likely cause</th>
+<th>First safe action</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>APK is blocked</td>
+<td>Android install-unknown-apps permission</td>
+<td>Permit the specific trusted Files/browser app, install, then turn permission off if desired.</td>
+</tr>
+<tr>
+<td>“App not installed” during update</td>
+<td>Signature/package mismatch or incompatible OS</td>
+<td>Do not uninstall; obtain the correctly signed APK and confirm Android 9+.</td>
+</tr>
+<tr>
+<td>Import says no <code>data</code> folder</td>
+<td>Wrong ZIP selected</td>
+<td>Choose the exact <code>medos-phone-data.zip</code> from the Android kit.</td>
+</tr>
+<tr>
+<td>Import runs out of space</td>
+<td>ZIP plus extracted data exceed free storage</td>
+<td>Allow about 25 GB during import and retry with screen awake.</td>
+</tr>
+<tr>
+<td>Android media is missing</td>
+<td>Older APK path/decryption resolver or incomplete import</td>
+<td>Install the current signed APK over the existing app; re-import only if data is reported missing.</td>
+</tr>
+<tr>
+<td>Phone sync finds no desktop</td>
+<td>Desktop not running/LAN-enabled or network isolates clients</td>
+<td>Start desktop MedOS, enable LAN, use private Wi-Fi, then retry Sync.</td>
+</tr>
+<tr>
+<td>Book result is unavailable</td>
+<td>Book is intentionally not in phone kit</td>
+<td>Use <strong>Manage Storage → Find desktop</strong> on the same Wi-Fi.</td>
+</tr>
+</tbody></table>
+<h3 id="escalating-a-problem">Escalating a problem<a class="heading-link" href="#escalating-a-problem" aria-label="Link to this section">#</a></h3>
+<p>Preserve the working/partially working folder, the original archive or torrent identity, and progression backup. Send the operating system/version, hardware architecture, exact error, named content source/QID/article, last activity-log line, and the privacy-filtered diagnostics ZIP. Never send <code>.env</code>, passwords, API keys, account/progression databases, patient data, or an entire licensed content set as a routine support attachment.</p>
+<hr>
+<h2 id="one-page-quick-reference">One-page quick reference<a class="heading-link" href="#one-page-quick-reference" aria-label="Link to this section">#</a></h2>
+<h3 id="new-windows-user">New Windows user<a class="heading-link" href="#new-windows-user" aria-label="Link to this section">#</a></h3>
+<p>Extract the complete folder to its permanent location → <code>START HERE - WINDOWS.cmd</code> → <strong>Start MedOS</strong> → use the one MedOS shortcut. Activation makes no second copy of medical data.</p>
+<h3 id="new-mac-user">New Mac user<a class="heading-link" href="#new-mac-user" aria-label="Link to this section">#</a></h3>
+<p>Extract the complete folder → open <code>MedOS.app</code> inside it → use Section 3 for first-open approval if needed → keep the folder together.</p>
+<h3 id="new-linux-user">New Linux user<a class="heading-link" href="#new-linux-user" aria-label="Link to this section">#</a></h3>
+<p>Install Python 3.11–3.14 and Node.js 20.9+ with npm (Python 3.12 and Node 22 LTS version 22.13+ recommended) → run <code>bash &quot;START HERE - LINUX.sh&quot;</code> in a dedicated complete Linux copy → allow first-setup network installs → later core use is offline → stop with Ctrl+C. Logs: <code>.medos-linux/logs</code>.</p>
+<h3 id="existing-desktop-user">Existing desktop user<a class="heading-link" href="#existing-desktop-user" aria-label="Link to this section">#</a></h3>
+<p>Export progression → stop MedOS → extract the cumulative kit so <code>MedOS Update</code> is inside the existing 1.1.4/1.1.5 folder → apply the platform updater → start current launcher → verify progress and an article. Keep the updater backup.</p>
+<h3 id="android-user">Android user<a class="heading-link" href="#android-user" aria-label="Link to this section">#</a></h3>
+<p>Install the matching signed 1.1.3/code 5 candidate APK over the app → import phone data only when its manifest says it changed → keep existing progress and storage.</p>
+<h3 id="if-something-fails">If something fails<a class="heading-link" href="#if-something-fails" aria-label="Link to this section">#</a></h3>
+<p>Preserve data and private settings → read the exact failure → use the cumulative update or targeted repair → keep integrity checks enabled → share only sanitized diagnostics.</p>
+<h3 id="password-reminder">Password reminder<a class="heading-link" href="#password-reminder" aria-label="Link to this section">#</a></h3>
+<p>The download password, MedOS account password, and UpToDate content key serve different purposes. Bundled UpToDate needs no manual password entry. Keep personal account credentials, sync tokens, and API keys private.</p>
+<hr>
+<h2 id="13-optional-help-with-chatgpt-or-codex">13. Optional help with ChatGPT or Codex<a class="heading-link" href="#13-optional-help-with-chatgpt-or-codex" aria-label="Link to this section">#</a></h2>
+<h3 id="a-note-from-the-maintainer">A note from the maintainer<a class="heading-link" href="#a-note-from-the-maintainer" aria-label="Link to this section">#</a></h3>
+<p>I maintain MedOS alongside residency shifts, so a personal reply or a new fix may take time. Please keep your working data and a progression backup. A clear error report helps me reproduce a problem when I am back at the project. If you are comfortable using an AI coding assistant, you can also investigate a local copy while waiting.</p>
+<h3 id="set-up-optional-assistance">Set up optional assistance<a class="heading-link" href="#set-up-optional-assistance" aria-label="Link to this section">#</a></h3>
+<p>Install and sign in to the current desktop app, then choose a chat/project or open your MedOS source folder. Select ChatGPT or Codex for the task. See the <a href="https://learn.chatgpt.com/docs/app">official desktop-app guide</a>. Codex is included with ChatGPT Free and other listed plans, but available usage varies by plan, model, and work; check your own limits. There is no guaranteed “3–4 chats” repair allowance. See <a href="https://learn.chatgpt.com/docs/pricing">current pricing and limits</a>.</p>
+<p>Work on a backup or separate code checkout. Keep <code>.env</code>, user/account/progression databases, patient files, and licensed content out of uploads. An assistant should inspect the code and bounded sanitized diagnostics, explain the cause, apply a reviewable fix, and run relevant tests. Optional AI help is not a requirement for installing or using MedOS.</p>
+<h3 id="copyable-repair-prompt">Copyable repair prompt<a class="heading-link" href="#copyable-repair-prompt" aria-label="Link to this section">#</a></h3>
+<pre><code class="language-text">Help diagnose this MedOS installation in a backup or separate code checkout.
+Desktop version / Android version:
+Operating system, version, and CPU architecture:
+Exact error text and the step that triggers it:
+Expected result and actual result:
+Launcher used and whether this was a full release or cumulative update:
+What still works:
+Sanitized diagnostics / relevant log excerpt:
+
+Preserve medical content, accounts, progression, private .env, and existing backups.
+Inspect the actual release identity and code before editing. Reproduce the cause,
+make a focused fix, and run relevant regression tests and startup/content checks.
+Do not bypass hashes, manifests, BUILD_ID checks, authentication, or decryption.
+Do not treat an error as an empty database or reset users/progression to fix it.
+If the frontend is rebuilt, restore its complete matching build and metadata.
+Report changed files, tests, remaining limits, and how to undo the code change.
+Do not request or upload .env files, user databases, patient files, or full content.
+</code></pre>
+<hr>
+<h2 id="appendix-a-historical-1-1-4-distributions">Appendix A. Historical 1.1.4 distributions<a class="heading-link" href="#appendix-a-historical-1-1-4-distributions" aria-label="Link to this section">#</a></h2>
+<p><strong>Historical identification only. Nothing in this appendix identifies the 1.1.5 candidate, its update ZIP, or Android 1.1.3 APK.</strong> These records are retained from the previous complete guide so old downloads and support screenshots can be identified. Some old 1.1.4 artifacts differ from the exact September 2 archive inspected for this repair. Follow current Sections 1–4 for installation and updates.</p>
+<h3 id="historical-torrent-identities">Historical torrent identities<a class="heading-link" href="#historical-torrent-identities" aria-label="Link to this section">#</a></h3>
+<p>These magnets identify old distributions only. Do not use them as the 1.1.5 candidate or the 1.1.3 APK. To reuse an old desktop download, apply the current cumulative update to a supported stopped folder. A future complete torrent needs a new identity.</p>
+<p><strong>Old desktop 1.1.4 torrent</strong> — payload 54,868,073,964 bytes; save-path mapping was the parent of the <code>MedOS</code> folder.</p>
+<pre><code class="language-text">magnet:?xt=urn:btih:fd89e50dcd74643712f3eeb81c10f13b83861a77&amp;dn=MedOS&amp;tr=udp%3A%2F%2Ftracker.opentrackr.org%3A1337%2Fannounce&amp;tr=udp%3A%2F%2Ftracker.openbittorrent.com%3A6969%2Fannounce&amp;tr=udp%3A%2F%2Fopentracker.i2p.rocks%3A6969%2Fannounce&amp;tr=udp%3A%2F%2Ftracker.torrent.eu.org%3A451%2Fannounce
+</code></pre>
+<p><strong>Old Android 1.1.2 kit torrent</strong> — six files totaling 11,986,374,413 bytes. Its old signed APK is not the new candidate APK.</p>
+<pre><code class="language-text">magnet:?xt=urn:btih:d3dfb91ba9179bd0731b969d99e1d1ad06620fd0&amp;dn=ANDROID%20-%20COPY%20TO%20PHONE&amp;tr=udp%3A%2F%2Ftracker.opentrackr.org%3A1337%2Fannounce&amp;tr=udp%3A%2F%2Ftracker.openbittorrent.com%3A6969%2Fannounce&amp;tr=udp%3A%2F%2Fopentracker.i2p.rocks%3A6969%2Fannounce&amp;tr=udp%3A%2F%2Ftracker.torrent.eu.org%3A451%2Fannounce
+</code></pre>
+<h3 id="historical-verification-notes-from-the-previous-guide">Historical verification notes from the previous guide<a class="heading-link" href="#historical-verification-notes-from-the-previous-guide" aria-label="Link to this section">#</a></h3>
+<h3 id="universal-desktop-package">Universal desktop package<a class="heading-link" href="#universal-desktop-package" aria-label="Link to this section">#</a></h3>
+<ul>
+<li>Release identity: <strong>medos-1.1.4</strong></li>
+<li>Published archive inventory: <strong>210,727 files</strong>, <strong>52,825,586,908 uncompressed bytes</strong></li>
+<li>Export completeness gate: no missing features, packs, or incomplete packs</li>
+<li>Mac runtime inventory: <strong>arm64 and x64</strong></li>
+<li>Portable activation: enabled</li>
+<li>Normal shortcut contract: <strong>one MedOS shortcut</strong></li>
+</ul>
+<h3 id="additional-qbanks">Additional Qbanks<a class="heading-link" href="#additional-qbanks" aria-label="Link to this section">#</a></h3>
+<p>Each published SQLite database passed <code>PRAGMA quick_check</code> and the expected question count:</p>
+<ul>
+<li>MKSAP 19 — 1,870</li>
+<li>BoardVitals 2025 — 1,890</li>
+<li>AMBOSS ABIM 2025 — 2,082</li>
+<li>UWorld ABIM March 2026 — 1,249</li>
+</ul>
+<h3 id="cross-platform-installer-verification">Cross-platform installer verification<a class="heading-link" href="#cross-platform-installer-verification" aria-label="Link to this section">#</a></h3>
+<p>The focused release regression set completed with <strong>153 tests passing</strong> before publication. The published folder contains both Mac runtime architectures and retained Unix executable modes.</p>
+<p>An Apple-silicon Mac installation was also reported working after the historical Mac fixes. The Intel bundle is present and covered by structure/runtime tests; that is not represented here as a newly observed physical Intel-Mac installation.</p>
+<h3 id="shareable-archive">Shareable archive<a class="heading-link" href="#shareable-archive" aria-label="Link to this section">#</a></h3>
+<ul>
+<li>Format: ZIP64 with password-protected ZipCrypto entries for broad 7-Zip/WinRAR compatibility</li>
+<li>Archive size: <strong>39,477,136,807 bytes</strong></li>
+<li>Files: <strong>210,727</strong></li>
+<li>Uncompressed size: <strong>52,825,586,908 bytes</strong></li>
+<li>Archive password/CRC test: <strong>passed — Everything is Ok</strong></li>
+<li>SHA-256: supplied in the matching <code>.sha256</code> sidecar generated after the final archive is built</li>
+</ul>
+<p>Compare the archive&#39;s SHA-256 with the supplied <code>.sha256</code> sidecar after downloading. A matching hash detects transfer corruption or alteration; continue to obtain the file and password from a trusted distributor.</p>
+<h3 id="public-desktop-torrent">Public desktop torrent<a class="heading-link" href="#public-desktop-torrent" aria-label="Link to this section">#</a></h3>
+<ul>
+<li>Infohash: <code>fd89e50dcd74643712f3eeb81c10f13b83861a77</code></li>
+<li>Payload: <strong>54,868,073,964 bytes</strong> in <strong>104,944 files</strong></li>
+<li>Pieces: <strong>3,271</strong></li>
+<li>Validation: metadata/file set checked; the local D-drive payload completed a 100% client recheck and was observed seeding in µTorrent; MedOS/libtorrent accepted the same distribution identity</li>
+<li>Save-path contract: choose the parent of the <code>MedOS</code> folder</li>
+<li>Privacy boundary: excludes <code>.env</code>, personal progression, Git metadata, agent/development files, and loose Anki media; includes the runtime-required app/backend files and <code>collection.media.7z</code></li>
+</ul>
+<h3 id="android-distribution-torrent">Android distribution torrent<a class="heading-link" href="#android-distribution-torrent" aria-label="Link to this section">#</a></h3>
+<ul>
+<li>Infohash: <code>d3dfb91ba9179bd0731b969d99e1d1ad06620fd0</code></li>
+<li>Payload: <strong>11,986,374,413 bytes</strong> in <strong>6 files</strong></li>
+<li>Pieces: <strong>1,429</strong> at 8 MiB each</li>
+<li>Contents: signed APK, <code>medos-phone-data.zip</code>, start guide, manifest, and checksum files</li>
+<li>Validation: D- and F-drive torrent files had matching SHA-256 values; file set and magnet were parsed and matched the copied Android kit</li>
+</ul>
+<p>The universal archive, desktop torrent, and Android torrent are different artifacts. Their sizes and file counts should not be compared as if they were three copies of one manifest.</p>
+<hr>
+</main>
+  <div class="footer">MedOS 1.1.5 complete guide · Self-contained document · No internet required to read</div>
+</body>
+</html>

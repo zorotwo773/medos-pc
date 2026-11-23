@@ -1,0 +1,3 @@
+module.exports=[30912,a=>{"use strict";var b=a.i(87924),c=a.i(23210),d=a.i(53656);a.s(["ReferenceLayer",0,function({html:a,className:e,as:f="div",onMouseMove:g,onMouseLeave:h,onClick:i,modeOverride:j,hoverEnabled:k=!0,...l}){let m=(0,d.useReferenceLayerMode)(),n=j??m;return"off"===n?(0,b.jsx)(f,{className:e,onMouseMove:g,onMouseLeave:h,onClick:a=>{let b=a.target instanceof Element?a.target.closest("a[href*='/qbank/exhibit/'], a[href*='/qbank/media/']"):null;i?.(a),b&&!a.defaultPrevented&&a.preventDefault()},dangerouslySetInnerHTML:{__html:a}}):(0,b.jsx)(c.AmbossHtml,{html:a,className:e,as:f,onMouseMove:g,onMouseLeave:h,onClick:i,hoverEnabled:k,modeOverride:n,...l})}])}];
+
+//# sourceMappingURL=components_common_ReferenceLayer_tsx_0nwnsuq._.js.map

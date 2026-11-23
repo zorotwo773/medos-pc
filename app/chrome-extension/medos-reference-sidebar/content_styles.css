@@ -1,0 +1,367 @@
+/* ── Underlines ────────────────────────────────────────────────────────────
+   Matches the in-app hover engine (AmbossHtml.tsx / globals.css .medos-hover-*):
+   1px source-coloured underline, 3px offset, subtle tinted hover background. */
+.medos-ext-ref {
+  cursor: pointer !important;
+  color: inherit !important;
+  font-weight: inherit !important;
+  text-decoration-line: underline !important;
+  text-decoration-style: solid !important;
+  text-decoration-thickness: 1px !important;
+  text-underline-offset: 3px !important;
+  border-bottom: 0 !important;
+  box-shadow: none !important;
+  background: transparent !important;
+  border-radius: 2px !important;
+  transition: background-color 0.12s ease !important;
+}
+
+.medos-ext-ref-source-amboss    { text-decoration-color: rgba(14, 165, 233, 0.72) !important; }
+.medos-ext-ref-source-qbank     { text-decoration-color: rgba(234, 179, 8, 0.78) !important; }
+.medos-ext-ref-source-utd       { text-decoration-color: rgba(34, 197, 94, 0.78) !important; }
+.medos-ext-ref-source-cliniccons{ text-decoration-color: rgba(249, 115, 22, 0.82) !important; }
+.medos-ext-ref-source-drug      { text-decoration-color: rgba(107, 114, 128, 0.86) !important; }
+.medos-ext-ref-source-firstaid  { text-decoration-color: rgba(198, 54, 42, 0.86) !important; }
+.medos-ext-ref-source-umls      { text-decoration-color: rgba(20, 184, 166, 0.82) !important; }
+.medos-ext-ref-source-uworld    { text-decoration-color: rgba(79, 70, 229, 0.82) !important; }
+.medos-ext-ref-source-books     { text-decoration-color: rgba(146, 109, 64, 0.82) !important; }
+.medos-ext-ref-source-diseases  { text-decoration-color: rgba(147, 51, 234, 0.82) !important; }
+.medos-ext-ref-source-reference { text-decoration-color: rgba(124, 138, 165, 0.82) !important; }
+
+.medos-ext-ref-source-amboss:hover    { background: rgba(14, 165, 233, 0.10) !important; }
+.medos-ext-ref-source-qbank:hover     { background: rgba(234, 179, 8, 0.12) !important; }
+.medos-ext-ref-source-utd:hover       { background: rgba(34, 197, 94, 0.11) !important; }
+.medos-ext-ref-source-cliniccons:hover{ background: rgba(249, 115, 22, 0.12) !important; }
+.medos-ext-ref-source-drug:hover      { background: rgba(107, 114, 128, 0.12) !important; }
+.medos-ext-ref-source-firstaid:hover  { background: rgba(198, 54, 42, 0.10) !important; }
+.medos-ext-ref-source-umls:hover      { background: rgba(20, 184, 166, 0.11) !important; }
+.medos-ext-ref-source-uworld:hover    { background: rgba(79, 70, 229, 0.11) !important; }
+.medos-ext-ref-source-books:hover     { background: rgba(146, 109, 64, 0.12) !important; }
+.medos-ext-ref-source-diseases:hover  { background: rgba(147, 51, 234, 0.11) !important; }
+.medos-ext-ref-source-reference:hover { background: rgba(124, 138, 165, 0.12) !important; }
+
+/* ── Hover card ────────────────────────────────────────────────────────────
+   Ports .medos-amboss-tooltip: frosted panel, smart placement, source-coloured
+   brand + action chips. Everything is !important-reset so host page CSS can't
+   bleed into the card. */
+.medos-ext-tooltip {
+  position: fixed !important;
+  z-index: 2147483647 !important;
+  box-sizing: border-box !important;
+  min-width: min(300px, calc(100vw - 24px)) !important;
+  overflow-x: hidden !important;
+  overflow-y: auto !important;
+  -webkit-backdrop-filter: blur(18px) saturate(1.08) !important;
+  backdrop-filter: blur(18px) saturate(1.08) !important;
+  background: rgba(248, 250, 252, 0.94) !important;
+  color: #111827 !important;
+  border: 1px solid rgba(148, 163, 184, 0.48) !important;
+  border-radius: 8px !important;
+  box-shadow: 0 18px 48px rgba(15, 23, 42, 0.18), inset 0 1px 0 rgba(255, 255, 255, 0.72) !important;
+  padding: 12px !important;
+  font: 13px/1.45 system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif !important;
+  text-align: left !important;
+  cursor: pointer !important;
+  overscroll-behavior: contain !important;
+  scrollbar-gutter: stable !important;
+}
+
+.medos-ext-tooltip * {
+  box-sizing: border-box !important;
+  font-family: inherit !important;
+}
+
+.medos-ext-tooltip[data-layout="compact"] { padding: 11px !important; }
+.medos-ext-tooltip[data-layout="exhibit"] { padding: 12px 13px !important; }
+.medos-ext-tooltip-above { transform: translateY(-100%) !important; }
+.medos-ext-tooltip-below { transform: none !important; }
+
+.medos-ext-tooltip::-webkit-scrollbar { width: 7px !important; }
+.medos-ext-tooltip::-webkit-scrollbar-thumb { background: rgba(100, 116, 139, 0.42) !important; border-radius: 999px !important; }
+.medos-ext-tooltip::-webkit-scrollbar-track { background: rgba(226, 232, 240, 0.54) !important; }
+
+.medos-ext-tooltip-body { min-height: 0 !important; overflow: visible !important; }
+
+.medos-ext-tooltip-q-corner {
+  position: absolute !important;
+  right: 10px !important;
+  top: 10px !important;
+  display: inline-flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  gap: 4px !important;
+  height: 26px !important;
+  min-width: 26px !important;
+  padding: 0 7px !important;
+  border: 1px solid rgba(202, 138, 4, 0.6) !important;
+  border-radius: 6px !important;
+  background: rgba(254, 249, 195, 0.9) !important;
+  color: #92400e !important;
+  font-size: 12px !important;
+  font-weight: 900 !important;
+  cursor: pointer !important;
+}
+.medos-ext-tooltip-q-corner:hover { background: rgba(253, 224, 71, 0.5) !important; }
+
+.medos-ext-tooltip-brand {
+  margin: 0 0 4px !important;
+  font-size: 10px !important;
+  font-weight: 800 !important;
+  letter-spacing: 0.12em !important;
+  color: #0e7490 !important;
+}
+.medos-ext-tooltip-brand-qbank      { color: #a16207 !important; }
+.medos-ext-tooltip-brand-utd        { color: #15803d !important; }
+.medos-ext-tooltip-brand-amboss     { color: #0e7490 !important; }
+.medos-ext-tooltip-brand-cliniccons { color: #c2410c !important; }
+.medos-ext-tooltip-brand-drug       { color: #334155 !important; }
+.medos-ext-tooltip-brand-firstaid   { color: #b42318 !important; }
+.medos-ext-tooltip-brand-umls       { color: #0f766e !important; }
+.medos-ext-tooltip-brand-uworld     { color: #4338ca !important; }
+.medos-ext-tooltip-brand-books      { color: #7c5e2e !important; }
+.medos-ext-tooltip-brand-diseases   { color: #7e22ce !important; }
+.medos-ext-tooltip-brand-reference  { color: #475569 !important; }
+
+.medos-ext-tooltip-title {
+  display: block !important;
+  margin: 0 0 6px !important;
+  padding-right: 44px !important;
+  color: #0f172a !important;
+  font-size: 15px !important;
+  font-weight: 800 !important;
+  line-height: 1.22 !important;
+}
+.medos-ext-tooltip-title-drug { font-size: 17px !important; line-height: 1.18 !important; margin-bottom: 9px !important; }
+
+.medos-ext-tooltip-icd { display: flex !important; flex-wrap: wrap !important; gap: 4px !important; margin: 0 0 6px !important; }
+.medos-ext-tooltip-icd span {
+  font-family: ui-monospace, SFMono-Regular, Menlo, monospace !important;
+  font-size: 9px !important;
+  letter-spacing: 0.06em !important;
+  color: #0f766e !important;
+  background: rgba(20, 184, 166, 0.12) !important;
+  border: 1px solid rgba(20, 184, 166, 0.28) !important;
+  border-radius: 4px !important;
+  padding: 1px 5px !important;
+}
+
+.medos-ext-tooltip-exp {
+  display: block !important;
+  margin: 0 0 6px !important;
+  color: #64748b !important;
+  font-size: 12px !important;
+  font-style: normal !important;
+}
+
+.medos-ext-tooltip-abstract {
+  margin: 0 0 10px !important;
+  color: #334155 !important;
+  font-size: 13px !important;
+}
+.medos-ext-tooltip-loading { color: #64748b !important; }
+
+/* HTML table / drug-card container */
+.medos-ext-tooltip-html {
+  background: #ffffff !important;
+  border: 1px solid rgba(203, 213, 225, 0.9) !important;
+  border-radius: 6px !important;
+  color: #111827 !important;
+  display: block !important;
+  margin: 10px 0 12px !important;
+  max-width: 100% !important;
+  overflow-x: auto !important;
+  padding: 8px !important;
+}
+.medos-ext-tooltip-html::-webkit-scrollbar { height: 8px !important; width: 8px !important; }
+.medos-ext-tooltip-html::-webkit-scrollbar-thumb { background: #cbd5e1 !important; border-radius: 999px !important; }
+.medos-ext-tooltip-html::-webkit-scrollbar-track { background: #eef2f7 !important; }
+.medos-ext-tooltip-html table {
+  background: #ffffff !important;
+  border: 1px solid #64748b !important;
+  border-collapse: collapse !important;
+  font-size: 11px !important;
+  line-height: 1.35 !important;
+  width: auto !important;
+}
+.medos-ext-tooltip-html td,
+.medos-ext-tooltip-html th {
+  background: #ffffff !important;
+  border: 1px solid #94a3b8 !important;
+  color: #111827 !important;
+  padding: 5px 6px !important;
+  vertical-align: top !important;
+}
+.medos-ext-tooltip-html tr { border-bottom: 1px solid #cbd5e1 !important; }
+.medos-ext-tooltip-html strong { color: #0f172a !important; }
+.medos-ext-tooltip-html p, .medos-ext-tooltip-html ul { margin: 0 !important; }
+.medos-ext-tooltip-html ul { padding-left: 16px !important; }
+
+/* Drug card */
+.medos-ext-tooltip-html .medos-drug-card { display: grid !important; gap: 8px !important; }
+.medos-ext-tooltip-html .medos-drug-row {
+  display: grid !important;
+  gap: 4px !important;
+  border: 1px solid #dbe3ee !important;
+  border-left-width: 4px !important;
+  border-radius: 6px !important;
+  padding: 8px 10px !important;
+  background: #ffffff !important;
+}
+.medos-ext-tooltip-html .medos-drug-class   { border-color: #bfdbfe !important; border-left-color: #2563eb !important; background: #eef6ff !important; }
+.medos-ext-tooltip-html .medos-drug-dose    { border-color: #99f6e4 !important; border-left-color: #0f766e !important; background: #f0fdfa !important; }
+.medos-ext-tooltip-html .medos-drug-uses    { border-color: #d9f99d !important; border-left-color: #65a30d !important; background: #f7fee7 !important; }
+.medos-ext-tooltip-html .medos-drug-warning { border-color: #fecdd3 !important; border-left-color: #e11d48 !important; background: #fff1f2 !important; }
+.medos-ext-tooltip-html .medos-drug-label {
+  color: #475569 !important;
+  font-size: 10px !important;
+  font-weight: 900 !important;
+  letter-spacing: 0.12em !important;
+  text-transform: uppercase !important;
+}
+.medos-ext-tooltip-html .medos-drug-row strong { color: #0f172a !important; font-size: 14px !important; line-height: 1.25 !important; }
+.medos-ext-tooltip-html .medos-drug-row p { margin: 0 !important; color: #334155 !important; line-height: 1.42 !important; }
+.medos-ext-tooltip-html .medos-drug-warning .medos-drug-label,
+.medos-ext-tooltip-html .medos-drug-warning p { color: #9f1239 !important; }
+.medos-ext-tooltip-html .medos-drug-row ul { display: grid !important; gap: 3px !important; margin: 0 !important; padding-left: 17px !important; list-style: disc !important; }
+.medos-ext-tooltip-html .medos-drug-row li { color: #334155 !important; line-height: 1.35 !important; }
+
+/* Media thumbnails */
+.medos-ext-tooltip-media {
+  display: grid !important;
+  gap: 7px !important;
+  grid-template-columns: repeat(var(--ext-media-cols, 3), minmax(0, 1fr)) !important;
+  margin: 10px 0 12px !important;
+}
+.medos-ext-tooltip-media[data-count="1"] { --ext-media-cols: 2; }
+.medos-ext-tooltip-media[data-count="2"] { --ext-media-cols: 2; }
+.medos-ext-tooltip-media[data-count="3"] { --ext-media-cols: 3; }
+.medos-ext-tooltip-thumb {
+  display: block !important;
+  height: 68px !important;
+  width: 100% !important;
+  padding: 0 !important;
+  overflow: hidden !important;
+  border: 1px solid rgba(148, 163, 184, 0.34) !important;
+  border-radius: 6px !important;
+  background: #ffffff !important;
+  cursor: pointer !important;
+}
+.medos-ext-tooltip-thumb:hover { border-color: rgba(103, 232, 249, 0.7) !important; }
+.medos-ext-tooltip-thumb img { display: block !important; height: 100% !important; width: 100% !important; object-fit: cover !important; }
+.medos-ext-thumb-ph { display: block !important; height: 100% !important; width: 100% !important; background: linear-gradient(110deg, #eef2f7 30%, #e2e8f0 50%, #eef2f7 70%) !important; }
+
+/* Secondary source actions */
+.medos-ext-tooltip-actions {
+  display: flex !important;
+  flex-wrap: wrap !important;
+  gap: 4px !important;
+  margin-top: 8px !important;
+  padding-top: 7px !important;
+  border-top: 1px solid rgba(148, 163, 184, 0.22) !important;
+}
+.medos-ext-tooltip-action {
+  display: grid !important;
+  grid-template-columns: auto minmax(0, 1fr) auto !important;
+  align-items: center !important;
+  gap: 6px !important;
+  width: 100% !important;
+  border: 1px solid rgba(148, 163, 184, 0.22) !important;
+  border-radius: 5px !important;
+  padding: 4px 6px !important;
+  font-size: 12px !important;
+  line-height: 1.2 !important;
+  color: #1f2937 !important;
+  background: #f8fafc !important;
+  text-align: left !important;
+  cursor: pointer !important;
+}
+.medos-ext-tooltip-action:hover { filter: brightness(1.05) !important; }
+.medos-ext-tooltip-badge {
+  display: inline-flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  min-width: 20px !important;
+  height: 17px !important;
+  padding: 0 3px !important;
+  border: 1px solid currentColor !important;
+  border-radius: 4px !important;
+  font-size: 10px !important;
+  font-weight: 900 !important;
+}
+.medos-ext-tooltip-action-title {
+  min-width: 0 !important;
+  overflow: hidden !important;
+  text-overflow: ellipsis !important;
+  white-space: nowrap !important;
+  font-weight: 700 !important;
+}
+.medos-ext-tooltip-action-ext { color: #64748b !important; font-weight: 700 !important; }
+
+.medos-ext-tooltip-action-amboss     { background: rgba(224, 242, 254, 0.86) !important; border-color: rgba(14, 165, 233, 0.32) !important; color: #0369a1 !important; }
+.medos-ext-tooltip-action-qbank      { background: rgba(254, 249, 195, 0.82) !important; border-color: rgba(202, 138, 4, 0.34) !important; color: #92400e !important; }
+.medos-ext-tooltip-action-utd        { background: rgba(220, 252, 231, 0.82) !important; border-color: rgba(22, 163, 74, 0.30) !important; color: #166534 !important; }
+.medos-ext-tooltip-action-cliniccons { background: rgba(255, 237, 213, 0.88) !important; border-color: rgba(249, 115, 22, 0.34) !important; color: #9a3412 !important; }
+.medos-ext-tooltip-action-drug       { background: rgba(243, 244, 246, 0.92) !important; border-color: rgba(107, 114, 128, 0.34) !important; color: #374151 !important; }
+.medos-ext-tooltip-action-firstaid   { background: rgba(255, 241, 239, 0.94) !important; border-color: rgba(198, 54, 42, 0.34) !important; color: #9f241d !important; }
+.medos-ext-tooltip-action-umls       { background: rgba(204, 251, 241, 0.82) !important; border-color: rgba(20, 184, 166, 0.34) !important; color: #0f766e !important; }
+.medos-ext-tooltip-action-uworld     { background: rgba(224, 231, 255, 0.86) !important; border-color: rgba(79, 70, 229, 0.32) !important; color: #4338ca !important; }
+.medos-ext-tooltip-action-diseases   { background: rgba(243, 232, 255, 0.86) !important; border-color: rgba(147, 51, 234, 0.30) !important; color: #7e22ce !important; }
+.medos-ext-tooltip-action-books      { background: rgba(245, 239, 224, 0.92) !important; border-color: rgba(146, 109, 64, 0.34) !important; color: #7c5e2e !important; }
+.medos-ext-tooltip-action-reference  { background: rgba(237, 241, 247, 0.92) !important; border-color: rgba(124, 138, 165, 0.34) !important; color: #3b4a60 !important; }
+
+/* ── Image lightbox ────────────────────────────────────────────────────────*/
+.medos-ext-lightbox {
+  position: fixed !important;
+  inset: 0 !important;
+  z-index: 2147483647 !important;
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  padding: 28px !important;
+  background: rgba(15, 23, 42, 0.72) !important;
+}
+.medos-ext-lightbox-panel {
+  display: flex !important;
+  flex-direction: column !important;
+  max-height: calc(100vh - 56px) !important;
+  max-width: min(960px, calc(100vw - 56px)) !important;
+  overflow: hidden !important;
+  background: #0f1417 !important;
+  border: 1px solid rgba(148, 163, 184, 0.34) !important;
+  border-radius: 8px !important;
+  box-shadow: 0 22px 70px rgba(0, 0, 0, 0.44) !important;
+}
+.medos-ext-lightbox-head {
+  display: flex !important;
+  align-items: center !important;
+  justify-content: space-between !important;
+  gap: 14px !important;
+  padding: 10px 12px !important;
+  border-bottom: 1px solid rgba(148, 163, 184, 0.24) !important;
+  color: #f8fafc !important;
+  font: 13px/1.3 system-ui, -apple-system, "Segoe UI", sans-serif !important;
+}
+.medos-ext-lightbox-head strong { font-size: 13px !important; }
+.medos-ext-lightbox-close {
+  display: inline-flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  width: 28px !important;
+  height: 28px !important;
+  border: 1px solid rgba(148, 163, 184, 0.34) !important;
+  border-radius: 6px !important;
+  background: transparent !important;
+  color: #e2e8f0 !important;
+  cursor: pointer !important;
+  font-size: 14px !important;
+}
+.medos-ext-lightbox-stage {
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  min-height: 200px !important;
+  padding: 12px !important;
+  overflow: auto !important;
+}
+.medos-ext-lightbox-stage img { display: block !important; max-width: 100% !important; max-height: calc(100vh - 132px) !important; object-fit: contain !important; }
+.medos-ext-lightbox-loading { color: #94a3b8 !important; font: 13px system-ui, sans-serif !important; }

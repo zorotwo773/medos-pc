@@ -1,0 +1,25 @@
+# Curated dosing overlay schema.
+overlays:
+  - drug:
+      rxcui: "string"
+      generic_name: "string"
+    indications:
+      - text: "Primary indication"
+        rank: 1
+    dosing_rules:
+      - indication: "Primary indication"
+        population: "adult"
+        route: "PO"
+        dose_form: "tablet"
+        fixed_dose_low: 500
+        fixed_dose_high: 500
+        mg_per_kg_low: null
+        mg_per_kg_high: null
+        dose_basis: null
+        dose_unit: "mg"
+        frequency_code: "once_daily"
+        divisions_per_day: 1
+        max_mg_per_day: null
+        default_duration_days: 30
+        schedule_context: "maintenance"
+        notes: "Reviewed source rationale."

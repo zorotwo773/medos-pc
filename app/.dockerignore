@@ -1,0 +1,83 @@
+# Build context = app/ (set in infra/docker-compose.yml).
+# Exclude everything heavy or environment-specific so the image stays slim
+# and reproducible. Data lives on a bind-mount, never inside the image.
+
+# Dev artefacts
+node_modules
+.next
+.next-dev
+.turbo
+out
+dist
+build
+coverage
+
+# Python build cache
+**/__pycache__
+**/*.pyc
+**/*.pyo
+**/.pytest_cache
+**/.mypy_cache
+**/.ruff_cache
+**/*.egg-info
+.venv
+venv
+
+# Git + IDE
+.git
+.gitignore
+.idea
+.vscode
+.DS_Store
+*.swp
+
+# Logs, pid files, scratch
+*.log
+*.pid
+backend.err
+frontend.err
+status.pid
+calc-debug.png
+thumb.jpg
+
+# Secrets — passed in via env at run time, never baked
+.env
+.env.*
+backend/.env
+backend/.env.*
+infra/.env.production
+infra/.env.local
+
+# Big binaries that occasionally live in app/ during dev
+*.zip
+*.tar.gz
+*.bin
+*.vhdx
+
+# OS-specific launchers and installers — irrelevant on Linux
+START.bat
+START.ps1
+START_DEV.ps1
+*.cmd
+*.vbs
+
+# Chrome extension is shipped separately, not via the web app
+chrome-extension
+
+# Backend scratch data that should never make it into the image
+backend/backend.log
+backend/static/
+backend/library_index.sqlite3
+backend/qbank_visual_index_step*.sqlite3
+backend/utd_graphic_index.sqlite3
+backend/__pycache__
+backend/routers/__pycache__
+backend/scripts/__pycache__
+backend/vectorstore
+
+# Sibling project directories that may exist on dev machines
+docs
+archive
+models
+data
+phone-data

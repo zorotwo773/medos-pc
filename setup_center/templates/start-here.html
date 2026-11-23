@@ -1,0 +1,89 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Start MedOS Setup</title>
+  <style>
+    :root{color-scheme:light dark;font:18px/1.55 system-ui,-apple-system,"Segoe UI",sans-serif;--ink:#14232b;--paper:#fff;--canvas:#edf5f2;--brand:#006c5b;--line:#b9d1c9}*{box-sizing:border-box}body{margin:0;background:var(--canvas);color:var(--ink)}main{width:min(72rem,calc(100% - 2rem));margin:auto;padding:2rem 0 4rem}header{padding:3rem clamp(1rem,5vw,4rem);border-radius:1.5rem;background:#0d2923;color:#fff}h1{max-width:14ch;margin:.2rem 0;font-size:clamp(2.5rem,8vw,5.5rem);line-height:1}header p{max-width:48rem;font-size:1.2rem;color:#cce5dd}.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,18rem),1fr));gap:1rem;margin-top:1rem}section{margin-top:1rem;padding:clamp(1.2rem,4vw,2rem);border:2px solid var(--line);border-radius:1rem;background:var(--paper)}h2{margin-top:0;color:var(--brand);font-size:1.8rem}li{margin:.55rem 0}code{display:block;overflow:auto;padding:.8rem;border-radius:.5rem;background:#17231f;color:#effff9;font-size:.84rem;white-space:pre-wrap}.note{padding:1rem;border-left:5px solid var(--brand);background:#dff3ec;color:#17362e}a{color:#005b9f}kbd{padding:.1rem .4rem;border:1px solid #888;border-radius:.25rem;background:#eee;color:#111}@media(prefers-color-scheme:dark){:root{--ink:#eaf4f0;--paper:#14241f;--canvas:#091611;--brand:#79d8c2;--line:#3a5d52}.note{background:#193c33;color:#eaf4f0}}@media(max-width:35rem){main{width:min(100% - 1rem,72rem)}header{padding:2rem 1.2rem}}
+  </style>
+</head>
+<body>
+<main>
+  <header>
+    <p>MEDOS OFFLINE SETUP CENTER</p>
+    <h1>Start MedOS Setup</h1>
+    <p>Choose your device below. The installer works from this SSD, preserves existing MedOS data, and does not need a network connection.</p>
+  </header>
+
+  <div class="grid">
+    <section>
+      <h2>Windows</h2>
+      <ol>
+        <li>Double-click <strong>START HERE - WINDOWS.cmd</strong>.</li>
+        <li>If Windows asks, confirm that you opened the file from your complete copied or extracted MedOS folder.</li>
+        <li>Your browser opens a local page. Click <strong>Start MedOS</strong>.</li>
+      </ol>
+      <p class="note">Keep the black window open until the page says MedOS is ready. No medical data is copied.</p>
+      <p>Manual command from Command Prompt:</p>
+      <code>"tools\python\python.exe" -B -E -s -m setup_center serve --drive-root "."</code>
+    </section>
+
+    <section>
+      <h2>Mac</h2>
+      <ol>
+        <li>Double-click <strong>START HERE - MAC.zip</strong> to extract it.</li>
+        <li>Open <strong>MedOS Setup</strong>. Keep this SSD connected while setup checks and copies files.</li>
+        <li>If macOS blocks the first launch, Control-click the app, choose <strong>Open</strong>, then confirm Open.</li>
+      </ol>
+      <p class="note">macOS security approval cannot be automated. MedOS Setup does not ask you to disable Gatekeeper or change system security.</p>
+    </section>
+
+    <section>
+      <h2>Android</h2>
+      <ol>
+        <li>Open <strong>ANDROID - COPY TO PHONE</strong> on this SSD.</li>
+        <li>Copy that complete folder to the phone with a USB cable.</li>
+        <li>On the phone, open the included guide, verify the displayed checksum, then tap the MedOS APK.</li>
+        <li>Android may ask permission to install apps from your Files app. Approve only for this install, then turn it off again.</li>
+      </ol>
+      <p class="note">Updating the app preserves its private app data. Never uninstall MedOS or choose “Clear storage” during an update.</p>
+    </section>
+  </div>
+
+  <section>
+    <h2>Windows starts directly from this folder</h2>
+    <p>The same Setup detects Windows, Apple Silicon, or Intel Mac and uses the matching bundled runtime.</p>
+    <ul>
+      <li>Copy or fully extract the complete folder to its permanent location first.</li>
+      <li>Double-click <strong>START HERE - WINDOWS.cmd</strong>, then click <strong>Start MedOS</strong>. There is <strong>no second copy of medical data</strong>.</li>
+      <li>MedOS prepares small per-user state, creates <strong>one MedOS shortcut</strong>, starts the app, and verifies it.</li>
+      <li>Keep the complete folder in place. If it moves, run <strong>START HERE - WINDOWS.cmd</strong> again from the new location.</li>
+    </ul>
+    <p class="note">The primary setup is offline-first. The universal release includes Windows, Apple Silicon, and Intel Mac runtimes. A controlled repair uses only a trusted release source and never installs arbitrary global packages.</p>
+  </section>
+
+  <section>
+    <h2>Repair this SSD</h2>
+    <p>If a launcher is missing or a security product blocks it:</p>
+    <ol>
+      <li>Do not format, erase, or “clean” the SSD.</li>
+      <li>Reconnect it directly to the computer, without a USB hub, and try the device instructions once more.</li>
+      <li>On Windows, open Command Prompt in this SSD folder and run:</li>
+    </ol>
+    <code>"tools\python\python.exe" -B -E -s -m setup_center verify --drive-root "."</code>
+    <p>Save the exact final message. If verification reports a missing or changed file, use a trusted MedOS release source to refresh this SSD. Do not download individual runtime files from search results.</p>
+  </section>
+
+  <section>
+    <h2>Security prompts and privacy</h2>
+    <ul>
+      <li>Modern Windows, macOS, and Android devices do not allow an SSD to install software automatically. One clear user approval is expected.</li>
+      <li>Setup installs per user by default and never installs system Python, Node, Homebrew, winget, or global packages.</li>
+      <li>Existing patient data, imported content, settings, and secrets are preserved.</li>
+      <li>Diagnostic bundles exclude environment files, databases, and full logs; known secrets and home-folder names are redacted.</li>
+    </ul>
+  </section>
+</main>
+</body>
+</html>

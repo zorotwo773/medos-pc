@@ -1,0 +1,323 @@
+[
+  {
+    "disease_name": "Congestive Heart Failure",
+    "primary_organ": "Heart",
+    "secondary_organs_involved": ["Lung", "Kidney", "Liver"],
+    "harrisons_synthesis": [
+      "Clinical syndrome resulting from structural or functional cardiac impairment that reduces ventricular filling or ejection",
+      "Left-sided failure manifests as dyspnea, orthopnea, and paroxysmal nocturnal dyspnea due to pulmonary congestion",
+      "Right-sided failure presents with jugular venous distension, hepatomegaly, and peripheral edema",
+      "Reduced ejection fraction (HFrEF, EF ≤40%) vs preserved ejection fraction (HFpEF, EF ≥50%) guide treatment strategy",
+      "BNP and NT-proBNP are key biomarkers for diagnosis and prognostication"
+    ],
+    "treatment_pearls": [
+      "Guideline-directed medical therapy (GDMT) includes ACEi/ARB/ARNI, beta-blocker, MRA, and SGLT2i",
+      "ARNI (sacubitril/valsartan) superior to ACEi alone in reducing mortality in HFrEF",
+      "Loop diuretics for volume management — titrate to euvolemia, not a fixed dose",
+      "ICD indicated for primary prevention when EF ≤35% despite 3 months of GDMT",
+      "Cardiac resynchronization therapy (CRT) when LBBB with QRS ≥150ms"
+    ],
+    "citation": {
+      "chapter_title": "Heart Failure: Pathophysiology and Diagnosis",
+      "page_number": 1763
+    }
+  },
+  {
+    "disease_name": "Acute Coronary Syndrome",
+    "primary_organ": "Heart",
+    "secondary_organs_involved": ["Aorta"],
+    "harrisons_synthesis": [
+      "Spectrum including unstable angina, NSTEMI, and STEMI caused by acute atherosclerotic plaque disruption",
+      "STEMI defined by persistent ST-elevation ≥1mm in ≥2 contiguous leads with troponin rise",
+      "Chest pain radiating to the left arm or jaw, diaphoresis, and nausea are classic but may be absent in diabetics and elderly",
+      "Acute plaque rupture exposes subendothelial collagen triggering platelet aggregation and thrombus formation",
+      "Killip classification grades hemodynamic severity from I (no heart failure) to IV (cardiogenic shock)"
+    ],
+    "treatment_pearls": [
+      "Door-to-balloon time <90 minutes for primary PCI in STEMI is the critical quality metric",
+      "Dual antiplatelet therapy (DAPT): aspirin + P2Y12 inhibitor (ticagrelor preferred over clopidogrel)",
+      "High-intensity statin therapy initiated regardless of baseline LDL",
+      "Beta-blockers within 24h if no contraindications (cardiogenic shock, bradycardia, decompensated HF)",
+      "Anticoagulation with heparin (UFH or enoxaparin) during acute management"
+    ],
+    "citation": {
+      "chapter_title": "ST-Segment Elevation Myocardial Infarction",
+      "page_number": 1793
+    }
+  },
+  {
+    "disease_name": "Type 2 Diabetes Mellitus",
+    "primary_organ": "Pancreas",
+    "secondary_organs_involved": ["Kidney", "Liver", "Nerves", "Eye"],
+    "harrisons_synthesis": [
+      "Characterized by insulin resistance in peripheral tissues and progressive pancreatic β-cell dysfunction",
+      "Presents with polyuria, polydipsia, blurred vision, fatigue, and recurrent infections",
+      "HbA1c ≥6.5%, fasting plasma glucose ≥126 mg/dL, or 2-hour OGTT ≥200 mg/dL confirms diagnosis",
+      "Microvascular complications include retinopathy, nephropathy, and neuropathy — onset correlates with duration and glycemic control",
+      "Macrovascular disease (CAD, CVA, PAD) is the leading cause of mortality in T2DM"
+    ],
+    "treatment_pearls": [
+      "Metformin remains first-line pharmacotherapy — reduces hepatic glucose output",
+      "SGLT2 inhibitors (empagliflozin, dapagliflozin) provide cardiorenal protective benefits beyond glycemic control",
+      "GLP-1 receptor agonists (semaglutide, liraglutide) preferred in patients with atherosclerotic CVD or obesity",
+      "Annual screening: dilated eye exam, urine albumin-to-creatinine ratio, monofilament foot exam",
+      "Insulin therapy indicated when HbA1c remains above target despite maximal oral/injectable therapy"
+    ],
+    "citation": {
+      "chapter_title": "Diabetes Mellitus: Diagnosis and Treatment",
+      "page_number": 2851
+    }
+  },
+  {
+    "disease_name": "Chronic Obstructive Pulmonary Disease",
+    "primary_organ": "Lung",
+    "secondary_organs_involved": ["Heart", "Diaphragm"],
+    "harrisons_synthesis": [
+      "Progressive airflow limitation that is not fully reversible, caused by chronic inflammatory response to noxious particles",
+      "Emphysema (parenchymal destruction) and chronic bronchitis (productive cough ≥3 months/year for 2 consecutive years) are the two classic phenotypes",
+      "Spirometry showing post-bronchodilator FEV1/FVC <0.70 confirms obstruction",
+      "GOLD staging based on FEV1 % predicted: Stage I (≥80%), II (50-79%), III (30-49%), IV (<30%)",
+      "Acute exacerbations (AECOPD) are triggered by viral/bacterial infections and are the major driver of morbidity"
+    ],
+    "treatment_pearls": [
+      "Smoking cessation is the only intervention proven to alter the natural history of COPD",
+      "Inhaled bronchodilators (LABA + LAMA combination) are the cornerstone of maintenance therapy",
+      "Inhaled corticosteroids (ICS) added for patients with frequent exacerbations and eosinophil count ≥300",
+      "Supplemental O2 when resting PaO2 ≤55 mmHg or SaO2 ≤88% — improves survival",
+      "Pulmonary rehabilitation reduces dyspnea and improves exercise capacity in all GOLD stages"
+    ],
+    "citation": {
+      "chapter_title": "Chronic Obstructive Pulmonary Disease",
+      "page_number": 1991
+    }
+  },
+  {
+    "disease_name": "Cirrhosis of the Liver",
+    "primary_organ": "Liver",
+    "secondary_organs_involved": ["Spleen", "Kidney", "Esophagus", "Brain"],
+    "harrisons_synthesis": [
+      "End-stage of chronic liver injury characterized by diffuse fibrosis, regenerative nodules, and architectural distortion",
+      "Common etiologies: alcohol-associated liver disease, chronic hepatitis B/C, and metabolic dysfunction-associated steatotic liver disease (MASLD)",
+      "Compensated cirrhosis may be asymptomatic; decompensation manifests as ascites, variceal bleeding, hepatic encephalopathy, or jaundice",
+      "Portal hypertension (HVPG ≥10 mmHg) drives most complications — esophageal varices, splenomegaly, ascites",
+      "Child-Pugh and MELD scores are used for prognostication and transplant listing prioritization"
+    ],
+    "treatment_pearls": [
+      "Non-selective beta-blockers (carvedilol or nadolol) for primary prophylaxis of variceal bleeding when varices ≥5mm",
+      "Lactulose and rifaximin are first-line for prevention and treatment of hepatic encephalopathy",
+      "Diagnostic paracentesis mandatory for new-onset ascites — SBP if PMN ≥250/μL",
+      "Hepatocellular carcinoma surveillance: ultrasound ± AFP every 6 months",
+      "Liver transplantation evaluation when MELD ≥15 or first decompensating event"
+    ],
+    "citation": {
+      "chapter_title": "Cirrhosis and Its Complications",
+      "page_number": 2405
+    }
+  },
+  {
+    "disease_name": "Chronic Kidney Disease",
+    "primary_organ": "Kidney",
+    "secondary_organs_involved": ["Heart", "Bone", "Nerves"],
+    "harrisons_synthesis": [
+      "Defined as abnormalities in kidney structure or function present for >3 months with health implications",
+      "Staging by GFR: G1 (≥90), G2 (60-89), G3a (45-59), G3b (30-44), G4 (15-29), G5 (<15 or dialysis)",
+      "Diabetes and hypertension account for >60% of CKD cases in developed nations",
+      "Uremia syndrome in advanced CKD includes nausea, pericarditis, encephalopathy, and bleeding diathesis",
+      "CKD-mineral bone disorder (CKD-MBD) involves hyperphosphatemia, secondary hyperparathyroidism, and renal osteodystrophy"
+    ],
+    "treatment_pearls": [
+      "ACEi/ARB are first-line for reducing proteinuria and slowing CKD progression — monitor K+ and creatinine",
+      "SGLT2 inhibitors (dapagliflozin) reduce CKD progression independent of diabetes status",
+      "Blood pressure target <130/80 mmHg; tighter control if proteinuria >1 g/day",
+      "Erythropoiesis-stimulating agents (ESA) for anemia when Hb <10 — target 10-11.5 g/dL",
+      "Renal replacement therapy planning (dialysis access or transplant referral) when eGFR <20"
+    ],
+    "citation": {
+      "chapter_title": "Chronic Kidney Disease",
+      "page_number": 2111
+    }
+  },
+  {
+    "disease_name": "Pulmonary Embolism",
+    "primary_organ": "Lung",
+    "secondary_organs_involved": ["Heart", "Femoral Vein"],
+    "harrisons_synthesis": [
+      "Obstruction of pulmonary arterial vasculature by thrombus, most commonly originating from deep veins of the lower extremities",
+      "Classic triad of dyspnea, pleuritic chest pain, and hemoptysis is present in <20% of cases",
+      "Massive PE causes acute right ventricular failure and hemodynamic collapse",
+      "CT pulmonary angiography (CTPA) is the diagnostic standard — sensitivity >95%",
+      "Wells score and D-dimer guide pre-test probability assessment and diagnostic pathway"
+    ],
+    "treatment_pearls": [
+      "Systemic anticoagulation with heparin ± transition to DOAC (rivaroxaban, apixaban) is standard of care",
+      "Systemic thrombolysis (alteplase) indicated for massive PE with hemodynamic instability",
+      "Catheter-directed therapy for submassive PE with RV dysfunction remains an evolving option",
+      "IVC filter only when anticoagulation is absolutely contraindicated (active hemorrhage)",
+      "Extended anticoagulation (>3 months) for unprovoked PE — risk-benefit reassessment at 3-6 months"
+    ],
+    "citation": {
+      "chapter_title": "Pulmonary Thromboembolism",
+      "page_number": 2170
+    }
+  },
+  {
+    "disease_name": "Stroke (Ischemic Cerebrovascular Accident)",
+    "primary_organ": "Brain",
+    "secondary_organs_involved": ["Carotid", "Heart"],
+    "harrisons_synthesis": [
+      "Acute loss of focal neurological function lasting >24 hours due to vascular occlusion in a defined arterial territory",
+      "Large vessel atherosclerosis, cardioembolism (atrial fibrillation), and small vessel lacunar disease are the major subtypes",
+      "NIH Stroke Scale (NIHSS) quantifies deficit severity and guides treatment eligibility",
+      "Diffusion-weighted MRI is most sensitive for acute ischemia — CT primarily excludes hemorrhage",
+      "Penumbra concept: ischemic tissue surrounding the core infarct is salvageable with rapid reperfusion"
+    ],
+    "treatment_pearls": [
+      "IV alteplase within 4.5 hours of symptom onset — door-to-needle time <60 min target",
+      "Mechanical thrombectomy for large vessel occlusion up to 24 hours (with perfusion imaging selection)",
+      "Permissive hypertension in acute stroke — do NOT lower BP unless >220/120 (or >185/110 if thrombolysis candidate)",
+      "Secondary prevention: antiplatelet (aspirin + clopidogrel short-term), statin, and risk factor modification",
+      "Atrial fibrillation-related stroke requires anticoagulation (DOAC preferred over warfarin)"
+    ],
+    "citation": {
+      "chapter_title": "Cerebrovascular Diseases",
+      "page_number": 3068
+    }
+  },
+  {
+    "disease_name": "Pneumonia (Community-Acquired)",
+    "primary_organ": "Lung",
+    "secondary_organs_involved": ["Pleura"],
+    "harrisons_synthesis": [
+      "Acute infection of the pulmonary parenchyma presenting with cough, fever, dyspnea, and radiographic infiltrate",
+      "Streptococcus pneumoniae remains the most common identified pathogen; atypical organisms (Mycoplasma, Legionella) also prevalent",
+      "Severity stratified by CURB-65 or PSI scores to guide inpatient vs outpatient management",
+      "Parapneumonic effusions develop in 20-40% of hospitalized cases — thoracentesis if >10mm on lateral decubitus",
+      "Complications include empyema, lung abscess, and ARDS in severe cases"
+    ],
+    "treatment_pearls": [
+      "Outpatient: amoxicillin or doxycycline; macrolide if atypical coverage needed",
+      "Inpatient (non-ICU): beta-lactam + macrolide OR respiratory fluoroquinolone monotherapy",
+      "ICU admission: beta-lactam + macrolide (or fluoroquinolone); add vancomycin/piperacillin if MRSA/Pseudomonas risk",
+      "Dexamethasone 6mg × 4 days may reduce mortality in severe CAP requiring ICU care",
+      "Follow-up chest radiograph at 6-8 weeks in smokers and patients >50 to exclude underlying malignancy"
+    ],
+    "citation": {
+      "chapter_title": "Pneumonia",
+      "page_number": 912
+    }
+  },
+  {
+    "disease_name": "Hypertension",
+    "primary_organ": "Heart",
+    "secondary_organs_involved": ["Kidney", "Brain", "Eye", "Aorta"],
+    "harrisons_synthesis": [
+      "Sustained systolic BP ≥130 mmHg or diastolic BP ≥80 mmHg (ACC/AHA 2017 guidelines)",
+      "Essential (primary) hypertension accounts for 90-95% of cases; secondary causes include renal artery stenosis, pheochromocytoma, and primary aldosteronism",
+      "Silent end-organ damage includes LVH, CKD, retinopathy, and subclinical cerebrovascular disease",
+      "Hypertensive emergency: BP >180/120 with acute end-organ damage (encephalopathy, aortic dissection, acute HF)",
+      "White-coat and masked hypertension diagnosed via 24-hour ambulatory BP monitoring (ABPM)"
+    ],
+    "treatment_pearls": [
+      "First-line agents: ACEi/ARB, calcium channel blocker, thiazide diuretic — choice guided by comorbidities",
+      "Black patients without CKD: CCB or thiazide preferred over ACEi/ARB as initial monotherapy",
+      "Resistant hypertension (uncontrolled on 3 drugs including diuretic): add spironolactone 25-50 mg",
+      "Hypertensive emergency: IV nicardipine or clevidipine — reduce MAP by 25% in first hour, NOT to normal",
+      "Lifestyle: DASH diet, sodium <2.3g/day, 150 min/week aerobic exercise, weight loss of 1 kg ≈ 1 mmHg reduction"
+    ],
+    "citation": {
+      "chapter_title": "Hypertensive Vascular Disease",
+      "page_number": 1891
+    }
+  }
+  {
+    [
+  {
+    "disease_name": "Acute Kidney Injury",
+    "primary_organ": "Kidney",
+    "secondary_organs_involved": [
+      "Heart",
+      "Lungs"
+    ],
+    "pathophysiology": "Acute kidney injury involves a rapid decline in glomerular filtration rate leading to the retention of nitrogenous solutes. The underlying mechanism can be prerenal due to inadequate systemic perfusion, intrinsic due to tubular injury from sepsis or nephrotoxins, or postrenal from urinary tract obstruction.",
+    "clinical_presentation": "Patients typically present with a reduction in urine output (oliguria or anuria) and fluid retention. Signs of uremia including mental status changes, bleeding complications, and profound volume overload may also manifest.",
+    "diagnostics": "Diagnosis requires an elevation in serum creatinine from baseline or a documented reduction in urine output. Urine sediment examination, serum cystatin C, renal ultrasound to rule out obstruction, and occasionally a kidney biopsy are utilized.",
+    "treatment_and_management": "Management involves optimization of systemic hemodynamics, careful volume resuscitation, and immediate elimination of nephrotoxic agents. Continuous renal replacement therapy or hemodialysis may be necessary for severe or refractory cases.",
+    "prognosis_or_complications": "Life-threatening hyperkalemia, marked volume overload, metabolic acidosis, and progression to chronic kidney disease.",
+    "citation": {
+      "chapter_title": "Acute Kidney Injury",
+      "page_number": "Section: DIAGNOSTIC EVALUATION"
+    }
+  },
+  {
+    "disease_name": "Chronic Kidney Disease",
+    "primary_organ": "Kidney",
+    "secondary_organs_involved": [
+      "Heart",
+      "Blood vessels",
+      "Bones"
+    ],
+    "pathophysiology": "CKD is characterized by initiating damage followed by a nonspecific, maladaptive hyperfiltration and hypertrophy of the remaining viable nephrons. Over time, increased intrarenal renin-angiotensin activity leads to glomerular architecture distortion, podocyte dysfunction, and progressive nephron sclerosis.",
+    "clinical_presentation": "Early stages are typically asymptomatic, but progressive decline leads to fatigue, anorexia, weight loss, edema, sensory polyneuropathy, and sleep disorders. In advanced stages, the uremic syndrome manifests with severe hypertension, encephalopathy, pericarditis, and asterixis.",
+    "diagnostics": "Diagnosis relies on an estimated glomerular filtration rate (eGFR) less than 60 mL/min/1.73 m2 or a urinary albumin-to-creatinine ratio greater than 30 mg/g persisting for at least 3 months. Renal ultrasound typically reveals bilaterally small kidneys with cortical thinning.",
+    "treatment_and_management": "Treatment includes tight blood pressure control (<130/80 mmHg), renin-angiotensin system inhibitors (ACE inhibitors or ARBs), and SGLT-2 inhibitors to slow disease progression. Dietary protein and salt restriction are recommended, with renal replacement therapy (dialysis or transplant) indicated for end-stage disease.",
+    "prognosis_or_complications": "Progression to end-stage renal disease (ESRD), significantly increased risk of cardiovascular disease, anemia, and secondary hyperparathyroidism.",
+    "citation": {
+      "chapter_title": "Chronic Kidney Disease",
+      "page_number": "Section: PATHOPHYSIOLOGY OF CKD"
+    }
+  },
+  {
+    "disease_name": "Heart Failure",
+    "primary_organ": "Heart",
+    "secondary_organs_involved": [
+      "Lungs",
+      "Kidneys",
+      "Liver"
+    ],
+    "pathophysiology": "Heart failure results from structural or functional impairment of ventricular filling or ejection, causing elevated intracardiac pressures and inadequate peripheral oxygen delivery. It involves a complex progressive cycle of maladaptive ventricular remodeling, often driven by continuous neurohormonal activation following an initial myocardial injury.",
+    "clinical_presentation": "Cardinal symptoms include breathlessness, orthopnea, paroxysmal nocturnal dyspnea, fatigue, and reduced exercise capacity. Physical signs consist of elevated jugular venous pressure, pulmonary crackles, an S3 gallop, and dependent peripheral edema.",
+    "diagnostics": "Echocardiography is the primary noninvasive modality used to assess ventricular structure, valvular function, and ejection fraction. Elevated circulating levels of B-type natriuretic peptide (BNP) or NT-proBNP strongly support the diagnosis, alongside a 12-lead ECG and chest x-ray.",
+    "treatment_and_management": "Foundational pharmacotherapy includes renin-angiotensin-aldosterone system antagonists (ACEIs, ARBs, or ARNIs), beta-blockers, mineralocorticoid receptor antagonists, and SGLT-2 inhibitors. Loop diuretics are used to manage congestion, while implantable cardioverter-defibrillators (ICDs) are considered for sudden death prevention.",
+    "prognosis_or_complications": "Acute decompensated heart failure requiring repeated hospitalizations, cardiogenic shock, and high risk of sudden cardiac death from ventricular arrhythmias.",
+    "citation": {
+      "chapter_title": "Heart Failure: Pathophysiology and Diagnosis",
+      "page_number": "Section: DEFINITIONS"
+    }
+  },
+  {
+    "disease_name": "Ischemic Heart Disease",
+    "primary_organ": "Heart",
+    "secondary_organs_involved": [
+      "Blood vessels",
+      "Lungs"
+    ],
+    "pathophysiology": "Ischemic heart disease develops when there is an imbalance between myocardial oxygen supply and demand, most commonly due to atherosclerotic narrowing of the epicardial coronary arteries. This obstructive disease causes a regional reduction in myocardial blood flow and inadequate tissue perfusion.",
+    "clinical_presentation": "Patients classically present with typical angina pectoris, consisting of exertional chest discomfort, pressure, or heaviness. Women frequently present with atypical symptoms such as fatigue, anxiety, nausea, indigestion, and upper back pain.",
+    "diagnostics": "The diagnosis is supported by 12-lead electrocardiography at rest and during standardized exercise stress testing. Advanced imaging modalities like stress echocardiography, radionuclide myocardial perfusion imaging, and coronary CT angiography are used, with invasive coronary arteriography remaining the gold standard.",
+    "treatment_and_management": "Medical therapy relies on organic nitrates, beta-blockers, calcium channel blockers, and SGLT-2 inhibitors to control anginal symptoms. Revascularization with percutaneous coronary intervention (PCI) or coronary artery bypass grafting (CABG) is indicated for severe refractory symptoms or high-risk anatomy.",
+    "prognosis_or_complications": "Unstable angina, acute myocardial infarction, and progressive left ventricular dysfunction culminating in ischemic cardiomyopathy.",
+    "citation": {
+      "chapter_title": "Ischemic Heart Disease",
+      "page_number": "Section: EPIDEMIOLOGY AND GLOBAL TRENDS"
+    }
+  },
+  {
+    "disease_name": "Chronic Obstructive Pulmonary Disease",
+    "primary_organ": "Lungs",
+    "secondary_organs_involved": [
+      "Heart",
+      "Musculoskeletal system"
+    ],
+    "pathophysiology": "COPD is characterized by persistent airflow obstruction caused by a combination of small airway disease and emphysematous parenchymal destruction. Inhalation of noxious particles, usually cigarette smoke, incites chronic inflammation, goblet cell hyperplasia, and proteolytic degradation of elastic fibers in the distal airways and alveoli.",
+    "clinical_presentation": "Patients present with a chronic productive cough, progressive exertional dyspnea, and an increased effort to breathe. Physical examination often reveals a prolonged expiratory phase, expiratory wheezing, hyperinflation causing a barrel chest, and use of accessory respiratory muscles.",
+    "diagnostics": "Spirometry is absolutely required for diagnosis, demonstrating a persistent and irreversible reduction in the FEV1/FVC ratio below 0.70. Chest CT is used to definitively establish the presence, specific pattern, and extent of emphysematous changes.",
+    "treatment_and_management": "Management centers on smoking cessation and the use of inhaled bronchodilators, primarily long-acting muscarinic antagonists and long-acting beta-agonists. Inhaled corticosteroids are added for patients with frequent exacerbations and elevated blood eosinophils, while continuous supplemental oxygen improves survival in those with severe resting hypoxemia.",
+    "prognosis_or_complications": "Acute respiratory exacerbations, frequent respiratory tract infections, and the development of pulmonary hypertension leading to right heart failure (cor pulmonale).",
+    "citation": {
+      "chapter_title": "Chronic Obstructive Pulmonary Disease",
+      "page_number": "Section: PATHOGENESIS AND PATHOLOGY"
+    }
+  }
+]
+  }
+]

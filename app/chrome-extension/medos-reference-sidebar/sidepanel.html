@@ -1,0 +1,73 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>MedOS Reference</title>
+    <link rel="stylesheet" href="sidepanel.css">
+  </head>
+  <body>
+    <header class="topbar">
+      <div class="topbar-brand">
+        <div class="brand-mark">M</div>
+        <div>
+          <div class="brand">MEDOS</div>
+          <div class="brand-sub">Reference Panel</div>
+        </div>
+      </div>
+      <div class="topbar-right">
+        <span id="syncBadge" class="sync-badge" hidden></span>
+        <span id="status" class="status status-pending">Checking</span>
+        <button id="openAppButton" class="icon-button" type="button" title="Open MedOS App">↗ App</button>
+      </div>
+    </header>
+
+    <section class="search-shell" aria-label="Search MedOS">
+      <input id="searchInput" type="search" placeholder="Drug, disease, abbreviation, score, image…">
+      <button id="searchButton" class="primary-button" type="button">Go</button>
+      <div id="suggestions" class="suggestions" hidden></div>
+    </section>
+
+    <div class="panel-shell">
+      <nav id="modeRail" class="mode-rail" aria-label="Sidebar modes">
+        <button type="button" class="active" data-mode="reference" title="References and articles">
+          <span class="rail-icon">⊕</span>
+          <span class="rail-label">Ref</span>
+        </button>
+        <button type="button" data-mode="questions" title="Suggested QBank questions">
+          <span class="rail-icon">Q</span>
+          <span class="rail-label">Q's</span>
+        </button>
+        <button type="button" data-mode="labs" title="Reference lab values">
+          <span class="rail-icon">⚗</span>
+          <span class="rail-label">Labs</span>
+        </button>
+        <button type="button" data-mode="media" title="Images, tables, and algorithms">
+          <span class="rail-icon">◫</span>
+          <span class="rail-label">Img</span>
+        </button>
+        <button type="button" data-mode="calculators" title="Calculators">
+          <span class="rail-icon">∑</span>
+          <span class="rail-label">Calc</span>
+        </button>
+        <button type="button" data-mode="databases" title="Open MedOS databases">
+          <span class="rail-icon">⊞</span>
+          <span class="rail-label">Open</span>
+        </button>
+      </nav>
+
+      <main class="workspace">
+        <section id="contextCard" class="context-card empty">
+          No active reference.
+        </section>
+
+        <section id="contentHeader" class="content-header"></section>
+        <section id="content" class="content empty">
+          Ready.
+        </section>
+      </main>
+    </div>
+
+    <script src="sidepanel.js"></script>
+  </body>
+</html>

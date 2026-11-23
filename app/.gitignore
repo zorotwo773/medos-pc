@@ -1,0 +1,79 @@
+# See https://help.github.com/articles/ignoring-files/ for more about ignoring files.
+
+# dependencies
+/node_modules
+/.pnp
+.pnp.*
+.yarn/*
+!.yarn/patches
+!.yarn/plugins
+!.yarn/releases
+!.yarn/versions
+
+# testing
+/coverage
+
+# next.js
+/.next/
+/out/
+
+# production
+/build
+
+# misc
+.DS_Store
+*.pem
+
+# debug
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+.pnpm-debug.log*
+
+# env files — only commit the example
+.env
+backend/.env
+infra/.env.production
+infra/.env.local
+
+# Container/runtime artefacts produced on the VM
+infra/.deploy_state
+infra/.last_deploy_sha
+
+# Security: never commit these
+*.bin
+*.vhdx
+*keyblob*
+*keystore2.sqlite
+GOCSPX-*.txt
+
+# Python caches
+__pycache__/
+*.pyc
+*.pyo
+backend/library_index.sqlite3
+backend/scripts/**/__pycache__/
+
+# Data (large, machine-specific)
+data/
+models/
+
+# Build artifacts
+*.tsbuildinfo
+
+# vercel
+.vercel
+
+# typescript
+next-env.d.ts
+
+# ── PC release payload exceptions ─────────────────────────────────────────────
+# The private PC repository intentionally includes the compiled Next.js build,
+# the bundled Windows dependencies, and the local anatomy model assets.
+!/node_modules/
+!/node_modules/**
+!/.next/
+!/.next/**
+!/public/models/
+!/public/models/**
+!next-env.d.ts

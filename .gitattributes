@@ -1,0 +1,63 @@
+# Force Windows line endings for scripts (prevents breakage on WSL / Git Bash)
+*.bat  text eol=crlf
+*.ps1  text eol=crlf
+*.vbs  text eol=crlf
+*.cmd  text eol=crlf
+
+# Force Unix line endings for macOS/Linux scripts (CRLF breaks the shebang)
+*.sh       text eol=lf
+*.command  text eol=lf
+
+# ── Git LFS: large bundled runtime, model and media payload ───────────────────
+# GitHub rejects normal Git blobs over 100 MB; the bundled torch DLL and Next SWC
+# binary exceed that limit. Install Git LFS before cloning this repository.
+*.7z         filter=lfs diff=lfs merge=lfs -text
+*.zip        filter=lfs diff=lfs merge=lfs -text
+*.rar        filter=lfs diff=lfs merge=lfs -text
+*.whl        filter=lfs diff=lfs merge=lfs -text
+*.tar        filter=lfs diff=lfs merge=lfs -text
+*.tar.gz     filter=lfs diff=lfs merge=lfs -text
+*.tgz        filter=lfs diff=lfs merge=lfs -text
+*.gz         filter=lfs diff=lfs merge=lfs -text
+
+*.exe        filter=lfs diff=lfs merge=lfs -text
+*.msi        filter=lfs diff=lfs merge=lfs -text
+*.dll        filter=lfs diff=lfs merge=lfs -text
+*.so         filter=lfs diff=lfs merge=lfs -text
+*.dylib      filter=lfs diff=lfs merge=lfs -text
+*.pyd        filter=lfs diff=lfs merge=lfs -text
+*.node       filter=lfs diff=lfs merge=lfs -text
+*.lib        filter=lfs diff=lfs merge=lfs -text
+*.a          filter=lfs diff=lfs merge=lfs -text
+*.bin        filter=lfs diff=lfs merge=lfs -text
+*.wasm       filter=lfs diff=lfs merge=lfs -text
+
+*.faiss      filter=lfs diff=lfs merge=lfs -text
+*.db         filter=lfs diff=lfs merge=lfs -text
+*.sqlite     filter=lfs diff=lfs merge=lfs -text
+*.sqlite3    filter=lfs diff=lfs merge=lfs -text
+*.onnx       filter=lfs diff=lfs merge=lfs -text
+*.pt         filter=lfs diff=lfs merge=lfs -text
+*.pth        filter=lfs diff=lfs merge=lfs -text
+*.safetensors filter=lfs diff=lfs merge=lfs -text
+*.npy        filter=lfs diff=lfs merge=lfs -text
+*.npz        filter=lfs diff=lfs merge=lfs -text
+
+*.glb        filter=lfs diff=lfs merge=lfs -text
+*.gltf       filter=lfs diff=lfs merge=lfs -text
+*.pdf        filter=lfs diff=lfs merge=lfs -text
+*.ttf        filter=lfs diff=lfs merge=lfs -text
+*.otf        filter=lfs diff=lfs merge=lfs -text
+*.woff       filter=lfs diff=lfs merge=lfs -text
+*.woff2      filter=lfs diff=lfs merge=lfs -text
+*.png        filter=lfs diff=lfs merge=lfs -text
+*.jpg        filter=lfs diff=lfs merge=lfs -text
+*.jpeg       filter=lfs diff=lfs merge=lfs -text
+*.gif        filter=lfs diff=lfs merge=lfs -text
+*.webp       filter=lfs diff=lfs merge=lfs -text
+*.ico        filter=lfs diff=lfs merge=lfs -text
+*.icns       filter=lfs diff=lfs merge=lfs -text
+*.mp4        filter=lfs diff=lfs merge=lfs -text
+*.mov        filter=lfs diff=lfs merge=lfs -text
+*.avi        filter=lfs diff=lfs merge=lfs -text
+*.mkv        filter=lfs diff=lfs merge=lfs -text
