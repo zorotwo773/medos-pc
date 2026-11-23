@@ -22,12 +22,12 @@ Per-session rules are in `installer\updater\DEVELOPER_START_PROMPT.md`.
 
 ## Shipped
 
-### 2026-11-23 00:26 — Shipped in MedOS-Setup.exe (medos-1.1.5)
+### 2026-11-23 20:18 — Shipped in MedOS-Setup.exe (medos-1.1.5, PC-only payload)
 
 - EXE: `D:\MedOS-installer-dist\MedOS-Setup.exe`
-- Size: **536,028,340 bytes**
-- EXE SHA-256: `ca73eb542bff331eee6f68db3972b7128c4fb1eeaa72a7c0795a24d939439c98`
-- Payload SHA-256: `9d8be2facf51ee11b36d777bff06e09e6e1720919699d0a884828ccd0d78b7e7`
+- Size: **535,991,041 bytes**
+- EXE SHA-256: `251a645bdc613c509caeffc8aa97239554a84cd480cd114490d049f3252d3cf9`
+- Payload SHA-256: `4ddb8e92fdde68f833bee020bb38e11b52ed0d64f40fb2abe764e41203739fd4`
 - Installer smoke suite (`test_installer.ps1`): **ALL CHECKS PASSED**
 - Real-payload scratch install + `validate_install.ps1`: **ALL CHECKS PASSED**
   (including `BUILD_ID` / `.medos-shipped`, no shipped `.env` or personal
@@ -37,8 +37,12 @@ Per-session rules are in `installer\updater\DEVELOPER_START_PROMPT.md`.
   UI with the one-click RAR/ZIP/7z import action, and `app/backend/pdf_export.py`
   with SHA-256 `879383b416f15017451be4a2621ede75b0b06f5f62c0962b8822f5d31de256ab`
   (the page-boundary explanation truncation fix).
-- All entries below were Pending before this build and are now included. The
-  signed Android APK is unchanged by these PC-only fixes.
+- First-party phone/Android-only helpers (`setup_center/android.py`,
+  `setup_center/templates/android-guide.html`, and
+  `tools/medroxi-sync/export_from_phone.py`) are excluded from the installer
+  payload and from the private GitHub repository. No APK or signing material
+  is included.
+- All entries below were Pending before this build and are now included.
 
 ### 2026-11-22 23:58 — Fix Q-Bank PDF image omissions
 

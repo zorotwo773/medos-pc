@@ -1,10 +1,10 @@
 {
   "product": "MedOS",
   "version": "1.1.5",
-  "built_at": "2026-11-22T21:26:47Z",
+  "built_at": "2026-11-23T20:18:47Z",
   "root": "C:\\MedOS",
-  "file_count": 58492,
-  "uncompressed_bytes": 2230055269,
+  "file_count": 58487,
+  "uncompressed_bytes": 2229982113,
   "included_dirs": [
     "app",
     "tools",
@@ -35,10 +35,6 @@
     "medos_data_manifest.md",
     "MedOS_USER_GUIDE.md",
     "MedOS_USER_GUIDE.pdf",
-    "MedOS-Phone-README.md",
-    "MedOS-Phone-Install.txt",
-    "MedOS-Companion-README.txt",
-    "MedOS-Companion.apk",
     "MedOS.command",
     "MedOS-Setup.command",
     "MedOS-Stop.command",
@@ -50,6 +46,7 @@
     "MedOS Update/ (old code-only update kit)",
     ".medos-updates/, _backups/, scratch/",
     ".medos-setup/ + setup-drive.json (stale integrity receipt)",
+    "phone-only helpers (setup guide, android setup, phone export script)",
     ".env files, logs, pid files, caches, __pycache__"
   ],
   "installer": {
@@ -57,9 +54,9 @@
     "files": [
       "D:\\MedOS-installer-dist\\MedOS-Setup.exe"
     ],
-    "bytes": 536028340,
-    "sha256": "ca73eb542bff331eee6f68db3972b7128c4fb1eeaa72a7c0795a24d939439c98",
-    "payload_sha256": "9d8be2facf51ee11b36d777bff06e09e6e1720919699d0a884828ccd0d78b7e7"
+    "bytes": 535991041,
+    "sha256": "251a645bdc613c509caeffc8aa97239554a84cd480cd114490d049f3252d3cf9",
+    "payload_sha256": "4ddb8e92fdde68f833bee020bb38e11b52ed0d64f40fb2abe764e41203739fd4"
   },
   "max_file_bytes": 1940000000
 }

@@ -80,10 +80,6 @@ INCLUDE_ROOT_FILES = (
     "medos_data_manifest.md",
     "MedOS_USER_GUIDE.md",
     "MedOS_USER_GUIDE.pdf",
-    "MedOS-Phone-README.md",
-    "MedOS-Phone-Install.txt",
-    "MedOS-Companion-README.txt",
-    "MedOS-Companion.apk",
     "MedOS.command",
     "MedOS-Setup.command",
     "MedOS-Stop.command",
@@ -134,6 +130,13 @@ SKIP_SUFFIXES = (
     ".tmp",
 )
 
+# First-party phone/Android-only helpers are never part of the PC installer.
+SKIP_RELATIVE_FILES = (
+    "setup_center/android.py",
+    "setup_center/templates/android-guide.html",
+    "tools/medroxi-sync/export_from_phone.py",
+)
+
 SKIP_FILES = {
     ".env",
     ".env.local",
@@ -170,6 +173,9 @@ def _skip_dir(rel: str, name: str) -> bool:
 
 def _skip_file(rel: str, name: str) -> bool:
     if name in SKIP_FILES:
+        return True
+    rel_l = rel.lower().replace("\\", "/")
+    if rel_l in SKIP_RELATIVE_FILES:
         return True
     if name.startswith(".env.") and not name.endswith(".example"):
         return True
@@ -553,6 +559,7 @@ def main() -> int:
             "MedOS Update/ (old code-only update kit)",
             ".medos-updates/, _backups/, scratch/",
             ".medos-setup/ + setup-drive.json (stale integrity receipt)",
+            "phone-only helpers (setup guide, android setup, phone export script)",
             ".env files, logs, pid files, caches, __pycache__",
         ],
         "installer": info,

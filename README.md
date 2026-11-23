@@ -36,8 +36,11 @@ The prepared installer is attached to the GitHub Release as
 
 Current release: `medos-1.1.5`
 
-- EXE SHA-256: `ca73eb542bff331eee6f68db3972b7128c4fb1eeaa72a7c0795a24d939439c98`
-- Payload SHA-256: `9d8be2facf51ee11b36d777bff06e09e6e1720919699d0a884828ccd0d78b7e7`
+- EXE SHA-256: `251a645bdc613c509caeffc8aa97239554a84cd480cd114490d049f3252d3cf9`
+- Payload SHA-256: `4ddb8e92fdde68f833bee020bb38e11b52ed0d64f40fb2abe764e41203739fd4`
+
+The installer build also excludes the first-party phone/Android-only helper
+files and any APK/signing material from the payload.
 
 ## Rebuilding the installer
 
